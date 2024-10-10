@@ -1,0 +1,31 @@
+<div class="nav-bar" [ngClass]="{ 'nav-bar--small': closeSideBar }">
+
+    <div class="nav-bar__components">
+      
+      <div class="logo" [ngClass]="{ 'logo--hidden': closeSideBar }">
+        <div class="logo__container"[ngClass]="{ 'logo__container--hidden': closeSideBar }">
+            <logo-emazon [svgClass]="['logo__icon',(closeSideBar ? 'logo__icon--hidden' : '')]" [svgFill]="'white'"></logo-emazon>
+            <h2 class="logo__text-name" [ngClass]="{ 'logo__text-name--hidden': closeSideBar }">EMAZON</h2>
+        </div>
+      </div>
+  
+      <div class="menu-arrow">
+        <button class="menu-arrow__button" (click)="toggleSidebar()">
+          <menu-arrow [svgClass]="['menu-arrow__svg',(closeSideBar ? 'menu-arrow__svg--hidden' : '')]" [svgFill]="'white'"></menu-arrow>
+        </button>
+      </div>
+  
+    </div>
+  
+    <div class="sidebar">
+      <side-bar-item [linkName]="'home'" [link]="'panel/home'" [isClose]="closeSideBar" class="">
+        <home-icon></home-icon>
+      </side-bar-item>
+      <side-bar-item [linkName]="'category'" [link]="'panel/category'" [isClose]="closeSideBar">
+        <category-icon></category-icon>
+      </side-bar-item>
+
+    </div>
+  
+  </div>
+  
