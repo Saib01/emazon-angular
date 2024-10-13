@@ -27,12 +27,12 @@
         color: rgba(255, 255, 255, 0.579);
     }
     &:focus {
-      border: 0.5px solid #ffffff; 
-      box-shadow: 0 0 1.5px rgba(255, 255, 255, 0.5);
+      border: 0.03125rem solid #ffffff; 
+      box-shadow: 0 0 0.09375rem rgba(255, 255, 255, 0.5); 
       outline: none; 
     }
     &--error{
-      border: 0.5px solid #ff0000; 
+      border: 0.03125rem solid #ff0000; 
     }
     &::-webkit-scrollbar {
       width: 0.3rem;

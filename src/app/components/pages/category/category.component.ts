@@ -1,11 +1,10 @@
+import { NoWhiteSpaceValidator } from '@utils/noWhitespaceValidator';
+import { NameValidator } from '@utils/nameValidator';
 import { Component } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
-import { RequestStatus } from '../../../models/request-status.model';
 import { Router } from '@angular/router';
-import { noWhitespaceValidator } from 'src/app/utils/nowhitespaceValidator';
-import { NameValidator } from '@utils/namevalidator';
-import { ErrorMessages } from '../../../models/error-messages.model';
-import { StockService } from '@services/Stock.service';
+import { ErrorMessages } from '@models/error-messages.model';
+import { StockService } from '@services/stock.service';
 import { Category } from '@models/category.model';
 @Component({
   selector: 'app-category',
@@ -15,8 +14,8 @@ import { Category } from '@models/category.model';
 export class CategoryComponent{
 
   formCategory = this.formBuilder.nonNullable.group({
-    name: ['', [noWhitespaceValidator(),Validators.maxLength(50)],NameValidator.checkNameAvailability(this.stock)],
-    description: ['', [noWhitespaceValidator(), Validators.maxLength(90)]],
+    name: ['', [NoWhiteSpaceValidator.checkNoWhitespace(),Validators.maxLength(50)],NameValidator.checkNameAvailability(this.stock)],
+    description: ['', [NoWhiteSpaceValidator.checkNoWhitespace(), Validators.maxLength(90)]],
   });
 
   errorNameMessages: ErrorMessages[] = [
@@ -35,32 +34,25 @@ export class CategoryComponent{
     { type: 'whitespace', message: 'The category description cannot be empty or null.' },
   ];
 
-  showRegister = false;
-  status: RequestStatus = 'init';
-  statusUser: RequestStatus = 'init';
-  
   constructor(
     private readonly formBuilder: FormBuilder,
      private readonly router: Router
      ,private readonly stock:StockService
     ) {
         }
-
-  
-  validateCategory(event: Event) {
+    
+  validateCategory() {
     if (this.formCategory.valid) {
       const category: Category = {
         name: this.formCategory.getRawValue().name,
         description: this.formCategory.getRawValue().description
       };
-      this.stock.create(category)
+      this.stock.createCategory(category)
       .subscribe({
-        next:(rta)=>{
-          this.status='success';
-          this.router.navigate(['panel/home']);
+        next: (rta) => {
+            this.router.navigate(['panel/home']);
         },
         error: (error)=>{
-          this.status='failed';
           console.log(error);
         }
       })

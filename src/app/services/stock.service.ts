@@ -4,6 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { environment } from '@environments/environment';
 import { Category } from '@models/category.model';
 import { checkToken } from '@interceptors/token.interceptor';
+import { ResponseMessage } from '@models/response.model';
 
 
 @Injectable({
@@ -14,12 +15,12 @@ export class StockService {
 
   constructor(private readonly http: HttpClient) {}
 
-  create(dto: Category) {
-    return this.http.post<Category>(this.API_STOCK, dto, {
+  createCategory(category: Category) {
+    return this.http.post<ResponseMessage>(this.API_STOCK, category, {
       context: checkToken()
     });
   }
-  checkName(name: string) {
+  checkCategoryName(name: string) {
     return this.http.post<boolean>(`${this.API_STOCK}validate-name`, name, {
       context: checkToken()
     });

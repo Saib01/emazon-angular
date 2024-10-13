@@ -6,7 +6,8 @@ import { CategoryComponent } from './category/category.component';
 import { HomeComponent } from './home/home.component';
 import { InputTextComponent } from '../molecules/input-text/input-text.component';
 import { TextAreaComponent } from '../molecules/text-area/text-area.component';
-import { ButtonComponent } from '../atoms/basic-components/button.component';
+import { ButtonComponent } from '../atoms/basic-components/button/button.component';
+import { ControlErrorComponent } from '../molecules/control-error/control-error.component';
 
 
 @NgModule({
@@ -15,6 +16,7 @@ import { ButtonComponent } from '../atoms/basic-components/button.component';
     HomeComponent,
     InputTextComponent,
     TextAreaComponent,
+    ControlErrorComponent,
     ButtonComponent
   ],
   imports: [

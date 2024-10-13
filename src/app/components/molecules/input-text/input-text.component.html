@@ -1,0 +1,13 @@
+<div class="field">
+    <label class="field__name" [for]="controlName"
+      >{{ controlName | titlecase }}:</label
+    >
+    <input
+      [formControl]="formControl"
+      class="field__input"
+      [ngClass]="{ 'field__input--error': formControl.touched && formControl.invalid }"
+      type="text"
+      [placeholder]="placeHolder"
+    />
+    <app-control-error [controlName]="controlName" [errorMessages]="errorMessages"></app-control-error>
+</div>

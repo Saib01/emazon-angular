@@ -1,14 +1,5 @@
 <header class="header">
-    <h1>{{lastSegment|uppercase}}</h1>
-    <form class="search-form" action="/search" method="get">
-        <input type="search" class="search-input" placeholder="Buscar..." name="q" aria-label="Buscar">
-        <button type="submit" class="search-button">Buscar</button>
-    </form>
-    <button class="user-icon" aria-label="Perfil de usuario">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
-            <circle cx="12" cy="7" r="4"></circle>
-        </svg>
-    </button>
+    <h1 class="header__tiitle">{{lastSegment|uppercase}}</h1>
+    <app-user-icon></app-user-icon>
 </header>
 

@@ -22,7 +22,7 @@
     "types": ["jest"],
     "paths": {
       "@models/*": ["./src/app/models/*"],
-      "@shared/*": ["src/app/modules/shared/*"],
+      "@shared/*": ["./src/app/modules/shared/*"],
       "@environments/*": ["./src/environments/*"],
       "@guards/*": ["./src/app/guards/*"],
       "@interceptors/*": ["./src/app/interceptors/*"],

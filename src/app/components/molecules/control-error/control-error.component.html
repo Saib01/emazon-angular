@@ -1,0 +1,9 @@
+<div class="container__error" *ngIf="formControl.touched && formControl.invalid">
+  <div class="error" *ngFor="let error of errorMessages">
+    <p class="error__name"
+      *ngIf="formControl.hasError(error.type)"
+    >
+      {{ error.message }}
+    </p>
+  </div>
+</div>

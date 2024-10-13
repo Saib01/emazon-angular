@@ -1,0 +1,13 @@
+<div class="field">
+    <label class="field__name" for="description">Description:</label>
+    <textarea
+      [formControl]="formControl"
+      class="field__text-area"
+      [ngClass]="{ 'field__text-area--error': formControl.touched && formControl.invalid }"
+      type="text"
+      rows="3"
+      cols="15"
+      [placeholder]="placeHolder"
+    ></textarea>
+    <app-control-error [controlName]="controlName" [errorMessages]="errorMessages"></app-control-error>
+</div>
