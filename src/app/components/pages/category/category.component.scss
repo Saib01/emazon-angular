@@ -1,0 +1,41 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+}
+.container__form {
+    margin-top: 4rem;
+   display: flex;
+   justify-content: center;
+    .form {
+        width: 75vw;
+        background: hsl(256, 27%, 27%);
+        padding: 1.5rem;
+        border-radius: 0.5rem;
+        box-shadow: 0.4375rem 0.8125rem 3.2125rem #000;
+
+        &__tittle {
+            font-size: 1.875rem;
+            margin-bottom: 1.25rem;
+            text-align: center;
+        }
+
+        &__actions {
+            display: flex;
+            justify-content: center;
+            text-align: center;
+            gap: 20%;
+        }
+    }
+}
+
+@media only screen and (min-width:1023px){
+    .container__form {
+        .form {
+            width: 25rem;
+            
+            &__actions {
+                gap: 25%;
+            }
+        }
+    }
+  }

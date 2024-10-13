@@ -1,0 +1,119 @@
+* {
+  transition: all 1s ease;
+  overflow: hidden;
+}
+
+.nav-bar {
+  padding-top: 1rem;
+  width:100vw;
+  height: 100vh;
+  background: #151126;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  display: inline-flex;
+  &__components {
+    width: 100%;
+    margin-bottom: 1.5rem;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+  }
+  &--small {
+    width: 17vW;//9rem//20vw;
+  }
+  &__list-items {
+    width: 18.75rem;
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 0.5rem;
+    display: inline-flex;
+  }
+
+
+
+  .logo {
+    width: 75%;
+    height: 6rem;
+    padding-top: 1.1875rem;
+    padding-bottom: 1.1875rem;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    display: inline-flex;
+    &__container {
+      width: 100%;
+      padding-top: 0.1875rem;
+      padding-bottom: 0.1875rem;
+      gap: 0.5rem;
+      justify-content: left;
+      align-items: center;
+      display: inline-flex;
+    }
+    &--hidden {
+      width: 0;
+      min-width: 0;
+      padding-left: 0;
+    }
+    &__text-name { 
+      width: 85%;
+      font-size: 2.5rem;
+      justify-content: center;
+      text-align: left;
+      transition: all 1s ease;
+      &--hidden {
+        width: 0;
+      }
+    }
+    ::ng-deep &__icon {
+      min-width: 3.5rem;
+      transition: all 1.5s ease;
+      &--hidden {
+        transition: all 0.7s ease;
+        min-width: 0;
+        width: 0;
+      }
+    } 
+  }
+
+  .menu-arrow {
+    padding: 0;
+    height: 100%;
+    align-items: center;
+    justify-content: center;
+    display: inline-flex;
+    &__button {
+      background: none;
+      border: none;
+    }
+  
+    ::ng-deep &__svg {
+      transition: all 0.7s ease;
+      display: flex;
+      height: 100%;
+      &--hidden {
+        transform: rotate(180deg);
+      }
+    }
+  }
+
+
+  .sidebar {
+    width: 100%;
+    padding-top: 1.25rem;
+  }
+
+}
+
+@media only screen and (min-width:1023px){
+  .nav-bar {
+    width: 35vW;
+    &--small {
+      width: 10vW;
+    }
+  }
+}

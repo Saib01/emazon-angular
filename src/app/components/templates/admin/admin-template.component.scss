@@ -1,0 +1,33 @@
+.screen {
+    display: flex;
+    height: 100vh;
+    overflow: hidden;
+    &__main{
+    flex-grow: 1;
+    display: block;
+    .footer{
+      height: 10vh;
+    }
+  }
+  background: #f8c3edb6;
+  }
+
+  .content{
+    display: flex;
+    flex-direction: column;
+    height: 85vh;
+    overflow-y: auto;
+    &::-webkit-scrollbar {
+      width: 0.4rem;
+      background-color: #555555;
+    }
+    &::-webkit-scrollbar-thumb {
+      background: #d2d2d2ce; 
+      border-radius: 0.25rem; 
+    }
+
+    &::-webkit-scrollbar-thumb:hover {
+      background-color: #d2d2d271; 
+    }
+  }
+
