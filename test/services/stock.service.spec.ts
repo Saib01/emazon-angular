@@ -1,8 +1,10 @@
 import { TestBed } from '@angular/core/testing';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { StockService } from '@services/stock.service';
-import { Category } from '@models/category.model'; 
+import { BasicInfo } from '@models/BasicInfo.model'; 
 import { environment } from '@environments/environment';
+import { HttpParams } from '@angular/common/http';
+import { Page } from '@models/page.model';
 
 describe('StockService', () => {
   let service: StockService;
@@ -27,7 +29,7 @@ describe('StockService', () => {
   });
 
   test('should create a category', () => {
-    const category: Category = {
+    const category: BasicInfo = {
         name: 'Test Category',
         description: ''
     }; 
@@ -46,11 +48,38 @@ describe('StockService', () => {
     const isValid = true;
 
     service.checkCategoryName(name).subscribe((response) => {
-      expect(response).toBe(isValid); // Verificamos que la respuesta sea la esperada
+      expect(response).toBe(isValid);
     });
 
     const req = httpMock.expectOne(`${environment.API_URL_STOCK}/api/category/validate-name`);
     expect(req.request.method).toBe('POST'); 
     req.flush(isValid); 
+  });
+
+  it('should retrieve categories with correct query parameters', () => {
+    const mockResponse: Page<BasicInfo> = {
+      content: [{ id: 1, name: 'Category 1',description:"asd" }, { id: 2, name: 'Category 2',description:" " }],
+      totalElements: 0,
+      totalPages: 0,
+      pageNumber: 0,
+      first: true,
+      last: true,
+      pageSize: 10,
+      numberOfElements: 0,
+      ascending: false,
+      empty: true
+    };
+
+    const sortDirection = 'ASC';
+    const page = 0;
+    const size = 10;
+
+    service.getCategories(sortDirection, page, size).subscribe(response => {
+      expect(response).toEqual(mockResponse);
+    });
+
+    const req = httpMock.expectOne(`${environment.API_URL_STOCK}/api/category?sortDirection=${sortDirection}&page=${page}&size=${size}`);
+    expect(req.request.method).toBe('GET');
+    req.flush(mockResponse);
   });
 });

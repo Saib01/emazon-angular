@@ -8,4 +8,5 @@ import {  Component, Input } from '@angular/core';
 export class ButtonComponent{ 
   @Input() typeBtn: 'reset' | 'submit' | 'button' = 'button';
   @Input() isDisabled:boolean=true;
+  @Input() isBackgroundBlack:boolean=true;
 }

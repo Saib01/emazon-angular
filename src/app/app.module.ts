@@ -6,6 +6,7 @@ import { AppComponent } from './app.component';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
 import { TokenInterceptor } from '@interceptors/token.interceptor';
+import { BoardsRoutingModule } from './components/pages/panel-routing.module';
 
 
 @NgModule({
@@ -16,7 +17,8 @@ import { TokenInterceptor } from '@interceptors/token.interceptor';
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    BoardsRoutingModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true }

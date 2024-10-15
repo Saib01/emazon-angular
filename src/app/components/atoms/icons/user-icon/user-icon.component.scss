@@ -1,16 +1,17 @@
+
 .user{
     &__button {
-        background-color: transparent;
+        background-color: rgba(0, 0, 0, 0.168);
         border: none;
         cursor: pointer;
-        padding: 0.5rem;
+        padding: 0.25rem;
         border-radius: 50%;
         transition: background-color 0.3s ease;
         &:hover{
-            background-color: rgba(255, 255, 255, 0.1);
+            background-color: rgba(0, 0, 0, 0.068);
         }
         &:active{
-            background-color: rgba(255, 255, 255, 0.2);
+            background-color: rgba(0, 0, 0, 0.253);
         }
     }
 

@@ -9,7 +9,6 @@
       height: 10vh;
     }
   }
-  background: #f8c3edb6;
   }
 
   .content{
@@ -17,6 +16,7 @@
     flex-direction: column;
     height: 85vh;
     overflow-y: auto;
+    overflow-x: auto;
     &::-webkit-scrollbar {
       width: 0.4rem;
       background-color: #555555;
