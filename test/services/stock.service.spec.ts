@@ -43,7 +43,7 @@ describe('StockService', () => {
     req.flush(category);
   });
 
-  test('should check if the name is valid', () => {
+  test('should check if the category name is valid', () => {
     const name = 'Valid Name';
     const isValid = true;
 
@@ -56,7 +56,7 @@ describe('StockService', () => {
     req.flush(isValid); 
   });
 
-  it('should retrieve categories with correct query parameters', () => {
+  test('should retrieve categories with correct query parameters', () => {
     const mockResponse: Page<BasicInfo> = {
       content: [{ id: 1, name: 'Category 1',description:"asd" }, { id: 2, name: 'Category 2',description:" " }],
       totalElements: 0,

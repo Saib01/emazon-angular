@@ -12,6 +12,7 @@ import { SideBarComponent } from '../organisms/side-bar/side-bar.component';
 import { HeaderComponent } from '../organisms/header/header.component';
 import { HomeIconComponent } from '../atoms/icons/home-icon/home-icon.component';
 import { UserIconComponent } from '../atoms/icons/user-icon/user-icon.component';
+import { BrandIconComponent } from '../atoms/icons/brand-icon/brand-icon.component';
 
 
 @NgModule({
@@ -22,6 +23,7 @@ import { UserIconComponent } from '../atoms/icons/user-icon/user-icon.component'
     LogoEmazonComponent,
     CategoryIconComponent,
     HomeIconComponent,
+    BrandIconComponent,
     SideBarItemComponent,
     SideBarComponent,
     HeaderComponent

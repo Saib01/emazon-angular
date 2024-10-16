@@ -9,16 +9,19 @@ import { StockService } from '@services/stock.service';
 })
 export class NameValidator {
 
-  static checkNameAvailability(stockService:StockService){
-    return(control:AbstractControl)=>{
+  static checkNameAvailability(stockService: StockService, name: 'category' | 'brand') {
+    return (control: AbstractControl) => {
       return timer(1000).pipe(
-        switchMap(()=>
-          stockService.checkCategoryName(control.value).pipe(
-            map(response=>response.valueOf() ? null : { notAvailable: true })
-          )
-        )
-      )
+        switchMap(() => {
+          const checkNameMethod = name === 'category'
+            ? stockService.checkCategoryName.bind(stockService)
+            : stockService.checkBrandName.bind(stockService);
+  
+          return checkNameMethod(control.value).pipe(
+            map(response => response ? null : { notAvailable: true })
+          );
+        })
+      );
     };
-
   }
 }

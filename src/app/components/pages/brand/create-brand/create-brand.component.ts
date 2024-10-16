@@ -1,23 +1,23 @@
-import { NoWhiteSpaceValidator } from '@utils/noWhitespaceValidator';
-import { NameValidator } from '@utils/nameValidator';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { BasicInfo } from '@models/BasicInfo.model';
 import { ErrorMessages } from '@models/error-messages.model';
 import { StockService } from '@services/stock.service';
-import { BasicInfo } from '@models/BasicInfo.model';
+import { NameValidator } from '@utils/nameValidator';
+import { NoWhiteSpaceValidator } from '@utils/noWhitespaceValidator';
+
 @Component({
-  selector: 'app-category',
-  templateUrl: './create-category.component.html',
-  styleUrls: ['./create-category.component.scss'],
+  selector: 'app-create-brand',
+  templateUrl: './create-brand.component.html',
+  styleUrls: ['./create-brand.component.scss']
 })
-export class CreateCategoryComponent{
+export class CreateBrandComponent {
 
-  formCategory = this.formBuilder.nonNullable.group({
-    name: ['', [NoWhiteSpaceValidator.checkNoWhitespace(),Validators.maxLength(50)],NameValidator.checkNameAvailability(this.stock,'category')],
-    description: ['', [NoWhiteSpaceValidator.checkNoWhitespace(), Validators.maxLength(90)]],
+  formBrand = this.formBuilder.nonNullable.group({
+    name: ['', [NoWhiteSpaceValidator.checkNoWhitespace(),Validators.maxLength(50)],NameValidator.checkNameAvailability(this.stock,'brand')],
+    description: ['', [NoWhiteSpaceValidator.checkNoWhitespace(), Validators.maxLength(120)]],
   });
-
   errorNameMessages: ErrorMessages[] = [
     {
       type: 'maxlength',
@@ -41,23 +41,23 @@ export class CreateCategoryComponent{
     ) {
         }
     
-  validateCategory() {
-    if (this.formCategory.valid) {
+  validateBrand() {
+    if (this.formBrand.valid) {
       const category: BasicInfo = {
-        name: this.formCategory.getRawValue().name,
-        description: this.formCategory.getRawValue().description
+        name: this.formBrand.getRawValue().name,
+        description: this.formBrand.getRawValue().description
       };
-      this.stock.createCategory(category)
+      this.stock.createBrand(category)
       .subscribe({
         next: (rta) => {
-            this.router.navigate(['/panel/category']);
+            this.router.navigate(['/panel/brand']);
         },
         error: (error)=>{
           console.log(error);
         }
       })
     } else {
-      this.formCategory.markAllAsTouched();
+      this.formBrand.markAllAsTouched();
     }
   }
 }
