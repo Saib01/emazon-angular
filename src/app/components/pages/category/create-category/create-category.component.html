@@ -6,8 +6,8 @@
         </input-text>
         <text-area [controlName]="'description'" [errorMessages]="errorDescriptionMessages" [placeHolder]="'Enter category description'"></text-area>
         <div class="form__actions">
-            <div class="form__cancel" [routerLink]="'panel/home'">
-                <app-button typeBtn="button" [isDisabled]="false">Cancel</app-button>
+            <div class="form__cancel" [routerLink]="['..']">
+                <app-button typeBtn="button" [isDisabled]="false" [isBackgroundBlack]="false">Cancel</app-button>
             </div>
             <div class="form__save">
                 <app-button typeBtn="submit" [isDisabled]="formCategory.status!='VALID'">Save</app-button>

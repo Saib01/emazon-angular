@@ -2,12 +2,12 @@ import { ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testin
 import { ReactiveFormsModule } from '@angular/forms';
 
 import { StockService } from '@services/stock.service';
-import { ButtonComponent } from '../../../../src/app/components/atoms/basic-components/button/button.component';
-import { ControlErrorComponent } from '../../../../src/app/components/molecules/control-error/control-error.component';
-import { InputTextComponent } from '../../../../src/app/components/molecules/input-text/input-text.component';
-import { TextAreaComponent } from '../../../../src/app/components/molecules/text-area/text-area.component';
-import { CategoryComponent } from '../../../../src/app/components/pages/category/category.component';
-import { Category } from '@models/category.model';
+import { ButtonComponent } from '../../../../../src/app/components/atoms/basic-components/button/button.component';
+import { ControlErrorComponent } from '../../../../../src/app/components/molecules/control-error/control-error.component';
+import { InputTextComponent } from '../../../../../src/app/components/molecules/input-text/input-text.component';
+import { TextAreaComponent } from '../../../../../src/app/components/molecules/text-area/text-area.component';
+import { CreateCategoryComponent } from '../../../../../src/app/components/pages/category/create-category/create-category.component';
+import { BasicInfo } from '@models/BasicInfo.model';
 import { ResponseMessage } from '@models/response.model';
 import { NameValidator } from '@utils/nameValidator';
 import { of, throwError } from 'rxjs';
@@ -17,7 +17,7 @@ import { Router } from '@angular/router';
 
 class MockStockService{
   private readonly API_STOCK = 'http://mockapi.com/api/category/'; 
-  createCategory(category: Category) {
+  createCategory(category: BasicInfo) {
     
     console.log("h1");
     const response: ResponseMessage = {
@@ -39,8 +39,8 @@ class MockNameValidator{
 }
 
 describe('CategoryComponent', () => {
-  let component: CategoryComponent;
-  let fixture: ComponentFixture<CategoryComponent>;
+  let component: CreateCategoryComponent;
+  let fixture: ComponentFixture<CreateCategoryComponent>;
   let stockServiceMock: MockStockService;
   let mockNameValidator: MockNameValidator;
   let router: Router;
@@ -51,7 +51,7 @@ describe('CategoryComponent', () => {
 
     await TestBed.configureTestingModule({
       declarations: [
-        CategoryComponent,
+        CreateCategoryComponent,
         InputTextComponent,
         TextAreaComponent,
         ButtonComponent,
@@ -65,7 +65,7 @@ describe('CategoryComponent', () => {
       ],
     }).compileComponents();
 
-    fixture = TestBed.createComponent(CategoryComponent);
+    fixture = TestBed.createComponent(CreateCategoryComponent);
     component = fixture.componentInstance;
     router = TestBed.inject(Router);
   });
@@ -95,7 +95,7 @@ describe('CategoryComponent', () => {
       expect(spy).toHaveBeenCalled();
       expect(component.formCategory.pristine).toBeTruthy();
       expect(component.formCategory.touched).toBeTruthy();
-      expect(router.navigate).toHaveBeenCalledWith(['panel/home']);
+      expect(router.navigate).toHaveBeenCalledWith(['/panel/category']);
     }));
 
     it('should throw an error when an issue arises with the communication', fakeAsync(() => {
@@ -111,7 +111,7 @@ describe('CategoryComponent', () => {
       expect(spy).toHaveBeenCalled();
       expect(component.formCategory.pristine).toBeTruthy();
       expect(component.formCategory.touched).toBeTruthy();
-      expect(router.navigate).not.toHaveBeenCalledWith(['panel/home']);
+      expect(router.navigate).not.toHaveBeenCalledWith(['/panel/category']);
     }));
   });
 });

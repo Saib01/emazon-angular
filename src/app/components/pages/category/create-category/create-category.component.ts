@@ -5,13 +5,13 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ErrorMessages } from '@models/error-messages.model';
 import { StockService } from '@services/stock.service';
-import { Category } from '@models/category.model';
+import { BasicInfo } from '@models/BasicInfo.model';
 @Component({
   selector: 'app-category',
-  templateUrl: './category.component.html',
-  styleUrls: ['./category.component.scss'],
+  templateUrl: './create-category.component.html',
+  styleUrls: ['./create-category.component.scss'],
 })
-export class CategoryComponent{
+export class CreateCategoryComponent{
 
   formCategory = this.formBuilder.nonNullable.group({
     name: ['', [NoWhiteSpaceValidator.checkNoWhitespace(),Validators.maxLength(50)],NameValidator.checkNameAvailability(this.stock)],
@@ -43,14 +43,14 @@ export class CategoryComponent{
     
   validateCategory() {
     if (this.formCategory.valid) {
-      const category: Category = {
+      const category: BasicInfo = {
         name: this.formCategory.getRawValue().name,
         description: this.formCategory.getRawValue().description
       };
       this.stock.createCategory(category)
       .subscribe({
         next: (rta) => {
-            this.router.navigate(['panel/home']);
+            this.router.navigate(['/panel/category']);
         },
         error: (error)=>{
           console.log(error);

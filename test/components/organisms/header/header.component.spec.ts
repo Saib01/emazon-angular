@@ -49,4 +49,15 @@ describe('HeaderComponent', () => {
       const lastSegment = component['getLastSegment'](url); 
       expect(lastSegment).toBe('about');
     });
+
+    test('should extract last segment from another simple URL', () => {
+      const url = '/panel/category/create?';
+      const lastSegment = component['getLastSegment'](url); 
+      expect(lastSegment).toBe('category');
+    });
+    test('should extract last segment from another simple URL', () => {
+      const url = '/panel/category?';
+      const lastSegment = component['getLastSegment'](url); 
+      expect(lastSegment).toBe('category');
+    });
   });
