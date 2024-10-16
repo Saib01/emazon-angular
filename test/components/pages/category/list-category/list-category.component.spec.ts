@@ -7,7 +7,7 @@ import { Page } from '@models/page.model';
 import { BasicInfo } from '@models/BasicInfo.model';
 import { RangePipe } from '../../../../../src/app/components/pipe/range.pipe';
 import { ButtonComponent } from '../../../../../src/app/components/atoms/basic-components/button/button.component';
-import { ActivatedRoute, Router, RouterModule } from '@angular/router';
+import { ActivatedRoute} from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
 
 

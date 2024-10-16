@@ -82,4 +82,34 @@ describe('StockService', () => {
     expect(req.request.method).toBe('GET');
     req.flush(mockResponse);
   });
+
+
+  
+  test('should create a brand', () => {
+    const brand: BasicInfo = {
+        name: 'Test Brand',
+        description: ''
+    }; 
+
+    service.createBrand(brand).subscribe((response) => {
+      expect(response).toEqual(brand); 
+    });
+
+    const req = httpMock.expectOne(`${environment.API_URL_STOCK}/api/brand/`);
+    expect(req.request.method).toBe('POST'); 
+    req.flush(brand);
+  });
+
+  test('should check if the brand name is valid', () => {
+    const name = 'Valid Name';
+    const isValid = true;
+
+    service.checkBrandName(name).subscribe((response) => {
+      expect(response).toBe(isValid);
+    });
+
+    const req = httpMock.expectOne(`${environment.API_URL_STOCK}/api/brand/validate-name`);
+    expect(req.request.method).toBe('POST'); 
+    req.flush(isValid); 
+  });
 });

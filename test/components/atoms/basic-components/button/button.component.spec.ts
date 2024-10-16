@@ -38,22 +38,18 @@ describe('ButtonComponent', () => {
   });
 
   test('should pass correct @Input values from parent to child', () => {
-    // Obtiene el componente hijo desde el DOM
     const buttonDebugElement = fixture.debugElement.query(By.directive(ButtonComponent));
-    const buttonComponent = buttonDebugElement.componentInstance as ButtonComponent;//componente hijo
-    const buttonElement: HTMLButtonElement = buttonDebugElement.nativeElement;//Elemento boton
+    const buttonComponent = buttonDebugElement.componentInstance as ButtonComponent;
+    const buttonElement: HTMLButtonElement = buttonDebugElement.nativeElement;
 
-    // Verifica que los valores pasados al hijo son correctos
     expect(buttonComponent).toBeTruthy();
     expect(buttonComponent.typeBtn).toBe('button');
     expect(buttonComponent.isDisabled).toBe(false);
 
-    // Cambia los valores en el host component
     component.typeBtn = 'submit';
     component.isDisabled = true;
-    fixture.detectChanges(); // Refleja los cambios en el DOM
+    fixture.detectChanges(); 
 
-    // Verifica que los nuevos valores han sido actualizados en el componente hijo
     expect(buttonComponent.typeBtn).toBe('submit');
     expect(buttonComponent.isDisabled).toBe(true);
     expect(buttonElement.textContent).toContain('Click Me');
