@@ -10,12 +10,17 @@ import { ControlErrorComponent } from '../molecules/control-error/control-error.
 import { CreateCategoryComponent } from './category/create-category/create-category.component';
 import { ListCategoryComponent } from './category/list-category/list-category.component';
 import { RangePipe } from '../pipe/range.pipe';
+import { BasicFormComponent } from '../organisms/basic-form/basic-form.component';
+import { CreateBrandComponent } from './brand/create-brand/create-brand.component';
+import { RouterModule } from '@angular/router';
 
 
 @NgModule({
   declarations: [
     ListCategoryComponent,
     CreateCategoryComponent,
+    CreateBrandComponent,
+    BasicFormComponent,
     HomeComponent,
     InputTextComponent,
     TextAreaComponent,
@@ -27,6 +32,7 @@ import { RangePipe } from '../pipe/range.pipe';
     CommonModule,
     BoardsRoutingModule,
     ReactiveFormsModule,
+    RouterModule
   ]
 })
 export class PanelModule { }

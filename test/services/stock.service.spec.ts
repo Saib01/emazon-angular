@@ -43,7 +43,7 @@ describe('StockService', () => {
     req.flush(category);
   });
 
-  test('should check if the name is valid', () => {
+  test('should check if the category name is valid', () => {
     const name = 'Valid Name';
     const isValid = true;
 
@@ -56,7 +56,7 @@ describe('StockService', () => {
     req.flush(isValid); 
   });
 
-  it('should retrieve categories with correct query parameters', () => {
+  test('should retrieve categories with correct query parameters', () => {
     const mockResponse: Page<BasicInfo> = {
       content: [{ id: 1, name: 'Category 1',description:"asd" }, { id: 2, name: 'Category 2',description:" " }],
       totalElements: 0,
@@ -81,5 +81,35 @@ describe('StockService', () => {
     const req = httpMock.expectOne(`${environment.API_URL_STOCK}/api/category?sortDirection=${sortDirection}&page=${page}&size=${size}`);
     expect(req.request.method).toBe('GET');
     req.flush(mockResponse);
+  });
+
+
+  
+  test('should create a brand', () => {
+    const brand: BasicInfo = {
+        name: 'Test Brand',
+        description: ''
+    }; 
+
+    service.createBrand(brand).subscribe((response) => {
+      expect(response).toEqual(brand); 
+    });
+
+    const req = httpMock.expectOne(`${environment.API_URL_STOCK}/api/brand/`);
+    expect(req.request.method).toBe('POST'); 
+    req.flush(brand);
+  });
+
+  test('should check if the brand name is valid', () => {
+    const name = 'Valid Name';
+    const isValid = true;
+
+    service.checkBrandName(name).subscribe((response) => {
+      expect(response).toBe(isValid);
+    });
+
+    const req = httpMock.expectOne(`${environment.API_URL_STOCK}/api/brand/validate-name`);
+    expect(req.request.method).toBe('POST'); 
+    req.flush(isValid); 
   });
 });

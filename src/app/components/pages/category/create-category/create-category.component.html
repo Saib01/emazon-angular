@@ -1,17 +1,2 @@
-
-<div class="container__form">
-    <form  [formGroup]="formCategory" class="form" (ngSubmit)="validateCategory()">
-        <h2 class="form__tittle">Registration</h2>
-        <input-text [controlName]="'name'" [errorMessages]="errorNameMessages" [placeHolder]="'Enter category name'">
-        </input-text>
-        <text-area [controlName]="'description'" [errorMessages]="errorDescriptionMessages" [placeHolder]="'Enter category description'"></text-area>
-        <div class="form__actions">
-            <div class="form__cancel" [routerLink]="['..']">
-                <app-button typeBtn="button" [isDisabled]="false" [isBackgroundBlack]="false">Cancel</app-button>
-            </div>
-            <div class="form__save">
-                <app-button typeBtn="submit" [isDisabled]="formCategory.status!='VALID'">Save</app-button>
-            </div>
-        </div>
-    </form>
-</div>
+<app-basic-form [formGroup]="formCategory" [errorNameMessages]="errorNameMessages"
+    [errorDescriptionMessages]="errorDescriptionMessages" (validateEvent)="validateCategory()"></app-basic-form>
