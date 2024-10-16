@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component} from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { BasicInfo } from '@models/BasicInfo.model';
@@ -21,17 +21,17 @@ export class CreateBrandComponent {
   errorNameMessages: ErrorMessages[] = [
     {
       type: 'maxlength',
-      message: 'The category name has a maximum allowed characters of 50.',
+      message: 'The brand name has a maximum allowed characters of 50.',
     },
-    { type: 'whitespace', message: 'The category name cannot be empty or null.' },
-    { type: 'notAvailable', message: 'There is already a category with that name' },
+    { type: 'whitespace', message: 'The brand name cannot be empty or null.' },
+    { type: 'notAvailable', message: 'There is already a brand with that name' },
   ];
   errorDescriptionMessages: ErrorMessages[] = [
     {
       type: 'maxlength',
-      message: 'The category description has a maximum allowed characters of 90.',
+      message: 'The brand description has a maximum allowed characters of 120.',
     },
-    { type: 'whitespace', message: 'The category description cannot be empty or null.' },
+    { type: 'whitespace', message: 'The brand description cannot be empty or null.' },
   ];
 
   constructor(
@@ -43,11 +43,11 @@ export class CreateBrandComponent {
     
   validateBrand() {
     if (this.formBrand.valid) {
-      const category: BasicInfo = {
+      const brand: BasicInfo = {
         name: this.formBrand.getRawValue().name,
         description: this.formBrand.getRawValue().description
       };
-      this.stock.createBrand(category)
+      this.stock.createBrand(brand)
       .subscribe({
         next: (rta) => {
             this.router.navigate(['/panel/brand']);

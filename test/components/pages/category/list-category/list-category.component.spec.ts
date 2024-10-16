@@ -9,6 +9,7 @@ import { RangePipe } from '../../../../../src/app/components/pipe/range.pipe';
 import { ButtonComponent } from '../../../../../src/app/components/atoms/basic-components/button/button.component';
 import { ActivatedRoute} from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
+import { BasicTableInfoComponent } from '../../../../../src/app/components/organisms/basic-table-info/basic-table-info.component';
 
 
 class MockStockService{
@@ -52,7 +53,7 @@ describe('ListCategoryComponent', () => {
   beforeEach(async () => {
     stockServiceMock = new MockStockService();
     await TestBed.configureTestingModule({
-      declarations: [ListCategoryComponent,RangePipe,ButtonComponent],
+      declarations: [ListCategoryComponent,RangePipe,ButtonComponent,BasicTableInfoComponent],
       imports: [HttpClientTestingModule,RouterTestingModule],
       providers: [
         { provide: StockService, useValue: stockServiceMock },
@@ -94,30 +95,26 @@ describe('ListCategoryComponent', () => {
   });
 
   test('should handle page number change and fetch new data', () => {
-    const event = { target: { value: '1' } }as unknown as Event;
-    component.onPageNumberChange(event);
+    component.onPageNumberChange(1);
     expect(component.page).toBe(1);
     expect(stockServiceMock.getCategories).toHaveBeenCalledWith('ASC', 1, 5);
   });
 
   test('should handle page size change and fetch new data', () => {
     component.page=1;
-    const event = { target: { value: '20' } } as unknown as Event;
-    component.onPageSizeChange(event);
+    component.onPageSizeChange(20);
     expect(component.size).toBe(20);
     expect(component.page).toBe(0);
     expect(stockServiceMock.getCategories).toHaveBeenCalledWith('ASC', 0, 20);
   });
   test('should handle page size change and fetch new data', () => {
-    const event = { target: { value: '20' } } as unknown as Event;
-    component.onPageSizeChange(event);
+    component.onPageSizeChange(20);
     expect(component.size).toBe(20);
     expect(component.page).toBe(0);
     expect(stockServiceMock.getCategories).toHaveBeenCalledWith('ASC', 0, 20);
   });
   test('should handle sort direction change and fetch new data', () => {
-    const event = { target: { value: 'DESC' } } as unknown as Event;
-    component.onSortDirectionChange(event);
+    component.onSortDirectionChange('DESC');
     expect(component.sortDirection).toBe('DESC');
     expect(stockServiceMock.getCategories).toHaveBeenCalledWith('DESC', 0, 5);
   });

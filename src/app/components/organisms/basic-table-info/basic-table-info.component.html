@@ -1,0 +1,80 @@
+<div class="list">
+
+  <div class="list__container">
+
+    <div class="list__button list__button--mobile">
+      <a class="link" [routerLink]="['create']">
+      <app-button [isDisabled]="false" >
+          <span class="link__icon">+ </span>Create
+      </app-button>
+    </a>
+    </div>
+
+    <div class="list__pagination">
+
+      <div class="list__button list__button--desktop">
+        <a class="link" [routerLink]="['create']">
+        <app-button [isDisabled]="false" >
+            <span class="link__icon">+ </span>Create
+        </app-button>
+      </a>
+      </div>
+
+      <div class="list__select-params">
+
+        <div class="pagination">
+          <span>Page:</span>
+          <select class="pagination__parameters" (change)="onPageNumberChange($event)">
+            <option *ngFor="let option of (0 | range:totalPages-1)" [value]="option">{{ option+1 }}
+            </option>
+          </select>
+        </div>
+        
+        <div class="pagination">
+          <span>Sort name:</span>
+          <select class="pagination__parameters" (change)="onSortDirectionChange($event)">
+            <option *ngFor="let option of ['ASC','DESC']" [value]="option">{{ option }}</option>
+          </select>
+        </div>
+
+        <div class="pagination">
+          <span>Size:</span>
+          <select class="pagination__parameters" (change)="onPageSizeChange($event)">
+            <option *ngFor="let option of (5 | range:15:5)" [value]="option">{{ option }}</option>
+          </select>
+        </div>
+
+      </div>
+
+    </div>
+
+    <main class="list__main-content">
+      <div class="list__card">
+        <div class="list__table-wrapper">
+          <table class="list__custom-table">
+            <thead>
+              <tr class="list__custom-tr">
+                <th *ngFor="let item of ['Id','Name','Description']" class="list__table-header text--start"
+                  [ngClass]="{ 'text--number': item.includes('Id') }">
+                  {{item}}
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let item of elements " class="list__custom-tr">
+                <td class="list__table-data text--number">
+                  {{item.id}}
+                </td>
+                <td class="list__table-data text--start">{{item.name}}</td>
+                <td class="list__table-data text--start">
+                  {{item.description}}
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </main>
+
+  </div>
+</div>

@@ -13,20 +13,25 @@ import { RangePipe } from '../pipe/range.pipe';
 import { BasicFormComponent } from '../organisms/basic-form/basic-form.component';
 import { CreateBrandComponent } from './brand/create-brand/create-brand.component';
 import { RouterModule } from '@angular/router';
+import { BasicTableInfoComponent } from '../organisms/basic-table-info/basic-table-info.component';
+import { ListBrandComponent } from './brand/list-brand/list-brand.component';
 
 
 @NgModule({
   declarations: [
     ListCategoryComponent,
+    ListBrandComponent,
     CreateCategoryComponent,
     CreateBrandComponent,
     BasicFormComponent,
+    BasicTableInfoComponent,
     HomeComponent,
     InputTextComponent,
     TextAreaComponent,
     ControlErrorComponent,
     ButtonComponent,
-    RangePipe
+    RangePipe,
+    BasicTableInfoComponent
   ],
   imports: [
     CommonModule,
