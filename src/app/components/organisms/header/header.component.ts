@@ -21,9 +21,9 @@ export class HeaderComponent implements OnInit {
       });
   }
   private getLastSegment(url: string): string {
-    const segments = url.split('/') ?? ""; 
+    const segments = url.split('/'); 
     segments.length>3?segments.pop():"";
     const lastSegment = segments.pop()?.split('?')[0]; 
-    return lastSegment ?? '';
+    return lastSegment!;
   }
 }

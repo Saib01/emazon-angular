@@ -50,6 +50,7 @@ export class ListCategoryComponent implements OnInit {
   onPageSizeChange(event: Event): void {
     const target = event.target as HTMLSelectElement;
     this.size = Number(target.value); 
+    console.log(this.page);
     this.page=this.pageCategory.totalElements<this.size*this.page?0:this.page;
     this.getCategories();
   }

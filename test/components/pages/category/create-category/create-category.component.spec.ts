@@ -2,11 +2,11 @@ import { ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testin
 import { ReactiveFormsModule } from '@angular/forms';
 
 import { StockService } from '@services/stock.service';
-import { ButtonComponent } from '../../../../src/app/components/atoms/basic-components/button/button.component';
-import { ControlErrorComponent } from '../../../../src/app/components/molecules/control-error/control-error.component';
-import { InputTextComponent } from '../../../../src/app/components/molecules/input-text/input-text.component';
-import { TextAreaComponent } from '../../../../src/app/components/molecules/text-area/text-area.component';
-import { CreateCategoryComponent } from '../../../../src/app/components/pages/category/create-category/create-category.component';
+import { ButtonComponent } from '../../../../../src/app/components/atoms/basic-components/button/button.component';
+import { ControlErrorComponent } from '../../../../../src/app/components/molecules/control-error/control-error.component';
+import { InputTextComponent } from '../../../../../src/app/components/molecules/input-text/input-text.component';
+import { TextAreaComponent } from '../../../../../src/app/components/molecules/text-area/text-area.component';
+import { CreateCategoryComponent } from '../../../../../src/app/components/pages/category/create-category/create-category.component';
 import { BasicInfo } from '@models/BasicInfo.model';
 import { ResponseMessage } from '@models/response.model';
 import { NameValidator } from '@utils/nameValidator';
