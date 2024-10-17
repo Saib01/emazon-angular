@@ -12,7 +12,9 @@ export class InputTextComponent implements OnInit {
   @Input() controlName: string='';
   @Input() placeHolder:string='';
   @Input() errorMessages: ErrorMessages[]=[];
+
   constructor(private readonly rootFormGroup: FormGroupDirective) {}
+  
   ngOnInit(): void {
     this.formControl = this.rootFormGroup.control.get(
       this.controlName

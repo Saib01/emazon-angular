@@ -48,4 +48,14 @@ export class StockService {
       context: checkToken()
     });
   }
+  getBrands(sortDirection: string, page: number, size: number) : Observable<Page<BasicInfo>>{
+    const params = new HttpParams()
+      .set('sortDirection', sortDirection)
+      .set('page', page.toString())
+      .set('size', size.toString());
+  
+    return this.http.get<Page<BasicInfo>>(
+      `${this.API_STOCK_BRAND}`, { params: params}
+    );
+  }
 }

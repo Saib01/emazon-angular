@@ -4,13 +4,12 @@ import { Page } from '@models/page.model';
 import { StockService } from '@services/stock.service';
 
 @Component({
-  selector: 'app-list-category',
-  templateUrl: './list-category.component.html',
-  styleUrls: ['./list-category.component.scss']
+  selector: 'app-list-brand',
+  templateUrl: './list-brand.component.html',
+  styleUrls: ['./list-brand.component.css']
 })
-export class ListCategoryComponent implements OnInit {
-
-  pageCategory: Page<BasicInfo> = {
+export class ListBrandComponent implements OnInit {
+  pageBrand: Page<BasicInfo> = {
     content: [], 
     totalElements: 0,
     totalPages: 0,
@@ -28,14 +27,14 @@ export class ListCategoryComponent implements OnInit {
   constructor(private readonly stock:StockService) { 
   }
   ngOnInit(): void {
-    this.getCategories();
+    this.getBrands();
   }
 
-  getCategories(){
-    this.stock.getCategories(this.sortDirection, this.page, this.size)
+  getBrands(){
+    this.stock.getBrands(this.sortDirection, this.page, this.size)
     .subscribe({
       next: (rta: Page<BasicInfo>) => {
-        this.pageCategory=rta;
+        this.pageBrand=rta;
       },
       error: (error)=>{
         console.log(error);
@@ -44,16 +43,15 @@ export class ListCategoryComponent implements OnInit {
   }
   onPageNumberChange(target: number): void {
     this.page = target; 
-    this.getCategories();
+    this.getBrands();
   }
   onPageSizeChange(target: number): void {
     this.size = target; 
-    this.page=this.pageCategory.totalElements<this.size*this.page?0:this.page;
-    this.getCategories();
+    this.page=this.pageBrand.totalElements<this.size*this.page?0:this.page;
+    this.getBrands();
   }
   onSortDirectionChange(target: string) {
     this.sortDirection = target; 
-    this.getCategories();
+    this.getBrands();
   }
-  
 }
