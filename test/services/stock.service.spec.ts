@@ -3,7 +3,6 @@ import { HttpClientTestingModule, HttpTestingController } from '@angular/common/
 import { StockService } from '@services/stock.service';
 import { BasicInfo } from '@models/BasicInfo.model'; 
 import { environment } from '@environments/environment';
-import { HttpParams } from '@angular/common/http';
 import { Page } from '@models/page.model';
 
 describe('StockService', () => {
@@ -112,4 +111,33 @@ describe('StockService', () => {
     expect(req.request.method).toBe('POST'); 
     req.flush(isValid); 
   });
+  
+  test('should retrieve brands with correct query parameters', () => {
+    const mockResponse: Page<BasicInfo> = {
+      content: [{ id: 1, name: 'Brand 1',description:"asd" }, { id: 2, name: 'Brand 2',description:" " }],
+      totalElements: 0,
+      totalPages: 0,
+      pageNumber: 0,
+      first: true,
+      last: true,
+      pageSize: 10,
+      numberOfElements: 0,
+      ascending: false,
+      empty: true
+    };
+
+    const sortDirection = 'ASC';
+    const page = 0;
+    const size = 10;
+
+    service.getBrands(sortDirection, page, size).subscribe(response => {
+      expect(response).toEqual(mockResponse);
+    });
+
+    const req = httpMock.expectOne(`${environment.API_URL_STOCK}/api/brand?sortDirection=${sortDirection}&page=${page}&size=${size}`);
+    expect(req.request.method).toBe('GET');
+    req.flush(mockResponse);
+});
+
+  
 });

@@ -6,6 +6,7 @@ import { ControlErrorComponent } from '../../molecules/control-error/control-err
 import { TextAreaComponent } from '../../molecules/text-area/text-area.component';
 import { ButtonComponent } from '../../atoms/basic-components/button/button.component';
 import { RouterTestingModule } from '@angular/router/testing';
+import { NO_ERRORS_SCHEMA } from '@angular/core';
 
 describe('BasicFormComponent', () => {
   let component: BasicFormComponent;
@@ -15,7 +16,9 @@ describe('BasicFormComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [BasicFormComponent,InputTextComponent,ControlErrorComponent,TextAreaComponent,ButtonComponent],
+      schemas: [NO_ERRORS_SCHEMA],
       imports: [ReactiveFormsModule,FormsModule,RouterTestingModule],
+      
     }).compileComponents();
 
     fixture = TestBed.createComponent(BasicFormComponent);
