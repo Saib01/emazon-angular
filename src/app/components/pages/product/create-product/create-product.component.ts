@@ -24,8 +24,8 @@ export class CreateProductComponent {
       NameValidator.checkNameAvailability(this.stock, 'product'),
     ],
     description: ['', [NoWhiteSpaceValidator.checkNoWhitespace()]],
-    amount: [null, [Validators.required, Validators.min(1)]],
-    price: [null , [Validators.required, Validators.min(1)]],
+    amount: [0, [Validators.required, Validators.min(1)]],
+    price: [0 , [Validators.required, Validators.min(1)]],
     brand: [{
       id:0,
       name:'',
@@ -96,14 +96,13 @@ export class CreateProductComponent {
       const product: ProductRequest = {
         name: this.formProduct.getRawValue().name,
         description: this.formProduct.getRawValue().description,
-       amount: this.formProduct.getRawValue().amount ?? 0,
-        price: this.formProduct.getRawValue().price ?? 0,
+       amount: this.formProduct.getRawValue().amount,
+        price: this.formProduct.getRawValue().price ,
         brandId: Number(this.formProduct.getRawValue().brand.id),
         categoryIdsList:this.formProduct.getRawValue().categoryList.map(num => Number(num.id))
       };
-      console.log(this.formProduct.getRawValue().categoryList.map(num => Number(num.id)))
       this.stock.createProduct(product).subscribe({
-        next: (rta) => {
+        next: () => {
           this.router.navigate(['/panel/home']);
         },
         error: (error) => {

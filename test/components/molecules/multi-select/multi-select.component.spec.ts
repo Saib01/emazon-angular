@@ -1,10 +1,10 @@
 /* tslint:disable:no-unused-variable */
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { MultiSelectComponent } from './multi-select.component';
+import { MultiSelectComponent } from '../../../../src/app/components/molecules/multi-select/multi-select.component';
 import { FormGroupDirective, FormControl, ReactiveFormsModule } from '@angular/forms';
 import { BasicInfo } from '@models/basic-Info.model';
-import { ControlErrorComponent } from '../control-error/control-error.component';
+import { ControlErrorComponent } from '../../../../src/app/components/molecules/control-error/control-error.component';
 
 describe('MultiSelectComponent', () => {
   let component: MultiSelectComponent;

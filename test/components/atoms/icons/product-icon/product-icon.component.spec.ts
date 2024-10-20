@@ -1,7 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 
-import { ProductIconComponent } from './product-icon.component';
+import { ProductIconComponent } from '../../../../../src/app/components/atoms/icons/product-icon/product-icon.component';
 
 describe('ProductIconComponent', () => {
   let component: ProductIconComponent;
