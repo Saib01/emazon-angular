@@ -13,8 +13,9 @@
   align-items: flex-start;
   display: inline-flex;
   &__components {
+    height: 5rem;
     width: 100%;
-    margin-bottom: 1.5rem;
+   // margin-bottom: 1.5rem;
     justify-content: center;
     align-items: center;
     display: flex;

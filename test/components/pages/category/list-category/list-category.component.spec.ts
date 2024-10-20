@@ -4,7 +4,7 @@ import { ListCategoryComponent } from '../../../../../src/app/components/pages/c
 import { StockService } from '@services/stock.service';
 import { Observable, of, throwError } from 'rxjs';
 import { Page } from '@models/page.model';
-import { BasicInfo } from '@models/BasicInfo.model';
+import { BasicInfo } from '@models/basic-Info.model';
 import { RangePipe } from '../../../../../src/app/components/pipe/range.pipe';
 import { ButtonComponent } from '../../../../../src/app/components/atoms/basic-components/button/button.component';
 import { ActivatedRoute} from '@angular/router';

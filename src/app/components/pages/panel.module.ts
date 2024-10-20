@@ -15,6 +15,9 @@ import { CreateBrandComponent } from './brand/create-brand/create-brand.componen
 import { RouterModule } from '@angular/router';
 import { BasicTableInfoComponent } from '../organisms/basic-table-info/basic-table-info.component';
 import { ListBrandComponent } from './brand/list-brand/list-brand.component';
+import { CreateProductComponent } from './product/create-product/create-product.component';
+import { MultiSelectComponent } from '../molecules/multi-select/multi-select.component';
+import { SimpleSelectComponent } from '../molecules/simple-select/simple-select.component';
 
 
 @NgModule({
@@ -23,11 +26,14 @@ import { ListBrandComponent } from './brand/list-brand/list-brand.component';
     ListBrandComponent,
     CreateCategoryComponent,
     CreateBrandComponent,
+    CreateProductComponent,
     BasicFormComponent,
     BasicTableInfoComponent,
     HomeComponent,
     InputTextComponent,
     TextAreaComponent,
+    MultiSelectComponent,
+    SimpleSelectComponent,
     ControlErrorComponent,
     ButtonComponent,
     RangePipe,
