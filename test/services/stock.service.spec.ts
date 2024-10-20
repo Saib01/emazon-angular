@@ -1,9 +1,10 @@
 import { TestBed } from '@angular/core/testing';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { StockService } from '@services/stock.service';
-import { BasicInfo } from '@models/BasicInfo.model'; 
+import { BasicInfo } from '@models/basic-Info.model'; 
 import { environment } from '@environments/environment';
 import { Page } from '@models/page.model';
+import { ProductRequest } from '@models/product.model';
 
 describe('StockService', () => {
   let service: StockService;
@@ -139,5 +140,36 @@ describe('StockService', () => {
     req.flush(mockResponse);
 });
 
+
+test('should create a product', () => {
+  const product: ProductRequest = {
+    name: 'product',
+    description: 'product description',
+   amount: 15,
+    price: 10,
+    brandId: 2,
+    categoryIdsList:[5,5,5]
+  };
+  service.createProduct(product).subscribe((response) => {
+    expect(response).toEqual(product); 
+  });
+
+  const req = httpMock.expectOne(`${environment.API_URL_STOCK}/api/product/`);
+  expect(req.request.method).toBe('POST'); 
+  req.flush(product);
+});
+
+test('should check if the product name is valid', () => {
+  const name = 'Valid Name';
+  const isValid = true;
+
+  service.checkProductName(name).subscribe((response) => {
+    expect(response).toBe(isValid);
+  });
+
+  const req = httpMock.expectOne(`${environment.API_URL_STOCK}/api/product/validate-name`);
+  expect(req.request.method).toBe('POST'); 
+  req.flush(isValid); 
+});
   
 });

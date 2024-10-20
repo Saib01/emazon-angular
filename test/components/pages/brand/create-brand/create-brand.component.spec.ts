@@ -6,7 +6,7 @@ import { ButtonComponent } from '../../../../../src/app/components/atoms/basic-c
 import { ControlErrorComponent } from '../../../../../src/app/components/molecules/control-error/control-error.component';
 import { InputTextComponent } from '../../../../../src/app/components/molecules/input-text/input-text.component';
 import { TextAreaComponent } from '../../../../../src/app/components/molecules/text-area/text-area.component';
-import { BasicInfo } from '@models/BasicInfo.model';
+import { BasicInfo } from '@models/basic-Info.model';
 import { ResponseMessage } from '@models/response.model';
 import { Observable, of, throwError } from 'rxjs';
 import { Router } from '@angular/router';

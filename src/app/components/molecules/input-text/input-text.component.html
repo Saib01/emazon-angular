@@ -4,9 +4,10 @@
     >
     <input
       [formControl]="formControl"
+      [id]="controlName"
       class="field__input"
       [ngClass]="{ 'field__input--error': formControl.touched && formControl.invalid }"
-      type="text"
+      [type]="type"
       [placeholder]="placeHolder"
     />
     <app-control-error [controlName]="controlName" [errorMessages]="errorMessages"></app-control-error>

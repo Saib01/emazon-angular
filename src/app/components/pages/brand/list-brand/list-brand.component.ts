@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { BasicInfo } from '@models/BasicInfo.model';
+import { BasicInfo } from '@models/basic-Info.model';
 import { Page } from '@models/page.model';
 import { StockService } from '@services/stock.service';
 

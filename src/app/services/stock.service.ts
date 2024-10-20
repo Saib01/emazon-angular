@@ -2,11 +2,12 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 
 import { environment } from '@environments/environment';
-import { BasicInfo } from '@models/BasicInfo.model';
+import { BasicInfo } from '@models/basic-Info.model';
 import { checkToken } from '@interceptors/token.interceptor';
 import { ResponseMessage } from '@models/response.model';
 import { Page } from '@models/page.model';
 import { Observable } from 'rxjs';
+import {ProductRequest } from '@models/product.model';
 
 
 @Injectable({
@@ -15,6 +16,7 @@ import { Observable } from 'rxjs';
 export class StockService {
   private readonly API_STOCK_CATEGORY = `${environment.API_URL_STOCK}/api/category`;
   private readonly API_STOCK_BRAND = `${environment.API_URL_STOCK}/api/brand`;
+  private readonly API_STOCK_PRODUCT = `${environment.API_URL_STOCK}/api/product`;
   constructor(private readonly http: HttpClient) {}
 
   createCategory(category: BasicInfo) {
@@ -57,5 +59,16 @@ export class StockService {
     return this.http.get<Page<BasicInfo>>(
       `${this.API_STOCK_BRAND}`, { params: params}
     );
+  }
+
+  createProduct(product: ProductRequest ) {
+    return this.http.post<ResponseMessage>(`${this.API_STOCK_PRODUCT}/`, product, {
+      context: checkToken()
+    });
+  }
+  checkProductName(name: string) {
+    return this.http.post<boolean>(`${this.API_STOCK_PRODUCT}/validate-name`, name, {
+      context: checkToken()
+    });
   }
 }

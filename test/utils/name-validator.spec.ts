@@ -10,7 +10,8 @@ describe('NameValidator', () => {
   beforeEach(() => {
     stockServiceMock = {
       checkCategoryName: jest.fn(),
-      checkBrandName: jest.fn()
+      checkBrandName: jest.fn(),
+      checkProductName: jest.fn()
     } as unknown as jest.Mocked<StockService>;
   
     TestBed.configureTestingModule({
@@ -69,4 +70,28 @@ describe('NameValidator', () => {
     });
   });
 
+  test('should return null if the product name is available', (done) => {
+    stockServiceMock.checkProductName.mockReturnValue(of(true));
+
+    const control: AbstractControl = { value: 'existingName' } as AbstractControl;
+    const validatorFn = NameValidator.checkNameAvailability(stockServiceMock,'product')(control);
+
+    validatorFn.subscribe((result: any) => {
+      expect(result).toBeNull(); 
+      done();
+    });
+  });
+
+
+  test('should return { notAvailable: true } if the product name is not available', (done) => {
+    stockServiceMock.checkProductName.mockReturnValue(of(false));
+
+    const control: AbstractControl = { value: 'existingName' } as AbstractControl;
+    const validatorFn = NameValidator.checkNameAvailability(stockServiceMock,'product')(control);
+
+    validatorFn.subscribe((result: any) => {
+      expect(result).toEqual({ notAvailable: true }); 
+      done();
+    });
+  });
 });

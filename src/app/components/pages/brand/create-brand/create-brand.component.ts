@@ -1,7 +1,7 @@
 import { Component} from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { BasicInfo } from '@models/BasicInfo.model';
+import { BasicInfo } from '@models/basic-Info.model';
 import { ErrorMessages } from '@models/error-messages.model';
 import { StockService } from '@services/stock.service';
 import { NameValidator } from '@utils/nameValidator';

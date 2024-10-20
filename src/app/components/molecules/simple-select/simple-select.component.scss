@@ -1,0 +1,80 @@
+*{
+    margin: 0;
+    font-family:  Calibri,'Gill Sans', 'Gill Sans MT', 'Trebuchet MS', sans-serif; 
+  }
+  .field{
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 1.25rem;
+    &__name{
+      margin-bottom: 0.25rem;
+      font-size: 1.5rem;
+    }
+    &__select{
+      cursor: pointer;
+      width: 100%;
+      border: 1px solid #e5e7eb;
+      background: #f8f8f8;      
+      border-radius: 0.3rem;
+      font-size: 1.25rem;
+      padding: 0.5rem 0.75rem;
+      box-sizing: border-box;
+      display: inline-flex;
+      &--error{
+        border: 0.03125rem solid #ff0000; 
+      }
+    }
+    &__options{
+      position: relative;
+    }
+  }
+  .options {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 10;
+    background: #fff;
+    border: 1px solid #ccc;
+    width: 100%;
+    height: 10rem;
+    overflow: auto;
+    box-sizing: border-box;
+    &::-webkit-scrollbar {
+      width: 0.4rem;
+      background-color: #555555;
+    }
+    &::-webkit-scrollbar-thumb {
+      background: #d2d2d2ce; 
+      border-radius: 0.25rem; 
+    }
+
+    &::-webkit-scrollbar-thumb:hover {
+      background-color: #d2d2d271; 
+    }
+    &__option {
+      padding: 10px;
+      border: 1px solid #e5e7eb;
+      cursor: pointer;
+      &:hover {
+        background-color: #f0f0f0;
+      }
+    }
+  }
+    .select{
+      &__option-text{
+      flex-grow: 1;
+      box-sizing: border-box;
+      white-space: nowrap;
+      overflow: hidden; 
+      text-overflow: ellipsis; 
+        &--place-holder{
+          color: #9b9da0;
+        }
+      }
+      &__toggle{
+        width: 100%;
+        display: flex;
+      }
+    }
+    
+    

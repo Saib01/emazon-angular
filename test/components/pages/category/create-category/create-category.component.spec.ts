@@ -12,7 +12,7 @@ import { ControlErrorComponent } from '../../../../../src/app/components/molecul
 import { InputTextComponent } from '../../../../../src/app/components/molecules/input-text/input-text.component';
 import { TextAreaComponent } from '../../../../../src/app/components/molecules/text-area/text-area.component';
 import { CreateCategoryComponent } from '../../../../../src/app/components/pages/category/create-category/create-category.component';
-import { BasicInfo } from '@models/BasicInfo.model';
+import { BasicInfo } from '@models/basic-Info.model';
 import { ResponseMessage } from '@models/response.model';
 import { Observable, of, throwError } from 'rxjs';
 import { Router } from '@angular/router';

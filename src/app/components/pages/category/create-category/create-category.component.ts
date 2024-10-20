@@ -5,7 +5,7 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ErrorMessages } from '@models/error-messages.model';
 import { StockService } from '@services/stock.service';
-import { BasicInfo } from '@models/BasicInfo.model';
+import { BasicInfo } from '@models/basic-Info.model';
 @Component({
   selector: 'app-category',
   templateUrl: './create-category.component.html',
