@@ -1,34 +1,51 @@
 .screen {
-    display: flex;
-    height: 100vh;
-    overflow: hidden;
-    &__main{
+  display: flex;
+  height: 100%;
+  overflow: hidden;
+
+  &__main {
     flex-grow: 1;
     display: block;
-    .footer{
+
+    .footer {
       height: 10vh;
     }
   }
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  height: 90vh;
+  overflow-y: auto;
+  overflow-x: auto;
+  width:83vW;
+  &::-webkit-scrollbar {
+    width: 0.4rem;
+    background-color: #555555;
   }
 
-  .content{
-    display: flex;
-    flex-direction: column;
-    height: 86vh;
-    overflow-y: auto;
-    overflow-x: auto;
-    padding-bottom: 3rem;
-    &::-webkit-scrollbar {
-      width: 0.4rem;
-      background-color: #555555;
-    }
-    &::-webkit-scrollbar-thumb {
-      background: #d2d2d2ce; 
-      border-radius: 0.25rem; 
-    }
-
-    &::-webkit-scrollbar-thumb:hover {
-      background-color: #d2d2d271; 
-    }
+  &::-webkit-scrollbar-thumb {
+    background: #d2d2d2ce;
+    border-radius: 0.25rem;
   }
 
+  &::-webkit-scrollbar-thumb:hover {
+    background-color: #d2d2d271;
+  }
+}
+
+.footer {
+  background-color:#f8f9fa;
+  padding: 10px 0;
+  text-align: center;
+  border-top: 1px solid #e7e7e7;
+  height: 10vh; /* Mantén la altura del footer */
+  margin-top: auto; /* Empuja el footer hacia el final */
+}
+
+@media only screen and (min-width:1023px){
+  .content {
+    width: 90vw;
+  }
+}

@@ -5,7 +5,6 @@
     width: 100%;
     box-sizing: border-box;
     overflow-y: hidden;
-
     &__button {
     
         width: 100%;
@@ -24,25 +23,28 @@
             }
         }
     }
-
     &__select-params {
         display: flex;
         align-items: center;
         justify-content: end;
         gap: 0.5rem;
-
-        .pagination{
-            &__parameters {
+        box-sizing: border-box;
+        overflow-x: hidden;  
+    }
+    &__params-container{
+        .select{
+            display: flex;
+            align-items: center;
+            justify-content: end;
+            &__param {
                 color: #9900ff81;
                 border: none;
                 background-color: transparent;
                 font-size: 1rem;
                 padding: 0.3125rem;
                 outline: none;
+                box-sizing: border-box;
                 cursor: pointer;
-                & option{
-                    padding: 10px; 
-                }
             }
         }
     }
@@ -57,6 +59,8 @@
     &__container {
         display: flex;
         flex-direction: column;
+        overflow-x: hidden;  
+        box-sizing: border-box;
     }
 
     &__main-content {
@@ -70,12 +74,26 @@
         border: 1px solid #e5e7eb;
         border-radius: 0.5rem;
         padding: 0.5rem;
+        overflow-x: auto;
+        
     }
 
     &__table-wrapper {
         position: relative;
         width: 100%;
         overflow: auto;
+        &::-webkit-scrollbar {
+            height: 0.4rem;
+            background-color: #555555;
+          }
+          &::-webkit-scrollbar-thumb {
+            background: #d2d2d2ce; 
+            border-radius: 0.25rem; 
+          }
+      
+          &::-webkit-scrollbar-thumb:hover {
+            background-color: #d2d2d271; 
+          }
     }
 
     &__custom-table {
@@ -126,9 +144,6 @@
     }
 }
 
-
-
-
 @media only screen and (min-width:600px) {
     .list {
         &__pagination {
@@ -156,6 +171,18 @@
             &--mobile {
                 padding: 0 0.8rem;
             }
+        }
+        &__pagination{
+            display: flex;
+            flex-direction: column; 
+        }
+    }
+}
+@media only screen and (min-width: 1024px) {
+    .list {
+        &__params-container{
+            display: flex;
+            gap: 0.5rem;
         }
     }
 }

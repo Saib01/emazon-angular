@@ -1,0 +1,106 @@
+<div class="list">
+
+  <div class="list__container">
+
+    <div class="list__button list__button--mobile">
+      <a class="link" [routerLink]="['create']">
+        <app-button [isDisabled]="false">
+          <span class="link__icon">+ </span>Create
+        </app-button>
+      </a>
+    </div>
+
+    <div class="list__pagination">
+
+      <div class="list__button list__button--desktop">
+        <a class="link" [routerLink]="['create']">
+          <app-button [isDisabled]="false">
+            <span class="link__icon">+ </span>Create
+          </app-button>
+        </a>
+      </div>
+
+      <div class="list__select-params">
+
+        <div class="list__params-container">
+
+          <div class="select">
+            <span>Sort:</span>
+            <select class="select__param" (change)="onSortDirectionChange($event)">
+              <option *ngFor="let option of ['ASC','DESC']" [value]="option">{{option }}</option>
+            </select>
+          </div>
+
+          <div class="pagination"><span>Order By:</span>
+            <select class="select__param" (change)="onSortByChange($event)">
+              <option *ngFor="let option of ['product','brand','category']" [value]="option">{{option}}</option>
+            </select>
+          </div>
+
+        </div>
+
+        <div class="list__params-container">
+
+          <div class="select">
+            <span>Page:</span>
+            <select class="select__param" (change)="onPageNumberChange($event)">
+              <option *ngFor="let option of (0 | range:pageProduct.totalPages-1)" [value]="option">{{ option+1 }}
+              </option>
+            </select>
+          </div>
+
+          <div class="select">
+            <span>Size:</span>
+            <select class="select__param" (change)="onPageSizeChange($event)">
+              <option *ngFor="let option of (5 | range:15:5)" [value]="option">{{ option }}</option>
+            </select>
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <main class="list__main-content">
+      <div class="list__card">
+        <div class="list__table-wrapper">
+          <table class="list__custom-table">
+            <thead>
+              <tr class="list__custom-tr">
+                <th *ngFor="let item of ['Id','Name','Description','Amount','Price','Brand','Categories']"
+                  class="list__table-header text--start" [ngClass]="{ 'text--number': item.includes('Id') }">
+                  {{item}}
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let item of pageProduct.content " class="list__custom-tr">
+                <td class="list__table-data text--number">
+                  {{item.id}}
+                </td>
+                <td class="list__table-data text--start">{{item.name}}</td>
+                <td class="list__table-data text--start">
+                  {{item.description}}
+                </td>
+                <td class="list__table-data text--start">
+                  {{item.amount}}
+                </td>
+                <td class="list__table-data text--start">
+                  {{item.price}}
+                </td>
+                <td class="list__table-data text--start">
+                  {{item.brandResponse.name}}
+                </td>
+                <td class="list__table-data text--start">
+                  {{formatCategoryNames(item)}}
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </main>
+
+  </div>
+</div>

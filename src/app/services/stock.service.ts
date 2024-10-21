@@ -7,7 +7,7 @@ import { checkToken } from '@interceptors/token.interceptor';
 import { ResponseMessage } from '@models/response.model';
 import { Page } from '@models/page.model';
 import { Observable } from 'rxjs';
-import {ProductRequest } from '@models/product.model';
+import {Product, ProductRequest } from '@models/product.model';
 
 
 @Injectable({
@@ -70,5 +70,16 @@ export class StockService {
     return this.http.post<boolean>(`${this.API_STOCK_PRODUCT}/validate-name`, name, {
       context: checkToken()
     });
+  }
+  getProducts(sortDirection: string, page: number, size: number,sortBy:string) : Observable<Page<Product>>{
+    const params = new HttpParams()
+      .set('sortDirection', sortDirection)
+      .set('page', page.toString())
+      .set('size', size.toString())
+      .set('sortBy',sortBy.toString());
+  
+    return this.http.get<Page<Product>>(
+      `${this.API_STOCK_PRODUCT}`, { params: params}
+    );
   }
 }

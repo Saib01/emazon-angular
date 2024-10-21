@@ -18,12 +18,14 @@ import { ListBrandComponent } from './brand/list-brand/list-brand.component';
 import { CreateProductComponent } from './product/create-product/create-product.component';
 import { MultiSelectComponent } from '../molecules/multi-select/multi-select.component';
 import { SimpleSelectComponent } from '../molecules/simple-select/simple-select.component';
+import { ListProductComponent } from './product/list-product/list-product.component';
 
 
 @NgModule({
   declarations: [
     ListCategoryComponent,
     ListBrandComponent,
+    ListProductComponent,
     CreateCategoryComponent,
     CreateBrandComponent,
     CreateProductComponent,
