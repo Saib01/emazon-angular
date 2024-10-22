@@ -103,7 +103,7 @@ export class CreateProductComponent {
       };
       this.stock.createProduct(product).subscribe({
         next: () => {
-          this.router.navigate(['/panel/home']);
+          this.router.navigate(['/panel/product']);
         },
         error: (error) => {
           console.log(error);

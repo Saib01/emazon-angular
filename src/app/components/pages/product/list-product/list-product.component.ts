@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Attribute, Component, OnInit } from '@angular/core';
 import { Page } from '@models/page.model';
 import { Product } from '@models/product.model';
 import { StockService } from '@services/stock.service';
@@ -41,13 +41,6 @@ export class ListProductComponent implements OnInit {
       }
     })
   }
-  formatCategoryNames(item: any): string {
-    return item.categoryResponseList
-      .slice(0, 3)
-      .map((category: any) => category.name) 
-      .join(', ');
-  }
-
   onPageSizeChange(event: Event): void {
     this.size = Number((event.target as HTMLSelectElement).value); 
     this.page=this.pageProduct.totalElements<this.size*this.page?0:this.page;
@@ -64,5 +57,18 @@ export class ListProductComponent implements OnInit {
   onSortByChange(event: Event) {
     this.sortBy=String((event.target as HTMLSelectElement).value).concat('Name'); 
     this.getProducts();
+  }
+
+  fieldsToShow: string[] = ['id', 'name', 'description', 'amount', 'price', 'brandResponse.name', 'categoryResponseList'];
+
+  get(item: any, field: string): any {
+    return field.split('.').reduce((acc, part) => acc?.[part], item);
+  }
+  isArrayWithThreeElements(value: any): boolean {
+    return Array.isArray(value);
+  }
+  textNumberClass(attribute:string){
+    let regex=/(id|price|amount)/;
+    return regex.exec(attribute);
   }
 }

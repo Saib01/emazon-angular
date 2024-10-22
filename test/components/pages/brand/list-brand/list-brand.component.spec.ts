@@ -48,15 +48,15 @@ describe('ListBrandComponent', () => {
     }));
     fixture.detectChanges();
   });
-  it('should create', () => {
+  test('should create', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should call getBrands on ngOnInit', () => {
+  test('should call getBrands on ngOnInit', () => {
     expect(stockServiceMock.getBrands).toHaveBeenCalledWith(component.sortDirection, component.page, component.size);
   });
 
-  it('should update pageBrand when getBrands is successful', () => {
+  test('should update pageBrand when getBrands is successful', () => {
     component.getBrands();
     fixture.detectChanges();
 
@@ -64,7 +64,7 @@ describe('ListBrandComponent', () => {
     expect(component.pageBrand.content[0].name).toBe('Brand 1');
   });
 
-  it('should log an error message if getBrands fails', () => {
+  test('should log an error message if getBrands fails', () => {
     const consoleSpy = jest.spyOn(console, 'log');
     stockServiceMock.getBrands.mockReturnValue(throwError(() => new Error('Error')));
 
@@ -72,7 +72,7 @@ describe('ListBrandComponent', () => {
     expect(consoleSpy).toHaveBeenCalledWith(expect.any(Error));
   });
 
-  it('should update page and call getBrands when onPageNumberChange is called', () => {
+  test('should update page and call getBrands when onPageNumberChange is called', () => {
     const newPage = 2;
     jest.spyOn(component, 'getBrands');
 
@@ -81,7 +81,7 @@ describe('ListBrandComponent', () => {
     expect(component.getBrands).toHaveBeenCalled();
   });
 
-  it('should update size and call getBrands when onPageSizeChange is called', () => {
+  test('should update size and call getBrands when onPageSizeChange is called', () => {
     const newSize = 20;
     jest.spyOn(component, 'getBrands');
 
@@ -90,7 +90,7 @@ describe('ListBrandComponent', () => {
     expect(component.getBrands).toHaveBeenCalled();
   });
 
-  it('should reset page to 0 if current page exceeds total pages when onPageSizeChange is called', () => {
+  test('should reset page to 0 if current page exceeds total pages when onPageSizeChange is called', () => {
     component.page = 5;
     component.pageBrand.totalElements = 40; 
 
@@ -98,7 +98,7 @@ describe('ListBrandComponent', () => {
     expect(component.page).toBe(0);
   });
 
-  it('should update sortDirection and call getBrands when onSortDirectionChange is called', () => {
+  test('should update sortDirection and call getBrands when onSortDirectionChange is called', () => {
     const newSortDirection = 'DESC';
     jest.spyOn(component, 'getBrands');
 

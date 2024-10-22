@@ -70,7 +70,7 @@ describe('CreateProductComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create the form with default values', () => {
+  test('should create the form with default values', () => {
     expect(component.formProduct).toBeTruthy();
     expect(component.formProduct.get('name')?.value).toBe('');
     expect(component.formProduct.get('amount')?.value).toBe(0);
@@ -79,12 +79,12 @@ describe('CreateProductComponent', () => {
     expect(component.formProduct.get('categoryList')?.value).toEqual([]);
   });
 
-  it('should call getBrands and getCategories on init', () => {
+  test('should call getBrands and getCategories on init', () => {
     expect(stockServiceMock.getBrands).toHaveBeenCalled();
     expect(stockServiceMock.getCategories).toHaveBeenCalled();
   });
 
-  it('should set pageBrand and pageCategory on successful getBrands and getCategories', () => {
+  test('should set pageBrand and pageCategory on successful getBrands and getCategories', () => {
     const mockBrands: Page<BasicInfo> = { content: [{ id: 1, name: 'Brand1', description: '' }], totalElements: 1, totalPages: 1, pageNumber: 0, first: true, last: true, pageSize: 10, numberOfElements: 1, ascending: false, empty: false };
     const mockCategories: Page<BasicInfo> = { content: [{ id: 1, name: 'Category1', description: '' }], totalElements: 1, totalPages: 1, pageNumber: 0, first: true, last: true, pageSize: 10, numberOfElements: 1, ascending: false, empty: false };
 
@@ -97,7 +97,7 @@ describe('CreateProductComponent', () => {
     expect(component.pageCategory).toEqual(mockCategories);
   });
 
-  it('should log error on failed getBrands', () => {
+  test('should log error on failed getBrands', () => {
     const consoleLogSpy = jest.spyOn(console, 'log').mockImplementation();
     (stockServiceMock.getBrands as jest.Mock).mockReturnValueOnce(throwError(() => new Error('Communication Error')));
     
@@ -107,7 +107,7 @@ describe('CreateProductComponent', () => {
     consoleLogSpy.mockRestore();
   });
 
-  it('should log error on failed getCategories', () => {
+  test('should log error on failed getCategories', () => {
     const consoleLogSpy = jest.spyOn(console, 'log').mockImplementation();
     (stockServiceMock.getCategories as jest.Mock).mockReturnValueOnce(throwError(() => new Error('Communication Error')));
 
@@ -117,7 +117,7 @@ describe('CreateProductComponent', () => {
     consoleLogSpy.mockRestore();
   });
 
-  it('should create product and navigate on valid form submission',fakeAsync( () => {
+  test('should create product and navigate on valid form submission',fakeAsync( () => {
     component.formProduct.setValue({
       name: 'Product1a',
       description: 'Description1',
@@ -129,10 +129,10 @@ describe('CreateProductComponent', () => {
     tick(1000);
     component.validateProduct();
     expect(stockServiceMock.createProduct).toHaveBeenCalled();
-    expect(routerMock.navigate).toHaveBeenCalledWith(['/panel/home']);
+    expect(routerMock.navigate).toHaveBeenCalledWith(['/panel/product']);
   }));
 
-  it('should log error on failed create product',fakeAsync( () => { 
+  test('should log error on failed create product',fakeAsync( () => { 
     const consoleLogSpy = jest.spyOn(console, 'log').mockImplementation();
     (stockServiceMock.createProduct as jest.Mock).mockReturnValueOnce(throwError(() => new Error('Communication Error')));
     component.formProduct.setValue({
@@ -149,7 +149,7 @@ describe('CreateProductComponent', () => {
     expect(consoleLogSpy).toHaveBeenCalledWith(expect.objectContaining({message: 'Communication Error'}));
     consoleLogSpy.mockRestore();
   }));
-  it('should mark form as touched on invalid submission', fakeAsync(() => {
+  test('should mark form as touched on invalid submission', fakeAsync(() => {
     const markAllAsTouchedSpy = jest.spyOn(component.formProduct, 'markAllAsTouched');
     component.formProduct.controls.name.setValue('ASD');
     component.formProduct.controls.description.setValue('');

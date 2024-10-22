@@ -68,32 +68,25 @@
           <table class="list__custom-table">
             <thead>
               <tr class="list__custom-tr">
-                <th *ngFor="let item of ['Id','Name','Description','Amount','Price','Brand','Categories']"
-                  class="list__table-header text--start" [ngClass]="{ 'text--number': item.includes('Id') }">
-                  {{item}}
+                <th *ngFor="let item of ['id','name','description','amount','price','brand','categories']"
+                  class="list__table-header" [ngClass]="textNumberClass(item)?'text--number':'text--start' ">
+                  {{item|titlecase}}
                 </th>
               </tr>
             </thead>
             <tbody>
               <tr *ngFor="let item of pageProduct.content " class="list__custom-tr">
-                <td class="list__table-data text--number">
-                  {{item.id}}
-                </td>
-                <td class="list__table-data text--start">{{item.name}}</td>
-                <td class="list__table-data text--start">
-                  {{item.description}}
-                </td>
-                <td class="list__table-data text--start">
-                  {{item.amount}}
-                </td>
-                <td class="list__table-data text--start">
-                  {{item.price}}
-                </td>
-                <td class="list__table-data text--start">
-                  {{item.brandResponse.name}}
-                </td>
-                <td class="list__table-data text--start">
-                  {{formatCategoryNames(item)}}
+                <td *ngFor="let field of fieldsToShow" class="list__table-data" [ngClass]="textNumberClass(field)?'text--number':'text--start' ">
+                  <ng-container *ngIf="!isArrayWithThreeElements(get(item, field)); else arrayBlock">
+                    <span>{{ get(item, field) }}</span>
+                  </ng-container>
+                  <ng-template #arrayBlock>
+                    <ul>
+                      <li *ngFor="let element of get(item, field)">
+                        <span class='text--start'>{{ element.name }}</span>
+                      </li>
+                    </ul>
+                  </ng-template>
                 </td>
               </tr>
             </tbody>

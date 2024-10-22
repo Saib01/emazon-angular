@@ -26,7 +26,6 @@ export class StockService {
   }
   checkCategoryName(name: string) {
     return this.http.post<boolean>(`${this.API_STOCK_CATEGORY}/validate-name`, name, {
-      context: checkToken()
     });
   }
   getCategories(sortDirection: string, page: number, size: number) : Observable<Page<BasicInfo>>{
@@ -47,7 +46,6 @@ export class StockService {
   }
   checkBrandName(name: string) {
     return this.http.post<boolean>(`${this.API_STOCK_BRAND}/validate-name`, name, {
-      context: checkToken()
     });
   }
   getBrands(sortDirection: string, page: number, size: number) : Observable<Page<BasicInfo>>{
@@ -68,7 +66,6 @@ export class StockService {
   }
   checkProductName(name: string) {
     return this.http.post<boolean>(`${this.API_STOCK_PRODUCT}/validate-name`, name, {
-      context: checkToken()
     });
   }
   getProducts(sortDirection: string, page: number, size: number,sortBy:string) : Observable<Page<Product>>{
