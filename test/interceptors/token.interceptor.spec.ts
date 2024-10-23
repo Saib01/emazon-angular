@@ -28,9 +28,8 @@ describe('TokenInterceptor', () => {
     httpMock.verify();
   });
 
-  it('should add an Authorization header with the token', () => {
+  test('should add an Authorization header with the token', () => {
     const testUrl = '/test';
-    const expectedToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJBVVRISldUX0pPSEFOIiwic3ViIjoibWFpbEBtYWlsLmNvbSIsImF1dGhvcml0aWVzIjoiUk9MRV9BRE1JTiIsImlkIjoxLCJpYXQiOjE3MjkwNzg5MTMsImV4cCI6MTcyOTE2NTMxMywianRpIjoiYTJkZTliOWUtMWRhNS00NjBmLWI5MjAtZWZlMTliYTY0OTlhIiwibmJmIjoxNzI5MDc4OTEzfQ.3mViA-EJMxg7sKT3fGpRVlLwzOtePOD3n488OIfanbA';
     httpClient.get(testUrl,{context: checkToken()}).subscribe();
 
     const httpRequest = httpMock.expectOne(testUrl);
@@ -40,7 +39,7 @@ describe('TokenInterceptor', () => {
     httpRequest.flush({});
   });
 
-  it('should pass the request unchanged if there is no token', () => {
+  test('should pass the request unchanged if there is no token', () => {
     const testUrl = '/test';
 
     httpClient.get(testUrl).subscribe();

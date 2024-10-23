@@ -25,8 +25,7 @@ export class MultiSelectComponent implements ControlValueAccessor {
   selectedOptions: BasicInfo[] = [];
   onChange: (selectedOptions: BasicInfo[]) => void = () => {};
   onTouched: () => void = () => {};
-constructor(
-  private readonly rootFormGroup: FormGroupDirective) {}
+constructor(private readonly rootFormGroup: FormGroupDirective) {}
 
 
   writeValue(elements: BasicInfo[]): void {

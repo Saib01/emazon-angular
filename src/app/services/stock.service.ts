@@ -7,7 +7,7 @@ import { checkToken } from '@interceptors/token.interceptor';
 import { ResponseMessage } from '@models/response.model';
 import { Page } from '@models/page.model';
 import { Observable } from 'rxjs';
-import {ProductRequest } from '@models/product.model';
+import {Product, ProductRequest } from '@models/product.model';
 
 
 @Injectable({
@@ -26,7 +26,6 @@ export class StockService {
   }
   checkCategoryName(name: string) {
     return this.http.post<boolean>(`${this.API_STOCK_CATEGORY}/validate-name`, name, {
-      context: checkToken()
     });
   }
   getCategories(sortDirection: string, page: number, size: number) : Observable<Page<BasicInfo>>{
@@ -47,7 +46,6 @@ export class StockService {
   }
   checkBrandName(name: string) {
     return this.http.post<boolean>(`${this.API_STOCK_BRAND}/validate-name`, name, {
-      context: checkToken()
     });
   }
   getBrands(sortDirection: string, page: number, size: number) : Observable<Page<BasicInfo>>{
@@ -68,7 +66,17 @@ export class StockService {
   }
   checkProductName(name: string) {
     return this.http.post<boolean>(`${this.API_STOCK_PRODUCT}/validate-name`, name, {
-      context: checkToken()
     });
+  }
+  getProducts(sortDirection: string, page: number, size: number,sortBy:string) : Observable<Page<Product>>{
+    const params = new HttpParams()
+      .set('sortDirection', sortDirection)
+      .set('page', page.toString())
+      .set('size', size.toString())
+      .set('sortBy',sortBy.toString());
+  
+    return this.http.get<Page<Product>>(
+      `${this.API_STOCK_PRODUCT}`, { params: params}
+    );
   }
 }
