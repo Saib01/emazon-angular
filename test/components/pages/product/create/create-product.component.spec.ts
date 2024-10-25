@@ -73,8 +73,8 @@ describe('CreateProductComponent', () => {
   test('should create the form with default values', () => {
     expect(component.formProduct).toBeTruthy();
     expect(component.formProduct.get('name')?.value).toBe('');
-    expect(component.formProduct.get('amount')?.value).toBe(0);
-    expect(component.formProduct.get('price')?.value).toBe(0);
+    expect(component.formProduct.get('amount')?.value).toBe('');
+    expect(component.formProduct.get('price')?.value).toBe('');
     expect(component.formProduct.get('brand')?.value).toEqual({ id: 0, name: '', description: '' });
     expect(component.formProduct.get('categoryList')?.value).toEqual([]);
   });
@@ -121,8 +121,8 @@ describe('CreateProductComponent', () => {
     component.formProduct.setValue({
       name: 'Product1a',
       description: 'Description1',
-      amount: 10,
-      price: 100,
+      amount: '10',
+      price: '100',
       brand: { id: 1, name: 'Brand1', description: 'description' },
       categoryList: [{ id: 1, name: 'Category1', description: 'description' }],
     });
@@ -138,8 +138,8 @@ describe('CreateProductComponent', () => {
     component.formProduct.setValue({
       name: 'Product1a',
       description: 'Description1',
-      amount: 10,
-      price: 100,
+      amount: '10',
+      price: '100',
       brand: { id: 1, name: 'Brand1', description: 'description' },
       categoryList: [{ id: 1, name: 'Category1', description: 'description' }],
     });
@@ -153,8 +153,8 @@ describe('CreateProductComponent', () => {
     const markAllAsTouchedSpy = jest.spyOn(component.formProduct, 'markAllAsTouched');
     component.formProduct.controls.name.setValue('ASD');
     component.formProduct.controls.description.setValue('');
-    component.formProduct.controls.amount.setValue(5);
-    component.formProduct.controls.price.setValue(50);
+    component.formProduct.controls.amount.setValue('5');
+    component.formProduct.controls.price.setValue('50');
     component.formProduct.controls.brand.setValue({ id: 0, name: 'name', description: 'description' });
     component.formProduct.controls.categoryList.setValue([{ id: 0, name: 'name', description: 'description' },{ id: 0, name: 'name2', description: 'description2' }]);
     tick(1000);

@@ -7,6 +7,8 @@ import { Page } from '@models/page.model';
 import { Product } from '@models/product.model';
 import { RangePipe } from '../../../../../src/app/components/pipe/range.pipe';
 import { ButtonComponent } from '../../../../../src/app/components/atoms/basic-components/button/button.component';
+import { BasicTableInfoComponent } from '../../../../../src/app/components/organisms/basic-table-info/basic-table-info.component';
+import { NO_ERRORS_SCHEMA } from '@angular/core';
 
 describe('ListProductComponent', () => {
   let component: ListProductComponent;
@@ -32,14 +34,16 @@ describe('ListProductComponent', () => {
     };
 
     await TestBed.configureTestingModule({
-      declarations: [ListProductComponent,RangePipe,ButtonComponent],
+      declarations: [ListProductComponent,RangePipe,ButtonComponent,BasicTableInfoComponent],
       imports: [HttpClientTestingModule],
-      providers: [{ provide: StockService, useValue: stockSpy }]
+      schemas: [NO_ERRORS_SCHEMA],
+      providers: [{ provide: StockService, useValue: stockSpy }],
     }).compileComponents();
 
     fixture = TestBed.createComponent(ListProductComponent);
     component = fixture.componentInstance;
     stockService = TestBed.inject(StockService) as jest.Mocked<StockService>;
+    stockService.getProducts.mockReturnValue(of(mockPageProduct));
   });
 
   test('should create the component', () => {
@@ -47,7 +51,6 @@ describe('ListProductComponent', () => {
   });
 
   test('should call getProducts on ngOnInit', () => {
-    stockService.getProducts.mockReturnValue(of(mockPageProduct));
     const getProductsSpy = jest.spyOn(component, 'getProducts');
     fixture.detectChanges();
 
@@ -55,8 +58,6 @@ describe('ListProductComponent', () => {
   });
 
   test('should populate pageProduct when getProducts is called', () => {
-    stockService.getProducts.mockReturnValue(of(mockPageProduct));
-
     component.getProducts();
 
     expect(component.pageProduct).toEqual(mockPageProduct);
@@ -74,42 +75,35 @@ describe('ListProductComponent', () => {
   });
 
   test('should update the page size and call getProducts when onPageSizeChange is triggered', () => {
-    const event = { target: { value: '10' } } as unknown as Event;
-    stockService.getProducts.mockReturnValue(of(mockPageProduct));
-
-    component.onPageSizeChange(event);
+    component.onPageSizeChange(10);
 
     expect(component.size).toBe(10);
     expect(stockService.getProducts).toHaveBeenCalled();
   });
 
   test('should update sort direction and call getProducts when onSortDirectionChange is triggered', () => {
-    const event = { target: { value: 'DESC' } } as unknown as Event;
-    stockService.getProducts.mockReturnValue(of(mockPageProduct));
-
-    component.onSortDirectionChange(event);
+    component.onSortDirectionChange('DESC');
 
     expect(component.sortDirection).toBe('DESC');
     expect(stockService.getProducts).toHaveBeenCalled();
   });
 
   test('should update page number and call getProducts when onPageNumberChange is triggered', () => {
-    const event = { target: { value: '2' } } as unknown as Event;
-    stockService.getProducts.mockReturnValue(of(mockPageProduct));
-
-    component.onPageNumberChange(event);
+    component.onPageNumberChange(2);
 
     expect(component.page).toBe(2);
     expect(stockService.getProducts).toHaveBeenCalled();
   });
 
   test('should update sortBy and call getProducts when onSortByChange is triggered', () => {
-    const event = { target: { value: 'category' } } as unknown as Event;
-    stockService.getProducts.mockReturnValue(of(mockPageProduct));
-
-    component.onSortByChange(event);
+    component.onSortByChange('category');
 
     expect(component.sortBy).toBe('categoryName');
     expect(stockService.getProducts).toHaveBeenCalled();
+  });
+  test('should reset page to 0 if current page exceeds total pages when onPageSizeChange is called', () => {
+    component.page = 5;
+    component.onPageSizeChange(10);
+    expect(component.page).toBe(0);
   });
 });

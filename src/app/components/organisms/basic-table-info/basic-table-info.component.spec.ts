@@ -21,14 +21,15 @@ describe('BasicTableInfoComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(BasicTableInfoComponent);
     component = fixture.componentInstance;
+    component.sortByOptions=['product','category'];
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  test('should create', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should emit pageNumberEvent when onPageNumberChange is called', () => {
+  test('should emit pageNumberEvent when onPageNumberChange is called', () => {
     jest.spyOn(component.pageNumberEvent, 'emit');
     const mockEvent = { target: { value: '2' } } as unknown as Event;
 
@@ -37,7 +38,7 @@ describe('BasicTableInfoComponent', () => {
     expect(component.pageNumberEvent.emit).toHaveBeenCalledWith(2);
   });
 
-  it('should emit pageSizeEvent when onPageSizeChange is called', () => {
+  test('should emit pageSizeEvent when onPageSizeChange is called', () => {
     jest.spyOn(component.pageSizeEvent, 'emit');
     const mockEvent = { target: { value: '20' } } as unknown as Event;
 
@@ -46,7 +47,7 @@ describe('BasicTableInfoComponent', () => {
     expect(component.pageSizeEvent.emit).toHaveBeenCalledWith(20);
   });
 
-  it('should emit sortDirectionEvent when onSortDirectionChange is called', () => {
+  test('should emit sortDirectionEvent  when onSortDirectionChange is called', () => {
     jest.spyOn(component.sortDirectionEvent, 'emit');
     const mockEvent = { target: { value: 'asc' } } as unknown as Event;
 
@@ -55,22 +56,31 @@ describe('BasicTableInfoComponent', () => {
     expect(component.sortDirectionEvent.emit).toHaveBeenCalledWith('asc');
   });
 
-  it('should have default totalPages as 0', () => {
+  test('should emit sortByChangeEvent when onSortByChange is called', () => {
+    jest.spyOn(component.sortByEvent, 'emit');
+    const mockEvent = { target: { value: 'product' } } as unknown as Event;
+
+    component.onSortByChange(mockEvent);
+
+    expect(component.sortByEvent.emit).toHaveBeenCalledWith('product');
+  });
+
+  test('should have default totalPages as 0', () => {
     expect(component.totalPages).toBe(0);
   });
 
-  it('should have an empty elements array by default', () => {
+  test('should have an empty elements array by default', () => {
     expect(component.elements).toEqual([]);
   });
 
-  it('should update totalPages input property', () => {
+  test('should update totalPages input property', () => {
     component.totalPages = 5;
     fixture.detectChanges();
 
     expect(component.totalPages).toBe(5);
   });
 
-  it('should update elements input property', () => {
+  test('should update elements input property', () => {
     const mockElements: BasicInfo[] = [
       { id: 1, name: 'category 1', description:'empty' },
       { id: 2, name: 'Element 2', description:'empty' }

@@ -1,4 +1,5 @@
-import { Attribute, Component, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { FieldsToShow } from '@models/field-to-show.model';
 import { Page } from '@models/page.model';
 import { Product } from '@models/product.model';
 import { StockService } from '@services/stock.service';
@@ -9,6 +10,18 @@ import { StockService } from '@services/stock.service';
   styleUrls: ['./list-product.component.scss']
 })
 export class ListProductComponent implements OnInit {
+  fieldsToShow:FieldsToShow[]=[
+    {name:'id',type:'number'},
+    {name:'name'},
+    {name:'description'},
+    {name:'amount',type:'number'},
+    {name:'price',type:'number'},
+    {name:'brand',accessValue:'brandResponse.name'},
+    {name:'categories',accessValue:'categoryResponseList'},
+  ];
+
+  regexNumberClass!:RegExp;
+  numberFields:string[] = ["price","id","amount"];
   pageProduct: Page<Product> = {
     content: [], 
     totalElements: 0,
@@ -29,6 +42,7 @@ export class ListProductComponent implements OnInit {
   }
   ngOnInit(): void {
    this.getProducts();
+   this.getRegexForHtmlNumberClass();
   }
   getProducts() {
     this.stock.getProducts(this.sortDirection, this.page, this.size,this.sortBy)
@@ -41,34 +55,24 @@ export class ListProductComponent implements OnInit {
       }
     })
   }
-  onPageSizeChange(event: Event): void {
-    this.size = Number((event.target as HTMLSelectElement).value); 
+  getRegexForHtmlNumberClass(){
+    this.regexNumberClass = new RegExp(`(${this.numberFields.join('|')})`); 
+  }
+  onPageSizeChange(target: number): void  {
+    this.size = target; 
     this.page=this.pageProduct.totalElements<this.size*this.page?0:this.page;
     this.getProducts();
   }
-  onSortDirectionChange(event: Event) {
-    this.sortDirection = String((event.target as HTMLSelectElement).value); 
+  onSortDirectionChange(target: string) {
+    this.sortDirection = target; 
     this.getProducts();
   }
-  onPageNumberChange(event: Event): void {
-    this.page = Number((event.target as HTMLSelectElement).value); 
+  onPageNumberChange(target: number): void {
+    this.page= target; 
     this.getProducts();
   }
-  onSortByChange(event: Event) {
-    this.sortBy=String((event.target as HTMLSelectElement).value).concat('Name'); 
+  onSortByChange(target: string) {
+    this.sortBy=target.concat('Name'); 
     this.getProducts();
-  }
-
-  fieldsToShow: string[] = ['id', 'name', 'description', 'amount', 'price', 'brandResponse.name', 'categoryResponseList'];
-
-  get(item: any, field: string): any {
-    return field.split('.').reduce((acc, part) => acc?.[part], item);
-  }
-  isArrayWithThreeElements(value: any): boolean {
-    return Array.isArray(value);
-  }
-  textNumberClass(attribute:string){
-    let regex=/(id|price|amount)/;
-    return regex.exec(attribute);
   }
 }

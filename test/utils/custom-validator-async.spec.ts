@@ -2,9 +2,9 @@ import { TestBed } from '@angular/core/testing';
 import { AbstractControl } from '@angular/forms';
 import { of } from 'rxjs';
 import { StockService } from '@services/stock.service'; 
-import { NameValidator } from '@utils/nameValidator';
+import { CustomValidatorsAsync } from '@utils/custom-validators-async';
 
-describe('NameValidator', () => {
+describe('CustomValidatorsAsync', () => {
   let stockServiceMock: jest.Mocked<StockService>;
 
   beforeEach(() => {
@@ -25,7 +25,7 @@ describe('NameValidator', () => {
     stockServiceMock.checkCategoryName.mockReturnValue(of(true));
 
     const control: AbstractControl = { value: 'existingName' } as AbstractControl;
-    const validatorFn = NameValidator.checkNameAvailability(stockServiceMock,'category')(control);
+    const validatorFn = CustomValidatorsAsync.checkNameAvailability(stockServiceMock,'category')(control);
 
     validatorFn.subscribe((result: any) => {
       expect(result).toBeNull(); 
@@ -37,7 +37,7 @@ describe('NameValidator', () => {
     stockServiceMock.checkCategoryName.mockReturnValue(of(false));
 
     const control: AbstractControl = { value: 'existingName' } as AbstractControl;
-    const validatorFn = NameValidator.checkNameAvailability(stockServiceMock,'category')(control);
+    const validatorFn = CustomValidatorsAsync.checkNameAvailability(stockServiceMock,'category')(control);
 
     validatorFn.subscribe((result: any) => {
       expect(result).toEqual({ notAvailable: true }); 
@@ -49,7 +49,7 @@ describe('NameValidator', () => {
     stockServiceMock.checkBrandName.mockReturnValue(of(true));
 
     const control: AbstractControl = { value: 'existingName' } as AbstractControl;
-    const validatorFn = NameValidator.checkNameAvailability(stockServiceMock,'brand')(control);
+    const validatorFn = CustomValidatorsAsync.checkNameAvailability(stockServiceMock,'brand')(control);
 
     validatorFn.subscribe((result: any) => {
       expect(result).toBeNull(); 
@@ -62,7 +62,7 @@ describe('NameValidator', () => {
     stockServiceMock.checkBrandName.mockReturnValue(of(false));
 
     const control: AbstractControl = { value: 'existingName' } as AbstractControl;
-    const validatorFn = NameValidator.checkNameAvailability(stockServiceMock,'brand')(control);
+    const validatorFn = CustomValidatorsAsync.checkNameAvailability(stockServiceMock,'brand')(control);
 
     validatorFn.subscribe((result: any) => {
       expect(result).toEqual({ notAvailable: true }); 
@@ -74,7 +74,7 @@ describe('NameValidator', () => {
     stockServiceMock.checkProductName.mockReturnValue(of(true));
 
     const control: AbstractControl = { value: 'existingName' } as AbstractControl;
-    const validatorFn = NameValidator.checkNameAvailability(stockServiceMock,'product')(control);
+    const validatorFn =CustomValidatorsAsync.checkNameAvailability(stockServiceMock,'product')(control);
 
     validatorFn.subscribe((result: any) => {
       expect(result).toBeNull(); 
@@ -87,7 +87,7 @@ describe('NameValidator', () => {
     stockServiceMock.checkProductName.mockReturnValue(of(false));
 
     const control: AbstractControl = { value: 'existingName' } as AbstractControl;
-    const validatorFn = NameValidator.checkNameAvailability(stockServiceMock,'product')(control);
+    const validatorFn = CustomValidatorsAsync.checkNameAvailability(stockServiceMock,'product')(control);
 
     validatorFn.subscribe((result: any) => {
       expect(result).toEqual({ notAvailable: true }); 

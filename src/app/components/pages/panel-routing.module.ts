@@ -7,6 +7,7 @@ import { CreateBrandComponent } from './brand/create-brand/create-brand.componen
 import { ListBrandComponent } from './brand/list-brand/list-brand.component';
 import { CreateProductComponent } from './product/create-product/create-product.component';
 import { ListProductComponent } from './product/list-product/list-product.component';
+import { CreateWarehouseAssistantComponent } from './warehouse-assistant/create-warehouse-assistant/create-warehouse-assistant.component';
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
@@ -16,6 +17,7 @@ const routes: Routes = [
   {path: 'brand',component:  ListBrandComponent},
   {path:'product',component:ListProductComponent},
   {path:'product/create',component:CreateProductComponent},
+  {path:'ware-house',component:CreateWarehouseAssistantComponent},
   {
     path: '**',
     redirectTo: 'home',

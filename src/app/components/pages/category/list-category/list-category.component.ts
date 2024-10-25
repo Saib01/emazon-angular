@@ -9,7 +9,6 @@ import { StockService } from '@services/stock.service';
   styleUrls: ['./list-category.component.scss']
 })
 export class ListCategoryComponent implements OnInit {
-
   pageCategory: Page<BasicInfo> = {
     content: [], 
     totalElements: 0,

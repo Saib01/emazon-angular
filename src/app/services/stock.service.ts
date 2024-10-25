@@ -17,6 +17,10 @@ export class StockService {
   private readonly API_STOCK_CATEGORY = `${environment.API_URL_STOCK}/api/category`;
   private readonly API_STOCK_BRAND = `${environment.API_URL_STOCK}/api/brand`;
   private readonly API_STOCK_PRODUCT = `${environment.API_URL_STOCK}/api/product`;
+  private readonly PARAM_SORT_DIRECTION='sortDirection';
+  private readonly PARAM_PAGE_NUMBER='page';
+  private readonly PARAM_PAGE_SIZE='size';
+  private readonly PARAM_SORT_BY='sortBy';
   constructor(private readonly http: HttpClient) {}
 
   createCategory(category: BasicInfo) {
@@ -29,16 +33,11 @@ export class StockService {
     });
   }
   getCategories(sortDirection: string, page: number, size: number) : Observable<Page<BasicInfo>>{
-    const params = new HttpParams()
-      .set('sortDirection', sortDirection)
-      .set('page', page.toString())
-      .set('size', size.toString());
-  
+    const params = this.setParams(sortDirection, page, size);
     return this.http.get<Page<BasicInfo>>(
       `${this.API_STOCK_CATEGORY}`, { params: params}
     );
   }
-
   createBrand(brand: BasicInfo) {
     return this.http.post<ResponseMessage>(`${this.API_STOCK_BRAND}/`, brand, {
       context: checkToken()
@@ -49,11 +48,7 @@ export class StockService {
     });
   }
   getBrands(sortDirection: string, page: number, size: number) : Observable<Page<BasicInfo>>{
-    const params = new HttpParams()
-      .set('sortDirection', sortDirection)
-      .set('page', page.toString())
-      .set('size', size.toString());
-  
+    const params = this.setParams(sortDirection, page, size);
     return this.http.get<Page<BasicInfo>>(
       `${this.API_STOCK_BRAND}`, { params: params}
     );
@@ -69,14 +64,17 @@ export class StockService {
     });
   }
   getProducts(sortDirection: string, page: number, size: number,sortBy:string) : Observable<Page<Product>>{
-    const params = new HttpParams()
-      .set('sortDirection', sortDirection)
-      .set('page', page.toString())
-      .set('size', size.toString())
-      .set('sortBy',sortBy.toString());
-  
+    const params = this.setParams(sortDirection, page, size,sortBy);
     return this.http.get<Page<Product>>(
       `${this.API_STOCK_PRODUCT}`, { params: params}
     );
+  }
+
+  private setParams(sortDirection: string, page: number, size: number,sortBy?:string) {
+    let params=new HttpParams()
+      .set(this.PARAM_SORT_DIRECTION, sortDirection)
+      .set(this.PARAM_PAGE_NUMBER, page.toString())
+      .set(this.PARAM_PAGE_SIZE, size.toString());
+      return sortBy ? params.set(this.PARAM_SORT_BY, sortBy) : params;
   }
 }

@@ -57,17 +57,16 @@ describe('ListCategoryComponent', () => {
       imports: [HttpClientTestingModule,RouterTestingModule],
       providers: [
         { provide: StockService, useValue: stockServiceMock },
-      //  {provide:Router,useValue:{navigate:jest.fn()}}
       {
         provide: ActivatedRoute,
         useValue: {
           snapshot: {
             root: {                routeConfig: {
-              path: 'panel/category', // Simulación de la ruta actual
+              path: 'panel/category', 
             }
           }, 
             paramMap: {
-              get: () => '1', // Mock de método get de paramMap
+              get: () => '1', 
             },
           },
         },
