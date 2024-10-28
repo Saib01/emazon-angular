@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
 import { TemplateRoutingModule } from './template-routing.module';
 import { AdminTemplateComponent } from './admin/admin-template.component';
 import { SharedModule } from 'src/app/shared/shared.module';
@@ -14,6 +13,7 @@ import { HomeIconComponent } from '../atoms/icons/home-icon/home-icon.component'
 import { UserIconComponent } from '../atoms/icons/user-icon/user-icon.component';
 import { BrandIconComponent } from '../atoms/icons/brand-icon/brand-icon.component';
 import { ProductIconComponent } from '../atoms/icons/product-icon/product-icon.component';
+import { WarehouseIconComponent } from '../atoms/icons/warehouse-icon/warehouse-icon.component';
 
 
 @NgModule({
@@ -26,6 +26,7 @@ import { ProductIconComponent } from '../atoms/icons/product-icon/product-icon.c
     CategoryIconComponent,
     BrandIconComponent,
     ProductIconComponent,
+    WarehouseIconComponent,
     SideBarItemComponent,
     SideBarComponent,
     HeaderComponent

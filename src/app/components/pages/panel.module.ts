@@ -19,6 +19,7 @@ import { CreateProductComponent } from './product/create-product/create-product.
 import { MultiSelectComponent } from '../molecules/multi-select/multi-select.component';
 import { SimpleSelectComponent } from '../molecules/simple-select/simple-select.component';
 import { ListProductComponent } from './product/list-product/list-product.component';
+import { CreateWarehouseAssistantComponent } from './warehouse-assistant/create-warehouse-assistant/create-warehouse-assistant.component';
 
 
 @NgModule({
@@ -29,6 +30,7 @@ import { ListProductComponent } from './product/list-product/list-product.compon
     CreateCategoryComponent,
     CreateBrandComponent,
     CreateProductComponent,
+    CreateWarehouseAssistantComponent,
     BasicFormComponent,
     BasicTableInfoComponent,
     HomeComponent,

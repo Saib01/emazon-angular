@@ -1,55 +1,72 @@
-*{
+* {
   margin: 0;
-  font-family:  Calibri,'Gill Sans', 'Gill Sans MT', 'Trebuchet MS', sans-serif; 
+  font-family: Calibri, 'Gill Sans', 'Gill Sans MT', 'Trebuchet MS', sans-serif;
 }
-.field{
+
+.field {
   display: flex;
   flex-direction: column;
   margin-bottom: 1.25rem;
-  &__name{
+
+  &__name {
     margin-bottom: 0.25rem;
     font-size: 1.5rem;
   }
-  &__input{
+
+  &__input {
     width: 100%;
     border: 1px solid #e5e7eb;
-    background: #f8f8f8;      
+    background: #f8f8f8;
     border-radius: 0.3rem;
     font-size: 1.25rem;
     padding: 0.75rem;
     box-sizing: border-box;
-    &::placeholder{
+
+    &::placeholder {
       color: #9b9da0;
-  }
+    }
+
     &:focus {
-      border: 0.03125rem solid #ffffff; 
-      box-shadow: 0 0 0.09375rem rgba(255, 255, 255, 0.5); 
-      outline: none; 
+      border: 0.03125rem solid #ffffff;
+      box-shadow: 0 0 0.09375rem rgba(255, 255, 255, 0.5);
+      outline: none;
     }
-    &--error{
-      border: 0.03125rem solid #ff0000; 
+
+    &--error {
+      border: 0.03125rem solid #ff0000;
     }
+
+    &::-webkit-inner-spin-button,
+    &::-webkit-outer-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+    appearance: textfield;
   }
 }
 
-@media only screen and (min-width:300px){
-.field{
-  margin-bottom: 1.25rem;
-  &__name{
-    margin-bottom: 0.25rem;
-    font-size: 1.5rem;
-  }
-  &__input{
-    border-radius: 0.3rem;
-    font-size: 1.25rem;
-    padding: 0.75rem;
-    &:focus {
-      border: 0.03125rem solid #ffffff; 
-      box-shadow: 0 0 0.09375rem rgba(255, 255, 255, 0.5); 
+@media only screen and (min-width:300px) {
+  .field {
+    margin-bottom: 1.25rem;
+
+    &__name {
+      margin-bottom: 0.25rem;
+      font-size: 1.5rem;
     }
-    &--error{
-      border: 0.03125rem solid #ff0000; 
+
+    &__input {
+      border-radius: 0.3rem;
+      font-size: 1.25rem;
+      padding: 0.75rem;
+
+      &:focus {
+        border: 0.03125rem solid #ffffff;
+        box-shadow: 0 0 0.09375rem rgba(255, 255, 255, 0.5);
+      }
+
+      &--error {
+        border: 0.03125rem solid #ff0000;
+      }
     }
   }
-}
 }

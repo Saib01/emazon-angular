@@ -1,99 +1,10 @@
-<div class="list">
-
-  <div class="list__container">
-
-    <div class="list__button list__button--mobile">
-      <a class="link" [routerLink]="['create']">
-        <app-button [isDisabled]="false">
-          <span class="link__icon">+ </span>Create
-        </app-button>
-      </a>
-    </div>
-
-    <div class="list__pagination">
-
-      <div class="list__button list__button--desktop">
-        <a class="link" [routerLink]="['create']">
-          <app-button [isDisabled]="false">
-            <span class="link__icon">+ </span>Create
-          </app-button>
-        </a>
-      </div>
-
-      <div class="list__select-params">
-
-        <div class="list__params-container">
-
-          <div class="select">
-            <span>Sort:</span>
-            <select class="select__param" (change)="onSortDirectionChange($event)">
-              <option *ngFor="let option of ['ASC','DESC']" [value]="option">{{option }}</option>
-            </select>
-          </div>
-
-          <div class="pagination"><span>Order By:</span>
-            <select class="select__param" (change)="onSortByChange($event)">
-              <option *ngFor="let option of ['product','brand','category']" [value]="option">{{option}}</option>
-            </select>
-          </div>
-
-        </div>
-
-        <div class="list__params-container">
-
-          <div class="select">
-            <span>Page:</span>
-            <select class="select__param" (change)="onPageNumberChange($event)">
-              <option *ngFor="let option of (0 | range:pageProduct.totalPages-1)" [value]="option">{{ option+1 }}
-              </option>
-            </select>
-          </div>
-
-          <div class="select">
-            <span>Size:</span>
-            <select class="select__param" (change)="onPageSizeChange($event)">
-              <option *ngFor="let option of (5 | range:15:5)" [value]="option">{{ option }}</option>
-            </select>
-          </div>
-
-        </div>
-
-      </div>
-
-    </div>
-
-    <main class="list__main-content">
-      <div class="list__card">
-        <div class="list__table-wrapper">
-          <table class="list__custom-table">
-            <thead>
-              <tr class="list__custom-tr">
-                <th *ngFor="let item of ['id','name','description','amount','price','brand','categories']"
-                  class="list__table-header" [ngClass]="textNumberClass(item)?'text--number':'text--start' ">
-                  {{item|titlecase}}
-                </th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr *ngFor="let item of pageProduct.content " class="list__custom-tr">
-                <td *ngFor="let field of fieldsToShow" class="list__table-data" [ngClass]="textNumberClass(field)?'text--number':'text--start' ">
-                  <ng-container *ngIf="!isArrayWithThreeElements(get(item, field)); else arrayBlock">
-                    <span>{{ get(item, field) }}</span>
-                  </ng-container>
-                  <ng-template #arrayBlock>
-                    <ul>
-                      <li *ngFor="let element of get(item, field)">
-                        <span class='text--start'>{{ element.name }}</span>
-                      </li>
-                    </ul>
-                  </ng-template>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-    </main>
-
-  </div>
-</div>
+<app-basic-table-info
+  [totalPages]="pageProduct.totalPages"
+  [elements]="pageProduct.content"
+  [fieldsToShow]="fieldsToShow"
+  [sortByOptions]="['product','category','brand']"
+  (pageNumberEvent)="onPageNumberChange($event)"
+  (pageSizeEvent)="onPageSizeChange($event)"
+  (sortDirectionEvent)="onSortDirectionChange($event)"
+  (sortByEvent)="onSortByChange($event)"
+></app-basic-table-info>

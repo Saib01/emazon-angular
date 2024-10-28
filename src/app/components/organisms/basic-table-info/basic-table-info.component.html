@@ -19,29 +19,42 @@
         </app-button>
       </a>
       </div>
-
       <div class="list__select-params">
 
-        <div class="pagination">
-          <span>Page:</span>
-          <select class="pagination__parameters" (change)="onPageNumberChange($event)">
-            <option *ngFor="let option of (0 | range:totalPages-1)" [value]="option">{{ option+1 }}
-            </option>
-          </select>
-        </div>
-        
-        <div class="pagination">
-          <span>Sort name:</span>
-          <select class="pagination__parameters" (change)="onSortDirectionChange($event)">
-            <option *ngFor="let option of ['ASC','DESC']" [value]="option">{{ option }}</option>
-          </select>
+        <div class= "list__params-container">
+
+          <div class="select">
+            <span>Sort:</span>
+            <select class="select__param" (change)="onSortDirectionChange($event)">
+              <option *ngFor="let option of ['ASC','DESC']" [value]="option">{{option }}</option>
+            </select>
+          </div>
+
+          <div class="pagination" *ngIf="sortByOptions.length!=0"><span>Order By:</span>
+            <select class="select__param" (change)="onSortByChange($event)">
+              <option *ngFor="let option of sortByOptions" [value]="option">{{option}}</option>
+            </select>
+          </div>
+
         </div>
 
-        <div class="pagination">
-          <span>Size:</span>
-          <select class="pagination__parameters" (change)="onPageSizeChange($event)">
-            <option *ngFor="let option of (5 | range:15:5)" [value]="option">{{ option }}</option>
-          </select>
+        <div class="list__params-container">
+
+          <div class="select">
+            <span>Page:</span>
+            <select class="select__param" (change)="onPageNumberChange($event)">
+              <option *ngFor="let option of (0 | range:totalPages-1)" [value]="option">{{ option+1 }}
+              </option>
+            </select>
+          </div>
+
+          <div class="select">
+            <span>Size:</span>
+            <select class="select__param" (change)="onPageSizeChange($event)">
+              <option *ngFor="let option of (5 | range:15:5)" [value]="option">{{ option }}</option>
+            </select>
+          </div>
+
         </div>
 
       </div>
@@ -54,20 +67,25 @@
           <table class="list__custom-table">
             <thead>
               <tr class="list__custom-tr">
-                <th *ngFor="let item of ['Id','Name','Description']" class="list__table-header text--start"
-                  [ngClass]="{ 'text--number': item.includes('Id') }">
-                  {{item}}
+                <th *ngFor="let item of getFieldsNames()"
+                  class="list__table-header" [ngClass]="textNumberClass(item)?'text--number':'text--start' ">
+                  {{item|titlecase}}
                 </th>
               </tr>
             </thead>
             <tbody>
               <tr *ngFor="let item of elements " class="list__custom-tr">
-                <td class="list__table-data text--number">
-                  {{item.id}}
-                </td>
-                <td class="list__table-data text--start">{{item.name}}</td>
-                <td class="list__table-data text--start">
-                  {{item.description}}
+                <td *ngFor="let field of getFieldsAccessValues()" class="list__table-data" [ngClass]="textNumberClass(field)?'text--number':'text--start' ">
+                  <ng-container *ngIf="!isArrayWithThreeElements(get(item, field)); else arrayBlock">
+                    <span>{{ get(item, field) }}</span>
+                  </ng-container>
+                  <ng-template #arrayBlock>
+                    <ul>
+                      <li *ngFor="let element of get(item, field)">
+                        <span class='text--start'>{{ element.name }}</span>
+                      </li>
+                    </ul>
+                  </ng-template>
                 </td>
               </tr>
             </tbody>

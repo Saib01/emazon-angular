@@ -1,6 +1,6 @@
 <div class="field">
     <label class="field__name" [for]="controlName"
-      >{{ controlName | titlecase }}:</label
+      >{{ label | titlecase }}:</label
     >
     <input
       [formControl]="formControl"
@@ -11,4 +11,5 @@
       [placeholder]="placeHolder"
     />
     <app-control-error [controlName]="controlName" [errorMessages]="errorMessages"></app-control-error>
+    <ng-content></ng-content>
 </div>
