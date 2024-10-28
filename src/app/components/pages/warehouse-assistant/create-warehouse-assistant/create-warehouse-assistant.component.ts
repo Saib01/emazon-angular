@@ -81,15 +81,15 @@ export class CreateWarehouseAssistantComponent {
         ],
       ],
       idDocument: [
-        null,
+        '',
         [checkNoWhitespace(), pattern(USER_ID_DOCUMENT_REGEX)],
         checkUserAvailability(this.authService, PROPERTY_ID_DOCUMENT),
       ],
       phoneNumber: [
-        null,
+        '',
         [checkNoWhitespace(), pattern(USER_PHONE_NUMBER_REGEX)],
       ],
-      dateOfBirth: [null, [required, checkUserAge(USER_MIN_AGE)]],
+      dateOfBirth: ['', [required, checkUserAge(USER_MIN_AGE)]],
       email: [
         '',
         [checkNoWhitespace(), pattern(USER_EMAIL_REGEX)],

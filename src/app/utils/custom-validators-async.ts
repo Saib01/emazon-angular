@@ -39,7 +39,7 @@ export class CustomValidatorsAsync {
 
   static checkUserAvailability(
     authService: AuthService,
-    type: 'email' | 'idDocument'
+    type: "email" | "idDocument"
   ) {
     return (control: AbstractControl) => {
       return timer(1000).pipe(
