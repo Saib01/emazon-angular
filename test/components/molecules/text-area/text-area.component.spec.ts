@@ -2,8 +2,8 @@ import { ComponentFixture, TestBed } from "@angular/core/testing";
 import { FormControl, FormGroup, FormGroupDirective, ReactiveFormsModule } from "@angular/forms";
 import { DebugElement } from "@angular/core";
 import { By } from "@angular/platform-browser";
-import { ControlErrorComponent } from "../../../../src/app/components/molecules/control-error/control-error.component";
-import { TextAreaComponent } from "../../../../src/app/components/molecules/text-area/text-area.component";
+import { ControlErrorComponent } from "../../../../src/app/shared/molecules/control-error/control-error.component";
+import { TextAreaComponent } from "../../../../src/app/shared/molecules/text-area/text-area.component";
 
 describe('TextAreaComponent', () => {
   let component: TextAreaComponent;

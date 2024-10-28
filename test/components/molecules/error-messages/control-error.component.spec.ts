@@ -2,7 +2,7 @@ import {ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { DebugElement } from '@angular/core';
 
-import { ControlErrorComponent } from '../../../../src/app/components/molecules/control-error/control-error.component';
+import { ControlErrorComponent } from '../../../../src/app/shared/molecules/control-error/control-error.component';
 import { ReactiveFormsModule, FormGroupDirective, FormControl, FormGroup, Validators } from '@angular/forms';
 import { CustomValidators } from '@utils/custom-validators';
 

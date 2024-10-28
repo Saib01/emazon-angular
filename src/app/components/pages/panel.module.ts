@@ -3,23 +3,17 @@ import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
 import { BoardsRoutingModule } from './panel-routing.module';
 import { HomeComponent } from './home/home.component';
-import { InputTextComponent } from '../molecules/input-text/input-text.component';
-import { TextAreaComponent } from '../molecules/text-area/text-area.component';
-import { ButtonComponent } from '../atoms/basic-components/button/button.component';
-import { ControlErrorComponent } from '../molecules/control-error/control-error.component';
 import { CreateCategoryComponent } from './category/create-category/create-category.component';
 import { ListCategoryComponent } from './category/list-category/list-category.component';
-import { RangePipe } from '../pipe/range.pipe';
 import { BasicFormComponent } from '../organisms/basic-form/basic-form.component';
 import { CreateBrandComponent } from './brand/create-brand/create-brand.component';
 import { RouterModule } from '@angular/router';
 import { BasicTableInfoComponent } from '../organisms/basic-table-info/basic-table-info.component';
 import { ListBrandComponent } from './brand/list-brand/list-brand.component';
 import { CreateProductComponent } from './product/create-product/create-product.component';
-import { MultiSelectComponent } from '../molecules/multi-select/multi-select.component';
-import { SimpleSelectComponent } from '../molecules/simple-select/simple-select.component';
 import { ListProductComponent } from './product/list-product/list-product.component';
 import { CreateWarehouseAssistantComponent } from './warehouse-assistant/create-warehouse-assistant/create-warehouse-assistant.component';
+import { SharedModule } from '@shared/shared.module';
 
 
 @NgModule({
@@ -34,20 +28,14 @@ import { CreateWarehouseAssistantComponent } from './warehouse-assistant/create-
     BasicFormComponent,
     BasicTableInfoComponent,
     HomeComponent,
-    InputTextComponent,
-    TextAreaComponent,
-    MultiSelectComponent,
-    SimpleSelectComponent,
-    ControlErrorComponent,
-    ButtonComponent,
-    RangePipe,
     BasicTableInfoComponent
   ],
   imports: [
     CommonModule,
     BoardsRoutingModule,
     ReactiveFormsModule,
-    RouterModule
+    RouterModule,
+    SharedModule
   ]
 })
 export class PanelModule { }

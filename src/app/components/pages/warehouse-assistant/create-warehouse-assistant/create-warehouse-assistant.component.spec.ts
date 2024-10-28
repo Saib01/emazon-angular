@@ -1,7 +1,7 @@
 import { ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testing';
 import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
-import { AuthService } from '@services/auth.service';
+import { AuthService } from '@services/user.service';
 import { of, throwError } from 'rxjs';
 import { CreateWarehouseAssistantComponent } from './create-warehouse-assistant.component';
 import { ErrorMessages } from '@models/error-messages.model';

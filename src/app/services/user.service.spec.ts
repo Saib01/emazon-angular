@@ -1,7 +1,7 @@
 
 
 import { TestBed, inject } from '@angular/core/testing';
-import { AuthService } from './auth.service';
+import { AuthService } from './user.service';
 import { HttpTestingController, HttpClientTestingModule } from '@angular/common/http/testing';
 import { environment } from '@environments/environment';
 import { UserRegister } from '@models/user.model';
