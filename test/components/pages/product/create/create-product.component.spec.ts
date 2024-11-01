@@ -6,12 +6,12 @@ import { ReactiveFormsModule, FormBuilder } from '@angular/forms';
 import { BasicInfo } from '@models/basic-Info.model';
 import { Page } from '@models/page.model';
 import { of, throwError } from 'rxjs';
-import { InputTextComponent } from '../../../../../src/app/components/molecules/input-text/input-text.component';
-import { TextAreaComponent } from '../../../../../src/app/components/molecules/text-area/text-area.component';
+import { InputTextComponent } from '../../../../../src/app/shared/molecules/input-text/input-text.component';
+import { TextAreaComponent } from '../../../../../src/app/shared/molecules/text-area/text-area.component';
 import { ButtonComponent } from '../../../../../src/app/components/atoms/basic-components/button/button.component';
-import { ControlErrorComponent } from '../../../../../src/app/components/molecules/control-error/control-error.component';
-import { SimpleSelectComponent } from '../../../../../src/app/components/molecules/simple-select/simple-select.component';
-import { MultiSelectComponent } from '../../../../../src/app/components/molecules/multi-select/multi-select.component';
+import { ControlErrorComponent } from '../../../../../src/app/shared/molecules/control-error/control-error.component';
+import { SimpleSelectComponent } from '../../../../../src/app/shared/molecules/simple-select/simple-select.component';
+import { MultiSelectComponent } from '../../../../../src/app/shared/molecules/multi-select/multi-select.component';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 
 describe('CreateProductComponent', () => {

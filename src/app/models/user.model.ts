@@ -7,4 +7,7 @@ export type UserRegister ={
     email?:string;
     password?:string;
 };
-export type UserLogin = Pick<UserRegister,'email' | 'password'> ;
+export type UserLogin ={
+    username:string;
+    password:string;
+};

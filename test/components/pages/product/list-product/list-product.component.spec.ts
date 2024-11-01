@@ -8,7 +8,7 @@ import { Product } from '@models/product.model';
 import { RangePipe } from '../../../../../src/app/components/pipe/range.pipe';
 import { ButtonComponent } from '../../../../../src/app/components/atoms/basic-components/button/button.component';
 import { BasicTableInfoComponent } from '../../../../../src/app/components/organisms/basic-table-info/basic-table-info.component';
-import { NO_ERRORS_SCHEMA } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA } from '@angular/core';
 
 describe('ListProductComponent', () => {
   let component: ListProductComponent;
@@ -36,7 +36,7 @@ describe('ListProductComponent', () => {
     await TestBed.configureTestingModule({
       declarations: [ListProductComponent,RangePipe,ButtonComponent,BasicTableInfoComponent],
       imports: [HttpClientTestingModule],
-      schemas: [NO_ERRORS_SCHEMA],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA],
       providers: [{ provide: StockService, useValue: stockSpy }],
     }).compileComponents();
 

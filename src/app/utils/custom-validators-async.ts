@@ -2,7 +2,7 @@ import { AbstractControl } from '@angular/forms';
 import { Injectable } from '@angular/core';
 import { map, switchMap, timer } from 'rxjs';
 import { StockService } from '@services/stock.service';
-import { AuthService } from '@services/auth.service';
+import { UserService } from '@services/user.service';
 import { CATEGORY } from '@shared/constants/category.constants';
 import { BRAND } from '@shared/constants/brand.constants';
 import { PROPERTY_EMAIL } from '@shared/constants/properties.constants';
@@ -38,14 +38,14 @@ export class CustomValidatorsAsync {
   }
 
   static checkUserAvailability(
-    authService: AuthService,
+    userService: UserService,
     type: "email" | "idDocument"
   ) {
     return (control: AbstractControl) => {
       return timer(1000).pipe(
         switchMap(() => {
           if (type === PROPERTY_EMAIL) {
-            return authService
+            return userService
               .checkEmail(control.value)
               .pipe(
                 map((response) =>
@@ -53,7 +53,7 @@ export class CustomValidatorsAsync {
                 )
               );
           } else {
-            return authService
+            return userService
               .checkIdDocument(control.value)
               .pipe(
                 map((response) =>

@@ -2,13 +2,20 @@ import { TestBed } from '@angular/core/testing';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { HttpClient, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { checkToken, TokenInterceptor } from '@interceptors/token.interceptor';
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { TokenService } from '@services/token.service';
 
 
 describe('TokenInterceptor', () => {
   let httpMock: HttpTestingController;
   let httpClient: HttpClient;
+  let tokenService: TokenService;
 
   beforeEach(() => {
+    const tokenServiceSpy = {
+      isValidToken: jest.fn(),
+      getToken: jest.fn(),
+    };
     TestBed.configureTestingModule({
       imports: [HttpClientTestingModule],
       providers: [
@@ -16,12 +23,15 @@ describe('TokenInterceptor', () => {
           provide: HTTP_INTERCEPTORS,
           useClass: TokenInterceptor,
           multi: true
-        }
-      ]
+        },
+        { provide: TokenService, useValue: tokenServiceSpy }
+      ],
+      schemas:[CUSTOM_ELEMENTS_SCHEMA]
     });
 
     httpClient = TestBed.inject(HttpClient);
     httpMock = TestBed.inject(HttpTestingController);
+    tokenService = TestBed.inject(TokenService);
   });
 
   afterEach(() => {
@@ -29,6 +39,10 @@ describe('TokenInterceptor', () => {
   });
 
   test('should add an Authorization header with the token', () => {
+    const mockToken = 'mockToken123';
+    (tokenService.getToken as jest.Mock).mockReturnValueOnce(mockToken);
+    (tokenService.isValidToken as jest.Mock).mockReturnValueOnce(true);
+
     const testUrl = '/test';
     httpClient.get(testUrl,{context: checkToken()}).subscribe();
 

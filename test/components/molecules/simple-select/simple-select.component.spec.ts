@@ -1,9 +1,9 @@
 import {ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { SimpleSelectComponent } from '../../../../src/app/components/molecules/simple-select/simple-select.component';
+import { SimpleSelectComponent } from '../../../../src/app/shared/molecules/simple-select/simple-select.component';
 import { FormGroupDirective, FormControl} from '@angular/forms';
 import { BasicInfo } from '@models/basic-Info.model';
-import { ControlErrorComponent } from '../../../../src/app/components/molecules/control-error/control-error.component';
+import { ControlErrorComponent } from '../../../../src/app/shared/molecules/control-error/control-error.component';
 
 
 

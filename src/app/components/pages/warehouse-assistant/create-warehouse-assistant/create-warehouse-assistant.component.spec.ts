@@ -1,25 +1,21 @@
 import { ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testing';
 import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
-import { AuthService } from '@services/auth.service';
 import { of, throwError } from 'rxjs';
 import { CreateWarehouseAssistantComponent } from './create-warehouse-assistant.component';
-import { ErrorMessages } from '@models/error-messages.model';
-import {
-  USER_NAME_EMPTY_OR_NULL_ERROR,
-  USER_LAST_NAME_EMPTY_OR_NULL_ERROR,
-  USER_ID_DOCUMENT_EMPTY_OR_NULL_ERROR,
-} from '@shared/constants/user-register.constants';
+
 import {NO_ERRORS_SCHEMA } from '@angular/core';
+import { UserService } from '@services/user.service';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 
 describe('CreateWarehouseAssistantComponent', () => {
   let component: CreateWarehouseAssistantComponent;
   let fixture: ComponentFixture<CreateWarehouseAssistantComponent>;
-  let authServiceMock: Partial<AuthService>;
+  let userServiceMock: Partial<UserService>;
   let routerMock: Partial<Router>;
 
   beforeEach(async () => {
-    authServiceMock = {
+    userServiceMock = {
       createWarehouse: jest.fn().mockReturnValue(of({message: 'Category created'})), 
       checkEmail: jest.fn().mockReturnValue(of({notAvailableEmail:true})), 
       checkIdDocument: jest.fn().mockReturnValue(of({notAvailableIdDocument:true})), 
@@ -31,11 +27,11 @@ describe('CreateWarehouseAssistantComponent', () => {
 
     await TestBed.configureTestingModule({
       declarations: [CreateWarehouseAssistantComponent],
-      imports: [ReactiveFormsModule],
+      imports: [ReactiveFormsModule,HttpClientTestingModule],
       schemas: [NO_ERRORS_SCHEMA],
       providers: [
         FormBuilder,
-        { provide: AuthService, useValue: authServiceMock },
+        { provide: UserService, useValue: userServiceMock },
         { provide: Router, useValue: routerMock },
       ],
     }).compileComponents();
@@ -112,7 +108,7 @@ describe('CreateWarehouseAssistantComponent', () => {
 
   test('should handle error on registration failure',fakeAsync( () => { 
     const consoleLogSpy = jest.spyOn(console, 'log').mockImplementation();
-    (authServiceMock.createWarehouse as jest.Mock).mockReturnValueOnce(
+    (userServiceMock.createWarehouse as jest.Mock).mockReturnValueOnce(
       throwError(() => new Error('Communication Error'))
     );
 

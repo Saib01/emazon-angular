@@ -1,9 +1,9 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { BasicFormComponent } from './basic-form.component';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { InputTextComponent } from '../../molecules/input-text/input-text.component';
-import { ControlErrorComponent } from '../../molecules/control-error/control-error.component';
-import { TextAreaComponent } from '../../molecules/text-area/text-area.component';
+import { InputTextComponent } from '../../../shared/molecules/input-text/input-text.component';
+import { ControlErrorComponent } from '../../../shared/molecules/control-error/control-error.component';
+import { TextAreaComponent } from '../../../shared/molecules/text-area/text-area.component';
 import { ButtonComponent } from '../../atoms/basic-components/button/button.component';
 import { RouterTestingModule } from '@angular/router/testing';
 import { NO_ERRORS_SCHEMA } from '@angular/core';

@@ -1,24 +1,40 @@
 
-
-import { TestBed, inject } from '@angular/core/testing';
-import { AuthService } from './auth.service';
-import { HttpTestingController, HttpClientTestingModule } from '@angular/common/http/testing';
+import { TestBed } from '@angular/core/testing';
+import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
+import { TokenService } from './token.service';
 import { environment } from '@environments/environment';
-import { UserRegister } from '@models/user.model';
-import { PROPERTY_EMAIL, PROPERTY_ID_DOCUMENT } from '@shared/constants/properties.constants';
+import { UserLogin } from '@models/user.model';
+import { ResponseLogin } from '@models/auth.model';
+import { AuthService } from './auth.service';
 
-describe('Service: Auth', () => {
-  let authService: AuthService;
+describe('Service: Auth.service', () => {
+  let service: AuthService;
   let httpMock: HttpTestingController;
+  let tokenService: TokenService;
+
+  const mockUserLogin: UserLogin = {
+    username: 'testuser',
+    password: 'password123'
+  };
+
+  const mockResponse: ResponseLogin = {
+    token: 'mocked-token'
+  };
 
   beforeEach(() => {
+    const tokenServiceSpy = { saveToken: jest.fn() };
+
     TestBed.configureTestingModule({
       imports: [HttpClientTestingModule],
-      providers: [AuthService]
+      providers: [
+        AuthService,
+        { provide: TokenService, useValue: tokenServiceSpy }
+      ]
     });
 
-    authService = TestBed.inject(AuthService);
+    service = TestBed.inject(AuthService);
     httpMock = TestBed.inject(HttpTestingController);
+    tokenService = TestBed.inject(TokenService);
   });
 
   afterEach(() => {
@@ -26,49 +42,26 @@ describe('Service: Auth', () => {
   });
 
   test('should be created', () => {
-    expect(authService).toBeTruthy();
+    expect(service).toBeTruthy();
   });
 
-  test('should send a POST request to create a warehouse', () => {
-    const warehouseRegister: UserRegister = {
-      email: 'test@example.com',
-      idDocument: '12345678',
-    };
-
-    authService.createWarehouse(warehouseRegister).subscribe(response => {
-      expect(response).toBeTruthy();
+  test('should save token on successful login', () => {
+    service.login(mockUserLogin).subscribe(response => {
+      expect(response).toEqual(mockResponse);
+      expect(tokenService.saveToken).toHaveBeenCalledWith(mockResponse.token);
     });
 
-    const req = httpMock.expectOne(`${environment.API_URL_USER}/api/users/aux`);
+    const req = httpMock.expectOne(`${environment.API_URL_USER}/api/auth`);
     expect(req.request.method).toBe('POST');
-    expect(req.request.body).toEqual(warehouseRegister);
+    req.flush(mockResponse);
   });
 
-  test('should send a GET request to validate email', () => {
-    const email = 'test@example.com';
-    const expectedResponse = true;
+  test('should call saveToken with the token from the response', () => {
+    service.login(mockUserLogin).subscribe();
 
-    authService.checkEmail(email).subscribe(response => {
-      expect(response).toBe(expectedResponse);
-    });
+    const req = httpMock.expectOne(`${environment.API_URL_USER}/api/auth`);
+    req.flush(mockResponse);
 
-    const req = httpMock.expectOne(`${environment.API_URL_USER}/api/users/validate-email?${PROPERTY_EMAIL}=${email}`);
-    expect(req.request.method).toBe('GET');
-    req.flush(expectedResponse);
-  });
-
-  test('should send a GET request to validate ID document', () => {
-    const idDocument = '12345678';
-    const expectedResponse = true;
-
-    authService.checkIdDocument(idDocument).subscribe(response => {
-      expect(response).toBe(expectedResponse);
-    });
-
-    const req = httpMock.expectOne(`${environment.API_URL_USER}/api/users/validate-id-document?${PROPERTY_ID_DOCUMENT}=${idDocument}`);
-    expect(req.request.method).toBe('GET');
-    req.flush(expectedResponse);
+    expect(tokenService.saveToken).toHaveBeenCalledWith('mocked-token');
   });
 });
-
-

@@ -8,16 +8,17 @@ import { ListBrandComponent } from './brand/list-brand/list-brand.component';
 import { CreateProductComponent } from './product/create-product/create-product.component';
 import { ListProductComponent } from './product/list-product/list-product.component';
 import { CreateWarehouseAssistantComponent } from './warehouse-assistant/create-warehouse-assistant/create-warehouse-assistant.component';
+import { AdminGuard } from '@guards/admin.guard';
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
   {path: 'category',component:  ListCategoryComponent},
-  {path: 'category/create',component:  CreateCategoryComponent},
-  {path: 'brand/create',component:  CreateBrandComponent},
+  {path: 'category/create',component:  CreateCategoryComponent,canActivate:[AdminGuard]}, 
+  {path: 'brand/create',component:  CreateBrandComponent,canActivate:[AdminGuard]},
   {path: 'brand',component:  ListBrandComponent},
   {path:'product',component:ListProductComponent},
-  {path:'product/create',component:CreateProductComponent},
-  {path:'ware-house',component:CreateWarehouseAssistantComponent},
+  {path:'product/create',component:CreateProductComponent,canActivate:[AdminGuard]},
+  {path:'ware-house',component:CreateWarehouseAssistantComponent,canActivate:[AdminGuard]},
   {
     path: '**',
     redirectTo: 'home',

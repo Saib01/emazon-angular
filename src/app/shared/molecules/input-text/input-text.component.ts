@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormControl, FormGroupDirective } from '@angular/forms';
-import { ErrorMessages } from '../../../models/error-messages.model';
+import { ErrorMessages } from '@models/error-messages.model';
 
 @Component({
   selector: 'input-text',

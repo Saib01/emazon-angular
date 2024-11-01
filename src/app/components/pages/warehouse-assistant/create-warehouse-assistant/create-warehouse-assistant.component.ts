@@ -3,7 +3,7 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ErrorMessages } from '@models/error-messages.model';
 import { UserRegister } from '@models/user.model';
-import { AuthService } from '@services/auth.service';
+import { UserService } from '@services/user.service';
 import {
   PROPERTY_CONFIRM_PASSWORD,
   PROPERTY_EMAIL,
@@ -83,7 +83,7 @@ export class CreateWarehouseAssistantComponent {
       idDocument: [
         '',
         [checkNoWhitespace(), pattern(USER_ID_DOCUMENT_REGEX)],
-        checkUserAvailability(this.authService, PROPERTY_ID_DOCUMENT),
+        checkUserAvailability(this.userService, PROPERTY_ID_DOCUMENT),
       ],
       phoneNumber: [
         '',
@@ -93,7 +93,7 @@ export class CreateWarehouseAssistantComponent {
       email: [
         '',
         [checkNoWhitespace(), pattern(USER_EMAIL_REGEX)],
-        checkUserAvailability(this.authService, PROPERTY_EMAIL),
+        checkUserAvailability(this.userService, PROPERTY_EMAIL),
       ],
       password: ['', [checkNoWhitespace(), pattern(USER_PASSWORD_REGEX)]],
       confirmPassword: ['', [required]],
@@ -206,7 +206,7 @@ export class CreateWarehouseAssistantComponent {
   constructor(
     private readonly formBuilder: FormBuilder,
     private readonly router: Router,
-    private readonly authService: AuthService
+    private readonly userService: UserService
   ) {}
 
   validateWarehouse() {
@@ -220,7 +220,7 @@ export class CreateWarehouseAssistantComponent {
         email: this.formWarehouse.getRawValue().email,
         password: this.formWarehouse.getRawValue().password,
       };
-      this.authService.createWarehouse(warehouse).subscribe({
+      this.userService.createWarehouse(warehouse).subscribe({
         next: (rta) => {
           this.router.navigate(['/panel/home']);
         },

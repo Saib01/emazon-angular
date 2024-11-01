@@ -2,7 +2,7 @@
 
   <div class="list__container">
 
-    <div class="list__button list__button--mobile">
+    <div class="list__button list__button--mobile" *ngIf="user?.role?.includes('ADMIN')">
       <a class="link" [routerLink]="['create']">
       <app-button [isDisabled]="false" >
           <span class="link__icon">+ </span>Create
@@ -10,9 +10,9 @@
     </a>
     </div>
 
-    <div class="list__pagination">
+    <div class="list__pagination" [ngClass]="{ 'list__pagination--admin-mode': user?.role?.includes('ADMIN')}">
 
-      <div class="list__button list__button--desktop">
+      <div class="list__button list__button--desktop"  *ngIf="user?.role?.includes('ADMIN')">
         <a class="link" [routerLink]="['create']">
         <app-button [isDisabled]="false" >
             <span class="link__icon">+ </span>Create
@@ -30,7 +30,7 @@
             </select>
           </div>
 
-          <div class="pagination" *ngIf="sortByOptions.length!=0"><span>Order By:</span>
+          <div class="select" *ngIf="sortByOptions.length!=0"><span>Order By:</span>
             <select class="select__param" (change)="onSortByChange($event)">
               <option *ngFor="let option of sortByOptions" [value]="option">{{option}}</option>
             </select>

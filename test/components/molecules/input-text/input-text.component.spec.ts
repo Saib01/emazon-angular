@@ -1,9 +1,9 @@
 import { ComponentFixture, TestBed } from "@angular/core/testing";
-import { InputTextComponent } from "../../../../src/app/components/molecules/input-text/input-text.component";
+import { InputTextComponent } from "../../../../src/app/shared/molecules/input-text/input-text.component";
 import { FormControl, FormGroup, FormGroupDirective, ReactiveFormsModule } from "@angular/forms";
 import { DebugElement } from "@angular/core";
 import { By } from "@angular/platform-browser";
-import { ControlErrorComponent } from "../../../../src/app/components/molecules/control-error/control-error.component";
+import { ControlErrorComponent } from "../../../../src/app/shared/molecules/control-error/control-error.component";
 
 describe('InputTextComponent', () => {
   let component: InputTextComponent;
