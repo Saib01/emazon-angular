@@ -1,23 +1,23 @@
 
 
-import { TestBed, inject } from '@angular/core/testing';
-import { AuthService } from './user.service';
+import { TestBed } from '@angular/core/testing';
+import {UserService } from './user.service';
 import { HttpTestingController, HttpClientTestingModule } from '@angular/common/http/testing';
 import { environment } from '@environments/environment';
 import { UserRegister } from '@models/user.model';
 import { PROPERTY_EMAIL, PROPERTY_ID_DOCUMENT } from '@shared/constants/properties.constants';
 
 describe('Service: Auth', () => {
-  let authService: AuthService;
+  let userService: UserService;
   let httpMock: HttpTestingController;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [HttpClientTestingModule],
-      providers: [AuthService]
+      providers: [UserService]
     });
 
-    authService = TestBed.inject(AuthService);
+    userService = TestBed.inject(UserService);
     httpMock = TestBed.inject(HttpTestingController);
   });
 
@@ -26,7 +26,7 @@ describe('Service: Auth', () => {
   });
 
   test('should be created', () => {
-    expect(authService).toBeTruthy();
+    expect( userService).toBeTruthy();
   });
 
   test('should send a POST request to create a warehouse', () => {
@@ -35,7 +35,7 @@ describe('Service: Auth', () => {
       idDocument: '12345678',
     };
 
-    authService.createWarehouse(warehouseRegister).subscribe(response => {
+    userService.createWarehouse(warehouseRegister).subscribe(response => {
       expect(response).toBeTruthy();
     });
 
@@ -48,7 +48,7 @@ describe('Service: Auth', () => {
     const email = 'test@example.com';
     const expectedResponse = true;
 
-    authService.checkEmail(email).subscribe(response => {
+    userService.checkEmail(email).subscribe(response => {
       expect(response).toBe(expectedResponse);
     });
 
@@ -61,7 +61,7 @@ describe('Service: Auth', () => {
     const idDocument = '12345678';
     const expectedResponse = true;
 
-    authService.checkIdDocument(idDocument).subscribe(response => {
+    userService.checkIdDocument(idDocument).subscribe(response => {
       expect(response).toBe(expectedResponse);
     });
 

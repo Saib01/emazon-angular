@@ -1,0 +1,39 @@
+.hero {
+    background-color: #151126;
+    color: #fff;
+    padding: 60px 20px;
+    text-align: center;
+}
+.hero h1 {
+    font-size: 2.5em;
+    margin: 0;
+}
+.hero p {
+    font-size: 1.2em;
+    margin: 10px 0;
+}
+.hero a {
+    display: inline-block;
+    background-color: #ff9900;
+    color: #fff;
+    padding: 10px 20px;
+    text-decoration: none;
+    border-radius: 5px;
+    margin-top: 15px;
+    font-weight: bold;
+}
+.content-section {
+    padding: 40px 20px;
+    text-align: center;
+}
+.content-section h2 {
+    color: #333;
+    font-size: 2em;
+    margin-bottom: 15px;
+}
+.content-section p {
+    color: #666;
+    font-size: 1.1em;
+    max-width: 800px;
+    margin: 0 auto;
+}

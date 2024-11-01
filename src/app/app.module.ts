@@ -10,9 +10,10 @@ import { BoardsRoutingModule } from './components/pages/panel-routing.module';
 import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from '../environments/environment';
-import { AuthGuard } from '@guards/admin.guard';
+import { AdminGuard } from '@guards/admin.guard';
 import { LoginComponent } from './components/pages/login/login.component';
 import { SharedModule } from '@shared/shared.module';
+import { LoginGuard } from '@guards/login.guard';
 
 
 @NgModule({
@@ -31,7 +32,7 @@ import { SharedModule } from '@shared/shared.module';
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production })
   ],
   providers: [
-    { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true },AuthGuard
+    { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true }, AdminGuard,LoginGuard
   ],
   bootstrap: [AppComponent]
 })

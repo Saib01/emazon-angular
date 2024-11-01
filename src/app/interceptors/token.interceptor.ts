@@ -8,6 +8,7 @@ import {
   HttpContext,
 } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { TokenService } from '@services/token.service';
 
 const CHECK_TOKEN = new HttpContextToken<boolean>(() => false);
 
@@ -18,21 +19,29 @@ export function checkToken() {
 @Injectable()
 export class TokenInterceptor implements HttpInterceptor {
 
-  token:string="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJBVVRISldUX0pPSEFOIiwic3ViIjoibWFpbEBtYWlsLmNvbSIsImF1dGhvcml0aWVzIjoiUk9MRV9BRE1JTiIsImlkIjoxLCJpYXQiOjE3Mjk4Mzk2MzcsImV4cCI6MTcyOTkyNjAzNywianRpIjoiYmY2ZjU0MjItOTgyZC00YWY3LWI1MDMtNzcyMGVkYjMwMjhlIiwibmJmIjoxNzI5ODM5NjM3fQ.hpuD0eKk9NjdXPerFSIx3YaRgBla2jj3VFjpdVhkQ10";
-  constructor() {}
+  constructor(
+    private readonly tokenService: TokenService
+  ) {}
 
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
     if (request.context.get(CHECK_TOKEN)) {
+      const isValidToken = this.tokenService.isValidToken(); 
+      if (isValidToken) {
+        return this.addToken(request, next);
+      }
     return this.addToken(request, next);
     }
     return next.handle(request);
   }
 
   private addToken(request: HttpRequest<unknown>, next: HttpHandler) {
-    const accessToken = this.token;
+    const accessToken = this.tokenService.getToken();
+    if (accessToken) {
       const authRequest = request.clone({
         headers: request.headers.set('Authorization', `Bearer ${accessToken}`)
       });
       return next.handle(authRequest);
+    }
+    return next.handle(request);
     }
 }

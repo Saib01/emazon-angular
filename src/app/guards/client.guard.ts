@@ -1,22 +1,20 @@
 import { Injectable } from '@angular/core';
-import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot, UrlTree } from '@angular/router';
-import { AuthService } from '@services/user.service';
+import { CanActivate, Router } from '@angular/router';
 import { TokenService } from '@services/token.service';
-import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
-export class AuthGuard implements CanActivate {
+export class ClientGuard implements CanActivate {
   
-  constructor(private authService: AuthService, private router: Router) {}
-
-  canActivate(): boolean {
-    const role = 'aux';//this.authService.getRole();
-    if (role === 'aux') {
+  constructor(private readonly tokenService:TokenService,
+    private readonly router:Router){}
+  canActivate():boolean{
+    const isValidToken=this.tokenService.isValidToken();
+    if (isValidToken&&this.tokenService.getUserRole()?.includes('CLIENT')) {
       return true;
     } else {
-      this.router.navigate(['/unauthorized']);
+      this.router.navigate(['login']);
       return false;
     }
   }

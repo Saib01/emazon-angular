@@ -30,7 +30,7 @@
       <side-bar-item [linkName]="'product'" [link]="'panel/product'" [isClose]="closeSideBar">
         <product-icon></product-icon>
       </side-bar-item>
-      <side-bar-item [linkName]="'ware-house'" [link]="'panel/ware-house'" [isClose]="closeSideBar">
+      <side-bar-item [linkName]="'ware-house'" [link]="'panel/ware-house'" [isClose]="closeSideBar" *ngIf="user?.role?.includes('ADMIN')">
         <warehouse-icon></warehouse-icon>
       </side-bar-item>
     </div>

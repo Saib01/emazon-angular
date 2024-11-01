@@ -1,19 +1,19 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { AuthGuard } from '@guards/admin.guard';
 import { LoginComponent } from './components/pages/login/login.component';
+import { LoginGuard } from '@guards/login.guard';
 
 const routes: Routes = [
-  { path: 'login', component: LoginComponent },
+  { path: 'login', component: LoginComponent ,canActivate:[LoginGuard] },
   {
     path: '',
-    canActivate:[AuthGuard],
     loadChildren: () =>
       import('./components/templates/template.module').then((module) => module.TemplateModule),
     data: {
       preload: true,
     }
-  },
+  }
+,
   {
     path:'**',
     redirectTo:''

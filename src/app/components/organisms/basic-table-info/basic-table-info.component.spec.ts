@@ -6,6 +6,7 @@ import { BasicInfo } from '@models/basic-Info.model';
 import { RangePipe } from '../../pipe/range.pipe';
 import { ButtonComponent } from '../../atoms/basic-components/button/button.component';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 
 describe('BasicTableInfoComponent', () => {
   let component: BasicTableInfoComponent;
@@ -15,6 +16,7 @@ describe('BasicTableInfoComponent', () => {
     await TestBed.configureTestingModule({
       declarations: [BasicTableInfoComponent,RangePipe,ButtonComponent],
       schemas: [NO_ERRORS_SCHEMA],
+      imports: [HttpClientTestingModule],
     }).compileComponents();
   });
 

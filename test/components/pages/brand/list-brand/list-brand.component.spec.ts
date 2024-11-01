@@ -8,6 +8,7 @@ import { throwError } from 'rxjs';
 import { RangePipe } from '../../../../../src/app/components/pipe/range.pipe';
 import { ButtonComponent } from '../../../../../src/app/components/atoms/basic-components/button/button.component';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 
 describe('ListBrandComponent', () => {
   let component: ListBrandComponent;
@@ -23,7 +24,8 @@ describe('ListBrandComponent', () => {
       declarations: [ListBrandComponent,BasicTableInfoComponent,RangePipe,ButtonComponent],
       providers: [
         { provide: StockService, useValue: stockMock }
-      ],
+      ],      
+      imports: [HttpClientTestingModule],
       schemas: [NO_ERRORS_SCHEMA],
     }).compileComponents();
 

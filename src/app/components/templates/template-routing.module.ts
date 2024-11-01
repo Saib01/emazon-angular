@@ -23,6 +23,7 @@ const routes: Routes = [
     path:'**',
     redirectTo:'panel'
   }
+  
 ];
 
 @NgModule({

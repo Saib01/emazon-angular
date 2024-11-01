@@ -16,6 +16,7 @@ import { ProductIconComponent } from '../atoms/icons/product-icon/product-icon.c
 import { WarehouseIconComponent } from '../atoms/icons/warehouse-icon/warehouse-icon.component';
 
 
+
 @NgModule({
   declarations: [
     AdminTemplateComponent,

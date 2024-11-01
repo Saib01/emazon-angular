@@ -2,6 +2,8 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { BasicInfo } from '@models/basic-Info.model';
 import { FieldsToShow } from '@models/field-to-show.model';
 import { Product } from '@models/product.model';
+import { UserInfo } from '@models/user-info.model';
+import { UserService } from '@services/user.service';
 
 @Component({
   selector: 'app-basic-table-info',
@@ -10,6 +12,7 @@ import { Product } from '@models/product.model';
 })
 export class BasicTableInfoComponent  implements OnInit{
   regexNumberClass!:RegExp;
+  user!:UserInfo|null;
   @Input() totalPages:number=0;
   @Input() elements:BasicInfo[]|Product[]=[];
   @Input() fieldsToShow:FieldsToShow[]=[
@@ -22,9 +25,11 @@ export class BasicTableInfoComponent  implements OnInit{
   @Output() pageSizeEvent = new EventEmitter<number>();
   @Output() sortDirectionEvent = new EventEmitter<string>();
   @Output() sortByEvent=new EventEmitter<string>();
-  constructor() { }
+  constructor(private readonly userService:UserService) { }
+  
   ngOnInit(): void { 
    this.getRegexForHtmlNumberClass();
+   this.user=this.userService.getUserValue();
   }
   getRegexForHtmlNumberClass(){
     const numberFields=this.fieldsToShow.filter(field=>field.type==='number').map(field=>field.name);

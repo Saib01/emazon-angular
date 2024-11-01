@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
+import { TokenService } from '@services/token.service';
 import { filter } from 'rxjs/operators';
 
 @Component({
@@ -9,7 +10,7 @@ import { filter } from 'rxjs/operators';
 })
 export class HeaderComponent implements OnInit {
   lastSegment: string = '';
-  constructor(private readonly router: Router) {}
+  constructor(private readonly router: Router,private readonly tokenService:TokenService) {}
   ngOnInit(): void {
     this.lastSegment = this.getLastSegment(this.router.routerState.snapshot.url);
     this.router.events
@@ -27,5 +28,9 @@ export class HeaderComponent implements OnInit {
     }
     const lastSegment = segments.pop()?.split('?')[0]; 
     return lastSegment?.replace('-',' ')!;
+  }
+  logout(){
+    this.tokenService.removeToken();
+    this.router.navigate(['/login']);
   }
 }

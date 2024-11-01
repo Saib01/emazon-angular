@@ -1,46 +1,71 @@
 import { Injectable } from '@angular/core';
 import { jwtDecode, JwtPayload } from 'jwt-decode';
-import { getCookie, removeCookie, setCookie } from 'typescript-cookie';
-
+import { CookieService } from 'ngx-cookie-service';
+import { UserInfo } from '../models/user-info.model';
 @Injectable({
   providedIn: 'root'
 })
 export class TokenService {
+  private readonly tokenKey = 'token-emazon';
+  constructor(private readonly cookieService: CookieService) {}
+  getUser(): UserInfo | null {
+    return {    
+      id: this.getUserId(),
+      email: this.getUserEmail(),
+      role: this.getUserRole()
+    };
+  }
 
-  constructor() { }
-  saveToken(token:string){
-    setCookie('token-emazon',token);
+  saveToken(token: string): void {
+    this.cookieService.set(this.tokenKey, token, { path: '/', expires: 1 }); 
   }
   getToken(){
-    const token=getCookie('token-emazon');
+    const token=this.cookieService.get(this.tokenKey) ;
+    if(!token){
+      return '';
+    }
     return token;
   }
   removeToken(){
-    removeCookie('token-emazon');
+    this.cookieService.delete(this.tokenKey, '/');
   }
 
   isValidToken(){
     const token=this.getToken();
-    if(!token){
+    try {
+      const { exp } = jwtDecode<JwtPayload>(token);
+      return exp ? new Date(exp * 1000) > new Date() : false;
+    } catch {
       return false;
     }
-    const decodeToken=jwtDecode<JwtPayload>(token);
-    if(decodeToken&&decodeToken?.exp){
-      const tokenDate=new Date(0);
-      tokenDate.setUTCSeconds(decodeToken.exp);
-      const today=new Date();
-      return tokenDate.getTime()>today.getTime();
-    }
-    return false;
   }
-  /*
-  getRole(){
+  
+  getUserRole(): string {
+    const claims = this.getTokenClaims();
+    return claims ? claims['authorities'] : '';
+  }
+  getUserId(): string {
+    const claims = this.getTokenClaims();
+    return claims ? claims['id'] : '';
+  }
+  getUserEmail(): string {
     const token=this.getToken();
-    if(!token||this.isValidToken()){
-      return '';//AUX_BODEGA
+    try {
+      const { sub} = jwtDecode<JwtPayload>(token);
+      return sub ?? '';
+    } catch {
+      return '';
     }
-    const decodeToken=jwtDecode<JwtPayload>(token);
-    return decodeToken.sub;
   }
-*/
+  getTokenClaims(): any {
+    const token=this.getToken();
+    if(token){
+    try {
+      return jwtDecode(token);
+    } catch (error) {
+      console.log('Invalid Token', error);
+      return null;
+    }
+  }
+}
 }

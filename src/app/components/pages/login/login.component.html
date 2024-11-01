@@ -1,5 +1,5 @@
 <div class="container__form">
-  <form [formGroup]="formWarehouse" class="form" (ngSubmit)="validateWarehouse()">
+  <form [formGroup]="loginForm" class="form" (ngSubmit)="login()">
     <h2 class="form__tittle">Login</h2>
     <input-text [controlName]="'email'"  [type]="'email'" 
     [errorMessages]="errorMessages['email']" [placeHolder]="'Enter your email'"></input-text>
@@ -10,7 +10,7 @@
         <app-button typeBtn="button" [isDisabled]="false" [isBackgroundBlack]="false">Cancel</app-button>
       </a>
       <div class="form__save">
-        <app-button typeBtn="submit" [isDisabled]="formWarehouse.status!='VALID'">Save</app-button>
+        <app-button typeBtn="submit" [isDisabled]="loginForm.status!='VALID'">Save</app-button>
       </div>
     </div>
   </form>
