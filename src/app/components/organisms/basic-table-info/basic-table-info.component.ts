@@ -14,7 +14,7 @@ export class BasicTableInfoComponent  implements OnInit{
   regexNumberClass!:RegExp;
   user!:UserInfo|null;
   @Input() totalPages:number=0;
-  @Input() elements:BasicInfo[]|Product[]=[];
+  @Input() elements:Product[]|BasicInfo[]=[];
   @Input() fieldsToShow:FieldsToShow[]=[
     {name:'id',type:'number'},
     {name:'name'},
@@ -61,5 +61,8 @@ export class BasicTableInfoComponent  implements OnInit{
   }
   getFieldsAccessValues(){
     return this.fieldsToShow.map(field=> field.accessValue ? field.accessValue : field.name);
+  }
+  isProduct(item: BasicInfo | Product): item is Product {
+    return (item as Product).amount !== undefined;
   }
 }

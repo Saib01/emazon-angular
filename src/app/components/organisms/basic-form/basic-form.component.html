@@ -1,7 +1,7 @@
 
 <div class="container__form">
   <form  [formGroup]="formGroup" class="form" (ngSubmit)="validate()">
-      <h2 class="form__tittle">Registration</h2>
+      <h2 class="form__tittle">Add Supply</h2>
       <input-text [controlName]="'name'" [errorMessages]="errorNameMessages" [placeHolder]="'Enter '+formName+' name'">
       </input-text>
       <text-area [controlName]="'description'" [errorMessages]="errorDescriptionMessages" [placeHolder]="'Enter '+formName+' description'"></text-area>

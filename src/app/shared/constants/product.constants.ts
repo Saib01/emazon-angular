@@ -4,6 +4,7 @@ import { ERROR_TEMPLATE_EMPTY_OR_NULL, ERROR_TEMPLATE_GREATER_THAN, ERROR_TEMPLA
 import { PROPERTY_AMOUNT, PROPERTY_NAME, PROPERTY_PRICE } from "./properties.constants";
 
 export const PRODUCT='product';
+export const PRODUCT_URL='/panel/product';
 export const PRODUCT_NAME='product name';
 export const PRODUCT_MIN_PRICE=1;
 export const PRODUCT_MIN_AMOUNT=1;

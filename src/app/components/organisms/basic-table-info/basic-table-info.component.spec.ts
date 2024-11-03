@@ -92,4 +92,14 @@ describe('BasicTableInfoComponent', () => {
 
     expect(component.elements).toBe(mockElements);
   });
+
+  test('should return true when item has amount property', () => {
+    const productItem = { id: 1, name: 'Sample Product', amount: 10 };
+    expect(component.isProduct(productItem)).toBe(true);
+  });
+
+  test('should return false when item does not have amount property', () => {
+    const basicInfoItem = { id: 1, name: 'Sample Basic Info' };
+    expect(component.isProduct(basicInfoItem)).toBe(false);
+  });
 });
