@@ -5,7 +5,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ErrorMessages } from '@models/error-messages.model';
 import { TransactionService } from '@services/transaction.service';
 import { PRODUCT_MIN_AMOUNT, PRODUCT_URL } from '@shared/constants/product.constants';
-import { PROPERTY_ID } from '@shared/constants/properties.constants';
+import { PROPERTY_ID, PROPERTY_NAME } from '@shared/constants/properties.constants';
 import { PRODUCT_SUPPLY_CONNECTION_ERROR, PRODUCT_SUPPLY_GREATER_THAN_ERROR, PRODUCT_SUPPLY_ID_INVALID_ERROR, PRODUCT_SUPPLY_NOT_INTEGER_ERROR, PRODUCT_SUPPLY_REQUIRED_ERROR, PRODUCT_SUPPLY_UNKNOWN_ERROR } from '@shared/constants/supply.constants';
 import { CustomValidators } from '@utils/custom-validators';
 
@@ -59,16 +59,17 @@ export class SupplyProductComponent implements OnInit {
     private readonly transactionService:TransactionService
   ) {}
   ngOnInit(): void {
-    this.setIdProduct();
+    this.setProduct();
   }
 
-  setIdProduct(){
-    const id=this.route.snapshot.queryParamMap.get(PROPERTY_ID);
-    const parsedId = id ? Number(id) : NaN;
-    if(isNaN(parsedId)){
-      this.router.navigate([PRODUCT_URL]);
+  setProduct(){
+    const id=Number(this.route.snapshot.queryParamMap.get(PROPERTY_ID))||NaN;
+    const name=this.route.snapshot.queryParamMap.get(PROPERTY_NAME)??'';
+    if(isNaN(id)){
+      this.navigateToProductPage();
     }
-    this.formSupply.controls.id.setValue(parsedId.toString());
+    this.formSupply.controls.id.setValue(id.toString());
+    this.formSupply.controls.name.setValue(name);
   }
 
   validateProduct() {
@@ -76,13 +77,11 @@ export class SupplyProductComponent implements OnInit {
       const {id,supply}=this.formSupply.getRawValue();
       this.transactionService.addProductSupply({idProduct:Number(id),amount:Number(supply)}).subscribe({
         next: (rta) => {
-          this.router.navigate([PRODUCT_URL]);
+          this.navigateToProductPage();
         },
         error: (error) => {
           this.message=this.getMessageError(error.status);
           this.status=error.status;
-          console.log(this.status);
-
         },
       });
     } else {
@@ -91,7 +90,7 @@ export class SupplyProductComponent implements OnInit {
   }
   handleError() {
     if(this.status==HttpStatusCode.NotFound){
-      this.router.navigate([PRODUCT_URL]);
+      this.navigateToProductPage();
     }
     this.status=null;
   }
@@ -105,4 +104,8 @@ export class SupplyProductComponent implements OnInit {
           return PRODUCT_SUPPLY_UNKNOWN_ERROR;
   }
   }
+  navigateToProductPage(){
+    this.router.navigate([PRODUCT_URL]);
+  }
+  
 }

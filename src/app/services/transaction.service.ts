@@ -8,12 +8,12 @@ import { SupplyRequest } from '@models/supply-request.model';
   providedIn: 'root'
 })
 export class TransactionService {
-  private readonly API_TRANSACTION = `${environment.API_URL_TRANSACTION}/api/supply`;
+  API_TRANSACTION = `${environment.API_URL_TRANSACTION}/api/supply`;
 
   constructor(private readonly http: HttpClient) {}
 
   addProductSupply(supplyRequest: SupplyRequest) {
-    return this.http.put<SupplyRequest>(`${this.API_TRANSACTION}`, supplyRequest,{
+    return this.http.put(`${this.API_TRANSACTION}`, supplyRequest,{
       context: checkToken()
     });
   }

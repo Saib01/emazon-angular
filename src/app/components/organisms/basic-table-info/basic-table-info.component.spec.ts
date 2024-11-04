@@ -1,6 +1,4 @@
-/* tslint:disable:no-unused-variable */
 import {ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { BasicTableInfoComponent } from './basic-table-info.component';
 import { BasicInfo } from '@models/basic-Info.model';
 import { RangePipe } from '../../pipe/range.pipe';

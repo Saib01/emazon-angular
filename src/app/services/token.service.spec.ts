@@ -148,7 +148,15 @@ describe('Service: Token', () => {
     expect(result).toEqual(claims);
   });
 
-  it('should return user info with valid token', () => {
+  test('should not return claims.', () => {
+    (cookieService.get as jest.Mock).mockReturnValue('test-token');
+    (jwtDecode as jest.Mock).mockReturnValue(null);
+
+    expect(tokenService.getUserId()).toBe('');
+    expect(tokenService.getUserRole()).toBe('');
+  });
+
+  test('should return user info with valid token', () => {
     const mockId = '12345';
     const mockEmail = 'test@example.com';
     const mockRole = 'USER';
