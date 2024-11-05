@@ -9,6 +9,8 @@ import { CreateProductComponent } from './product/create-product/create-product.
 import { ListProductComponent } from './product/list-product/list-product.component';
 import { CreateWarehouseAssistantComponent } from './warehouse-assistant/create-warehouse-assistant/create-warehouse-assistant.component';
 import { AdminGuard } from '@guards/admin.guard';
+import { WarehouseGuard } from '@guards/warehouse.guard';
+import { SupplyProductComponent } from './product/supply-product/supply-product.component';
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
@@ -18,6 +20,7 @@ const routes: Routes = [
   {path: 'brand',component:  ListBrandComponent},
   {path:'product',component:ListProductComponent},
   {path:'product/create',component:CreateProductComponent,canActivate:[AdminGuard]},
+  {path:'product/add-supply',component:SupplyProductComponent,canActivate:[WarehouseGuard]},
   {path:'ware-house',component:CreateWarehouseAssistantComponent,canActivate:[AdminGuard]},
   {
     path: '**',

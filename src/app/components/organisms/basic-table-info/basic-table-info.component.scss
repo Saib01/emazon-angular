@@ -109,7 +109,6 @@
 
     &__custom-tr {
         border-bottom: 1px solid#e5e7eb;
-
         &:nth-child(even) {
             background-color: #f0eded;
         }
@@ -133,6 +132,12 @@
         padding: 0.5rem;
         font-size: 1rem;
         vertical-align: middle;
+        height: 5rem;
+    }
+    &__table-button{
+        margin: auto;
+        width: 3rem;
+        vertical-align: middle;
     }
 }
 
@@ -143,6 +148,9 @@
 
     &--number {
         text-align: end;
+    }
+    &--center {
+        text-align: center;
     }
 }
 

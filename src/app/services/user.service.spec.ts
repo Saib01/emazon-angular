@@ -6,15 +6,21 @@ import { HttpTestingController, HttpClientTestingModule } from '@angular/common/
 import { environment } from '@environments/environment';
 import { UserRegister } from '@models/user.model';
 import { PROPERTY_EMAIL, PROPERTY_ID_DOCUMENT } from '@shared/constants/properties.constants';
+import { TokenService } from './token.service';
 
 describe('Service: Auth', () => {
   let userService: UserService;
   let httpMock: HttpTestingController;
+  let tokenService: TokenService;
 
   beforeEach(() => {
+    const tokenServiceMock = {
+      getUser: jest.fn() 
+    };
     TestBed.configureTestingModule({
       imports: [HttpClientTestingModule],
-      providers: [UserService]
+      providers: [UserService,{ provide: TokenService, useValue: tokenServiceMock }
+      ]
     });
 
     userService = TestBed.inject(UserService);

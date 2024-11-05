@@ -46,16 +46,17 @@ export class TokenService {
   }
   getUserId(): string {
     const claims = this.getTokenClaims();
+    console.log(claims);
     return claims ? claims['id'] : '';
   }
   getUserEmail(): string {
     const token=this.getToken();
+    let result='';
     try {
       const { sub} = jwtDecode<JwtPayload>(token);
-      return sub ?? '';
-    } catch {
-      return '';
-    }
+      result=sub??'';
+    }catch{}
+    return result;
   }
   getTokenClaims(): any {
     const token=this.getToken();

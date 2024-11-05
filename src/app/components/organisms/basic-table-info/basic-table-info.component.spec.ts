@@ -1,6 +1,4 @@
-/* tslint:disable:no-unused-variable */
 import {ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { BasicTableInfoComponent } from './basic-table-info.component';
 import { BasicInfo } from '@models/basic-Info.model';
 import { RangePipe } from '../../pipe/range.pipe';
@@ -91,5 +89,15 @@ describe('BasicTableInfoComponent', () => {
     fixture.detectChanges();
 
     expect(component.elements).toBe(mockElements);
+  });
+
+  test('should return true when item has amount property', () => {
+    const productItem = { id: 1, name: 'Sample Product', amount: 10 };
+    expect(component.isProduct(productItem)).toBe(true);
+  });
+
+  test('should return false when item does not have amount property', () => {
+    const basicInfoItem = { id: 1, name: 'Sample Basic Info' };
+    expect(component.isProduct(basicInfoItem)).toBe(false);
   });
 });

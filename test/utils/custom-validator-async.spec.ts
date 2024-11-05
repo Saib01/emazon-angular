@@ -3,9 +3,11 @@ import { AbstractControl } from '@angular/forms';
 import { of } from 'rxjs';
 import { StockService } from '@services/stock.service'; 
 import { CustomValidatorsAsync } from '@utils/custom-validators-async';
+import { UserService } from '@services/user.service';
 
 describe('CustomValidatorsAsync', () => {
   let stockServiceMock: jest.Mocked<StockService>;
+  let userServiceMock: jest.Mocked<UserService>;
 
   beforeEach(() => {
     stockServiceMock = {
@@ -13,7 +15,10 @@ describe('CustomValidatorsAsync', () => {
       checkBrandName: jest.fn(),
       checkProductName: jest.fn()
     } as unknown as jest.Mocked<StockService>;
-  
+    userServiceMock = {
+      checkIdDocument: jest.fn(),
+      checkEmail: jest.fn()
+    } as unknown as jest.Mocked<UserService>;
     TestBed.configureTestingModule({
       providers: [
         { provide: StockService, useValue: stockServiceMock }
@@ -91,6 +96,55 @@ describe('CustomValidatorsAsync', () => {
 
     validatorFn.subscribe((result: any) => {
       expect(result).toEqual({ notAvailable: true }); 
+      done();
+    });
+  });
+
+
+  test('should return null if the user email is available', (done) => {
+    userServiceMock.checkEmail.mockReturnValue(of(true));
+
+    const control: AbstractControl = { value: 'existingEmail' } as AbstractControl;
+    const validatorFn = CustomValidatorsAsync.checkUserAvailability(userServiceMock,'email')(control);
+
+    validatorFn.subscribe((result: any) => {
+      expect(result).toBeNull(); 
+      done();
+    });
+  });
+
+  test('should return { notAvailable: true } if the user email is not available', (done) => {
+    userServiceMock.checkEmail.mockReturnValue(of(false));
+
+    const control: AbstractControl = { value: 'existingEmail' } as AbstractControl;
+    const validatorFn = CustomValidatorsAsync.checkUserAvailability(userServiceMock,'email')(control);
+
+    validatorFn.subscribe((result: any) => {
+      expect(result).toEqual({ notAvailableEmail: true }); 
+      done();
+    });
+  });
+
+  test('should return null if the user id document is available', (done) => {
+    userServiceMock.checkIdDocument.mockReturnValue(of(true));
+
+    const control: AbstractControl = { value: 'existingEmail' } as AbstractControl;
+    const validatorFn = CustomValidatorsAsync.checkUserAvailability(userServiceMock,'idDocument')(control);
+
+    validatorFn.subscribe((result: any) => {
+      expect(result).toBeNull(); 
+      done();
+    });
+  });
+
+  test('should return { notAvailable: true } if the user id document is not available', (done) => {
+    userServiceMock.checkIdDocument.mockReturnValue(of(false));
+
+    const control: AbstractControl = { value: 'existingEmail' } as AbstractControl;
+    const validatorFn = CustomValidatorsAsync.checkUserAvailability(userServiceMock,'idDocument')(control);
+
+    validatorFn.subscribe((result: any) => {
+      expect(result).toEqual({ notAvailableIdDocument: true }); 
       done();
     });
   });

@@ -4,12 +4,15 @@ import { By } from '@angular/platform-browser';
 import { Component } from '@angular/core';
 
 @Component({
-  template: `<app-button [typeBtn]="typeBtn" [isDisabled]="isDisabled">{{buttonText}}</app-button>`
+  template: `<app-button [typeBtn]="typeBtn" [isDisabled]="isDisabled" (clickEvent)="sayHi()">{{buttonText}}</app-button>`
 })
 class TestHostComponent {
   typeBtn: 'button' | 'submit' | 'reset' = 'button';
   buttonText = 'Click Me';
   isDisabled: boolean=false;
+  sayHi(){
+    console.log('hi');
+  }
 }
 
 describe('ButtonComponent', () => {
@@ -53,5 +56,13 @@ describe('ButtonComponent', () => {
     expect(buttonComponent.typeBtn).toBe('submit');
     expect(buttonComponent.isDisabled).toBe(true);
     expect(buttonElement.textContent).toContain('Click Me');
+  });
+  test('should emit clickEvent when click is called', () => {
+    const buttonDebugElement = fixture.debugElement.query(By.directive(ButtonComponent));
+    const buttonComponent = buttonDebugElement.componentInstance as ButtonComponent;
+    const consoleLogSpy = jest.spyOn(console, 'log').mockImplementation();
+    buttonComponent.click();
+    expect(consoleLogSpy).toHaveBeenCalledWith('hi');
+    consoleLogSpy.mockRestore();
   });
 });

@@ -1,27 +1,28 @@
+<ng-template #createButton>
+  <a class="link" [routerLink]="['create']">
+    <app-button [isDisabled]="false">
+      <span class="link__icon">+ </span>Create
+    </app-button>
+  </a>
+</ng-template>
+
 <div class="list">
 
   <div class="list__container">
 
     <div class="list__button list__button--mobile" *ngIf="user?.role?.includes('ADMIN')">
-      <a class="link" [routerLink]="['create']">
-      <app-button [isDisabled]="false" >
-          <span class="link__icon">+ </span>Create
-      </app-button>
-    </a>
+      <ng-container *ngTemplateOutlet="createButton"></ng-container>
     </div>
 
     <div class="list__pagination" [ngClass]="{ 'list__pagination--admin-mode': user?.role?.includes('ADMIN')}">
 
-      <div class="list__button list__button--desktop"  *ngIf="user?.role?.includes('ADMIN')">
-        <a class="link" [routerLink]="['create']">
-        <app-button [isDisabled]="false" >
-            <span class="link__icon">+ </span>Create
-        </app-button>
-      </a>
+      <div class="list__button list__button--desktop" *ngIf="user?.role?.includes('ADMIN')">
+        <ng-container *ngTemplateOutlet="createButton"></ng-container>
       </div>
+
       <div class="list__select-params">
 
-        <div class= "list__params-container">
+        <div class="list__params-container">
 
           <div class="select">
             <span>Sort:</span>
@@ -67,15 +68,19 @@
           <table class="list__custom-table">
             <thead>
               <tr class="list__custom-tr">
-                <th *ngFor="let item of getFieldsNames()"
-                  class="list__table-header" [ngClass]="textNumberClass(item)?'text--number':'text--start' ">
+                <th *ngFor="let item of getFieldsNames()" class="list__table-header"
+                  [ngClass]="textNumberClass(item)?'text--number':'text--start' ">
                   {{item|titlecase}}
+                </th>
+                <th class="list__table-header text--center" *ngIf=" user?.role?.includes('AUX_BODEGA')&& fieldsToShow.length>4">
+                  {{'supply'|titlecase}}
                 </th>
               </tr>
             </thead>
             <tbody>
               <tr *ngFor="let item of elements " class="list__custom-tr">
-                <td *ngFor="let field of getFieldsAccessValues()" class="list__table-data" [ngClass]="textNumberClass(field)?'text--number':'text--start' ">
+                <td *ngFor="let field of getFieldsAccessValues()" class="list__table-data"
+                  [ngClass]="textNumberClass(field)?'text--number':'text--start' ">
                   <ng-container *ngIf="!isArrayWithThreeElements(get(item, field)); else arrayBlock">
                     <span>{{ get(item, field) }}</span>
                   </ng-container>
@@ -86,6 +91,15 @@
                       </li>
                     </ul>
                   </ng-template>
+                </td>
+                <td class="list__table-data" *ngIf=" user?.role?.includes('AUX_BODEGA') && isProduct(item)">
+                  <div class="list__table-button ">
+                    <a class="link" [routerLink]="['add-supply']" [queryParams]="{ id: item.id,name:item.name}">
+                      <app-button [isDisabled]="false" >
+                        <span class="link__icon">+ </span>
+                      </app-button>
+                    </a>
+                  </div>
                 </td>
               </tr>
             </tbody>

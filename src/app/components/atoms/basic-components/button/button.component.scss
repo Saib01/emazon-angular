@@ -21,23 +21,22 @@
       transform: scale(1);
       cursor: not-allowed;
     }
-}
-
-.button-white{
-  background-color: white;
-  color: black;
-  border: 1px solid #e5e7eb;   
-  box-shadow: none;
-  &:hover{
-    box-shadow: 0px 0.5rem 1rem rgba(0, 0, 0, 0.3);
-    background-color: #a1a1a1;
-  }
-  &:active{
-    transform: scale(0.95);
-  }
-  &:disabled{
-    background: #666;
-    transform: scale(1);
-    cursor: not-allowed;
-  }
+    &--white{
+      background-color: white;
+      color: black;
+      border: 1px solid #e5e7eb;   
+      box-shadow: none;
+      &:hover{
+        box-shadow: 0px 0.5rem 1rem rgba(0, 0, 0, 0.3);
+        background-color: #a1a1a1;
+      }
+      &:active{
+        transform: scale(0.95);
+      }
+      &:disabled{
+        background: #666;
+        transform: scale(1);
+        cursor: not-allowed;
+      }
+    }
 }
