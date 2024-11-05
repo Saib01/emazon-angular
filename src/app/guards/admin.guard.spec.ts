@@ -1,63 +1,58 @@
 import { TestBed } from '@angular/core/testing';
 import { AdminGuard } from './admin.guard';
-import { TokenService } from '@services/token.service';
 import { Router } from '@angular/router';
+
+import { AuthService } from '@services/auth.service';
 import { of } from 'rxjs';
 
 describe('AdminGuard', () => {
-  let adminGuard: AdminGuard;
-  let tokenService: TokenService;
-  let router: Router;
-
+  let guard: AdminGuard;
+  let authServiceMock: { getUserStatus: jest.Mock };
+  let routerMock: { navigate: jest.Mock };
+  let mockUserStatus={
+    id:'1',
+    email:'mail@mail.com',
+    role:'ADMIN'
+  }
   beforeEach(() => {
-    const tokenServiceMock = {
-      isValidToken: jest.fn(),
-      getUserRole: jest.fn()
-    };
-
-    const routerMock = {
-      navigate: jest.fn()
-    };
+    authServiceMock = { getUserStatus: jest.fn() };
+    routerMock = { navigate: jest.fn() };
 
     TestBed.configureTestingModule({
       providers: [
         AdminGuard,
-        { provide: TokenService, useValue: tokenServiceMock },
+        { provide: AuthService, useValue: authServiceMock },
         { provide: Router, useValue: routerMock }
       ]
     });
-
-    adminGuard = TestBed.inject(AdminGuard);
-    tokenService = TestBed.inject(TokenService);
-    router = TestBed.inject(Router);
+    guard = TestBed.inject(AdminGuard);
   });
 
-  test('should allow activation if token is valid and user has ADMIN role', () => {
-    (tokenService.isValidToken as jest.Mock).mockReturnValue(true);
-    (tokenService.getUserRole as jest.Mock).mockReturnValue(['ADMIN']);
+  it('should allow access if the user has ADMIN role', () => {
+    authServiceMock.getUserStatus.mockReturnValue(of(mockUserStatus));
 
-    const result = adminGuard.canActivate();
-
-    expect(result).toBe(true);
-    expect(router.navigate).not.toHaveBeenCalled();
+    guard.canActivate().subscribe((result) => {
+      expect(result).toBe(true);
+      expect(routerMock.navigate).not.toHaveBeenCalled();
+    });
   });
 
-  test('should prevent activation and navigate to login if token is invalid', () => {
-    (tokenService.isValidToken as jest.Mock).mockReturnValue(false);
+  it('should deny access and navigate to login if the user does not have ADMIN role', () => {
+    mockUserStatus.role='CLIENT';
+    authServiceMock.getUserStatus.mockReturnValue(of(mockUserStatus));
 
-    const result = adminGuard.canActivate();
-
-    expect(result).toBe(false);
-    expect(router.navigate).toHaveBeenCalledWith(['login']);
+    guard.canActivate().subscribe((result) => {
+      expect(result).toBe(false);
+      expect(routerMock.navigate).toHaveBeenCalledWith(['login']); 
+    });
   });
 
-  test('should prevent activation and navigate to login if user does not have ADMIN role', () => {
-    (tokenService.isValidToken as jest.Mock).mockReturnValue(true);
-    (tokenService.getUserRole as jest.Mock).mockReturnValue(['CLIENT']);
+  it('should deny access and navigate to login if no user role is provided', () => {
+    authServiceMock.getUserStatus.mockReturnValue(of(null));
 
-    const result = adminGuard.canActivate();
-
-    expect(result).toBe(false);
-    expect(router.navigate).toHaveBeenCalledWith(['login']);
+    guard.canActivate().subscribe((result) => {
+      expect(result).toBe(false);
+      expect(routerMock.navigate).toHaveBeenCalledWith(['login']); 
+    });
   });
 });

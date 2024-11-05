@@ -1,20 +1,25 @@
 import { Injectable } from '@angular/core';
 import {  CanActivate, Router} from '@angular/router';
-import { TokenService } from '@services/token.service';
+import { AuthService } from '@services/auth.service';
+import { map, Observable, tap } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
-export class AdminGuard implements CanActivate {
-  constructor(private readonly tokenService:TokenService,
+export class AdminGuard implements CanActivate{
+  constructor(private readonly authService:AuthService,
     private readonly router:Router){}
-  canActivate():boolean{
-    const isValidToken=this.tokenService.isValidToken();
-    if (isValidToken&&this.tokenService.getUserRole()?.includes('ADMIN')) {
-      return true;
-    } else {
-      this.router.navigate(['login']);
-      return false;
+
+    canActivate(): Observable<boolean> {
+      return this.authService.getUserStatus().pipe(
+        map(userStatus => {
+          return userStatus?.role?.includes('ADMIN') || false;
+        }),
+        tap(isAuthorized => {
+          if (!isAuthorized) {
+            this.router.navigate(['login']);
+          }
+        })
+      );
     }
   }
-}

@@ -25,7 +25,8 @@ export class StockService {
 
   createCategory(category: BasicInfo) {
     return this.http.post<ResponseMessage>(`${this.API_STOCK_CATEGORY}/`, category, {
-      context: checkToken()
+      context: checkToken(),
+      observe: 'response'
     });
   }
   checkCategoryName(name: string) {
@@ -40,7 +41,8 @@ export class StockService {
   }
   createBrand(brand: BasicInfo) {
     return this.http.post<ResponseMessage>(`${this.API_STOCK_BRAND}/`, brand, {
-      context: checkToken()
+      context: checkToken(),
+      observe: 'response'
     });
   }
   checkBrandName(name: string) {
@@ -56,7 +58,8 @@ export class StockService {
 
   createProduct(product: ProductRequest ) {
     return this.http.post<ResponseMessage>(`${this.API_STOCK_PRODUCT}/`, product, {
-      context: checkToken()
+      context: checkToken(),
+      observe: 'response'
     });
   }
   checkProductName(name: string) {

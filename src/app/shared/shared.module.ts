@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
-import { ButtonComponent } from '../components/atoms/basic-components/button/button.component';
 import { ControlErrorComponent } from './molecules/control-error/control-error.component';
 import { InputTextComponent } from './molecules/input-text/input-text.component';
 import { MultiSelectComponent } from './molecules/multi-select/multi-select.component';
@@ -9,6 +8,10 @@ import { SimpleSelectComponent } from './molecules/simple-select/simple-select.c
 import { TextAreaComponent } from './molecules/text-area/text-area.component';
 import { RangePipe } from '../components/pipe/range.pipe';
 import { ReactiveFormsModule } from '@angular/forms';
+import { RegisterFormComponent } from '../components/organisms/register-form/register-form.component';
+import { RouterModule } from '@angular/router';
+import { ButtonComponent } from './atoms/button/button.component';
+import { StatusResponseComponent } from './molecules/status-response/status-response.component';
 
 
 @NgModule({
@@ -19,12 +22,15 @@ import { ReactiveFormsModule } from '@angular/forms';
     SimpleSelectComponent,
     ControlErrorComponent,
     ButtonComponent,
-    RangePipe
+    RangePipe,
+    RegisterFormComponent,
+    StatusResponseComponent
   ],
   imports: [
     CommonModule,
     HttpClientModule,
     ReactiveFormsModule,
+    RouterModule
   ],
   exports: [
     InputTextComponent,
@@ -33,7 +39,9 @@ import { ReactiveFormsModule } from '@angular/forms';
     SimpleSelectComponent,
     ControlErrorComponent,
     ButtonComponent,
-    RangePipe
+    RangePipe,
+    RegisterFormComponent,
+    StatusResponseComponent
   ] 
 })
 export class SharedModule { }

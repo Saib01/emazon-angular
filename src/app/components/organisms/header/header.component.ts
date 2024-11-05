@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
-import { TokenService } from '@services/token.service';
-import { filter } from 'rxjs/operators';
+import { UserInfo } from '@models/user-info.model';
+import { filter, map, startWith } from 'rxjs/operators';
 
 @Component({
   selector: 'app-header',
@@ -9,28 +9,25 @@ import { filter } from 'rxjs/operators';
   styleUrls: ["./header.component.scss"]
 })
 export class HeaderComponent implements OnInit {
-  lastSegment: string = '';
-  constructor(private readonly router: Router,private readonly tokenService:TokenService) {}
+  lastSegmentUrl: string = '';
+  user!: UserInfo | null;
+  isVisibleUserInfo:boolean=false;
+  constructor(private readonly router: Router) { }
   ngOnInit(): void {
-    this.lastSegment = this.getLastSegment(this.router.routerState.snapshot.url);
     this.router.events
-      .pipe(
-        filter((event): event is NavigationEnd => event instanceof NavigationEnd) 
-      )
-      .subscribe((event: NavigationEnd) => {
-        this.lastSegment = this.getLastSegment(event.urlAfterRedirects);
-      });
+    .pipe(
+      startWith(this.router.routerState.snapshot.url),
+      filter((event): event is NavigationEnd => event instanceof NavigationEnd || typeof event === 'string'),
+      map((event: NavigationEnd) => this.getLastSegment(typeof event === 'string' ? event : event.url))
+    )
+    .subscribe((lastSegment: string) => this.lastSegmentUrl = lastSegment);
   }
   private getLastSegment(url: string): string {
-    const segments = url.split('/'); 
-    if(segments.length>3){
+    const segments = url.split('/');
+    if (segments.length > 3) {
       segments.pop();
     }
-    const lastSegment = segments.pop()?.split('?')[0]; 
-    return lastSegment?.replace('-',' ')!;
-  }
-  logout(){
-    this.tokenService.removeToken();
-    this.router.navigate(['/login']);
+    const lastSegment = segments.pop()?.split('?')[0];
+    return lastSegment?.replace('-', ' ')!;
   }
 }

@@ -14,12 +14,14 @@ import { AdminGuard } from '@guards/admin.guard';
 import { LoginComponent } from './components/pages/login/login.component';
 import { SharedModule } from '@shared/shared.module';
 import { LoginGuard } from '@guards/login.guard';
+import { RegisterComponent } from './components/pages/register/register.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
+    RegisterComponent
   ],
   imports: [
     BrowserModule,

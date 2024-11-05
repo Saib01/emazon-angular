@@ -1,0 +1,19 @@
+.register-client__container {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    overflow-y: auto;
+    &::-webkit-scrollbar {
+      width: 0.4rem;
+      background-color: #555555;
+    }
+  
+    &::-webkit-scrollbar-thumb {
+      background: #d2d2d2ce;
+      border-radius: 0.25rem;
+    }
+  
+    &::-webkit-scrollbar-thumb:hover {
+      background-color: #d2d2d271;
+    }
+  }

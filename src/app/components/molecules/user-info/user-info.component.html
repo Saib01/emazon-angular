@@ -1,0 +1,25 @@
+<div class="user" *ngIf="user != null; else notLoggedIn">
+  <button #userButton class="user__button" (click)="toggleUserInfo()">
+    <svg class="user__icon" xmlns="http://www.w3.org/2000/svg" width="2.1rem" height="2.1rem" viewBox="0 0 24 24">
+      <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" fill="black" stroke="none"></path>
+      <circle cx="12" cy="9" r="4" fill="black" stroke="none"></circle>
+    </svg>
+  </button>
+  <div #userInfoContainer class="user__info" *ngIf="isVisibleUserInfo">
+    <div class="info__container">
+      <div>
+        <span class="info__data">{{ user.email }}</span>
+      </div>
+      <div>
+        <span class="info__data">{{ getSimpleRole() }}</span>
+      </div>
+      <div class="info__button">
+        <app-button typeBtn="button" [isDisabled]="false" (clickEvent)="logout()">Logout</app-button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<ng-template #notLoggedIn>
+  <app-button typeBtn="button" [isDisabled]="false" (clickEvent)="login()">Login</app-button>
+</ng-template>

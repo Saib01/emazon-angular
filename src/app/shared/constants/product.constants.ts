@@ -25,3 +25,7 @@ export const PRODUCT_BRAND_REQUIRED_ERROR=ERROR_TEMPLATE_REQUIRED(BRAND);
 
 export const PRODUCT_CATEGORY_LIST_REQUIRED_ERROR=ERROR_TEMPLATE_REQUIRED(CATEGORY_LIST);
 export const PRODUCT_CATEGORY_LIST_MAX_LENGTH_ERROR='The category list cannot exceed 3 items.';
+
+
+export const PRODUCT_TITTLE_ERROR='Product Creation Failed';
+export const PRODUCT_TITTLE_SUCCESSFULLY='Product Created Successfully';

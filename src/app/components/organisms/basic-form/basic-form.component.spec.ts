@@ -4,7 +4,7 @@ import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule } from '@angul
 import { InputTextComponent } from '../../../shared/molecules/input-text/input-text.component';
 import { ControlErrorComponent } from '../../../shared/molecules/control-error/control-error.component';
 import { TextAreaComponent } from '../../../shared/molecules/text-area/text-area.component';
-import { ButtonComponent } from '../../atoms/basic-components/button/button.component';
+import { ButtonComponent } from '../../../shared/atoms/button/button.component';
 import { RouterTestingModule } from '@angular/router/testing';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 

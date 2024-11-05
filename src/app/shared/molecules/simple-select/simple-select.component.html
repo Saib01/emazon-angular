@@ -4,7 +4,7 @@
 
 
   <div class="field__select" [attr.aria-expanded]="isDropdownOpen ? 'true' : 'false'" [ngClass]="{ 'field__select--error': formControl.touched && formControl.invalid }">
-    <div class="select__toggle" (click)="toggleDropdown()" (keydown)="onKeydown() ">
+    <div #toggle class="select__toggle" (click)="toggleDropdown()" (keydown)="onKeydown() ">
 
       <span class="select__option-text"
         [ngClass]="{'select__option-text--place-holder':selectedOption.name == ''}">{{selectedOption.name == ''?'Select a '+controlName:selectedOption.name}}
@@ -19,7 +19,7 @@
     </div>
   </div>
 
-  <div class="field__options">
+  <div #option class="field__options">
     <div *ngIf="isDropdownOpen" class="options">
       <div *ngFor="let option of options" class="options__option" (click)="onOptionSelect(option)"
         (keydown)="onKeydown()">

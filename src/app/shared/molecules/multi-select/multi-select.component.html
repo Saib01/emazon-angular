@@ -3,19 +3,21 @@
   <label class="field__name" [for]="name">{{ 'categories'| titlecase }}:</label>
 
 
-  <div class="field__select" [attr.aria-expanded]="isDropdownOpen ? 'true' : 'false'" [ngClass]="{ 'field__select--error': formControl.touched && formControl.invalid}">
+  <div class="field__select" [attr.aria-expanded]="isDropdownOpen ? 'true' : 'false'"
+    [ngClass]="{ 'field__select--error': formControl.touched && formControl.invalid}">
 
     <div class="select" [ngClass]="{ 'select--empty':selectedOptions.length==0 }">
-      <div class="select__option-selected-container" [ngClass]="{ 'select__option-selected-container--empty-select':selectedOptions.length==0 }">
+      <div class="select__option-selected-container"
+        [ngClass]="{ 'select__option-selected-container--empty-select':selectedOptions.length==0 }">
         <div class="select__option-selected" *ngFor="let option of selectedOptions">
           <div class="select__option-text">
             <span>{{option?.name}}</span>
           </div>
           <button type="button" class="select__option-button" (click)="onOptionDelete(option)">
             <span>
-              <svg xmlns="http://www.w3.org/2000/svg" width="0.7rem" height="0.7rem"
-                viewBox="0 0 384 512">
-                <path d="M376.6 84.5c11.3-13.6 9.5-33.8-4.1-45.1s-33.8-9.5-45.1 4.1L192 206 56.6 43.5C45.3 29.9 25.1 28.1 11.5 39.4S-3.9 70.9 7.4 84.5L150.3 256 7.4 427.5c-11.3 13.6-9.5 33.8 4.1 45.1s33.8 9.5 45.1-4.1L192 306 327.4 468.5c11.3 13.6 31.5 15.4 45.1 4.1s15.4-31.5 4.1-45.1L233.7 256 376.6 84.5z" />
+              <svg xmlns="http://www.w3.org/2000/svg" width="0.7rem" height="0.7rem" viewBox="0 0 384 512">
+                <path
+                  d="M376.6 84.5c11.3-13.6 9.5-33.8-4.1-45.1s-33.8-9.5-45.1 4.1L192 206 56.6 43.5C45.3 29.9 25.1 28.1 11.5 39.4S-3.9 70.9 7.4 84.5L150.3 256 7.4 427.5c-11.3 13.6-9.5 33.8 4.1 45.1s33.8 9.5 45.1-4.1L192 306 327.4 468.5c11.3 13.6 31.5 15.4 45.1 4.1s15.4-31.5 4.1-45.1L233.7 256 376.6 84.5z" />
               </svg>
             </span>
           </button>
@@ -23,8 +25,9 @@
 
       </div>
 
-      <div class="select__toggle" [ngClass]="{ 'select__toggle--not-null':selectedOptions.length!=0 }" (click)="toggleDropdown()" (keydown)="onKeydown() ">
-        <span class="select__place-holder"  *ngIf="selectedOptions.length==0">Select a category.</span>
+      <div  #toggle class="select__toggle" [ngClass]="{ 'select__toggle--not-null':selectedOptions.length!=0 }"
+        (click)="toggleDropdown()" (keydown)="onKeydown()">
+        <span class="select__place-holder" *ngIf="selectedOptions.length==0">Select a category.</span>
         <span>
           <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" color="black">
             <path d="M480-360 280-560h400L480-360Z" />
@@ -34,7 +37,7 @@
     </div>
   </div>
 
-  <div class="field__options">
+  <div #option class="field__options">
     <div *ngIf="isDropdownOpen" class="options">
       <div *ngFor="let option of options " class="options__option" (click)="onOptionSelect(option)"
         (keydown)="onKeydown()">
@@ -42,6 +45,6 @@
       </div>
     </div>
   </div>
-<app-control-error [controlName]="controlName" [errorMessages]="errorMessages"></app-control-error>
+  <app-control-error [controlName]="controlName" [errorMessages]="errorMessages"></app-control-error>
 
 </div>

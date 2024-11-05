@@ -10,7 +10,7 @@ describe('LoginGuard', () => {
 
   beforeEach(() => {
     const tokenServiceMock = {
-      isValidToken: jest.fn()
+      getToken: jest.fn()
     };
 
     const routerMock = {
@@ -31,7 +31,7 @@ describe('LoginGuard', () => {
   });
 
   it('should navigate to "panel/home" if token is valid', () => {
-    (tokenService.isValidToken as jest.Mock).mockReturnValue(true);
+    (tokenService.getToken as jest.Mock).mockReturnValue('Token');
 
     const result = loginGuard.canActivate();
 
@@ -40,7 +40,7 @@ describe('LoginGuard', () => {
   });
 
   it('should return true if token is invalid', () => {
-    (tokenService.isValidToken as jest.Mock).mockReturnValue(false);
+    (tokenService.getToken as jest.Mock).mockReturnValue('');
 
     const result = loginGuard.canActivate();
 

@@ -2,7 +2,7 @@ import {ComponentFixture, TestBed } from '@angular/core/testing';
 import { BasicTableInfoComponent } from './basic-table-info.component';
 import { BasicInfo } from '@models/basic-Info.model';
 import { RangePipe } from '../../pipe/range.pipe';
-import { ButtonComponent } from '../../atoms/basic-components/button/button.component';
+import { ButtonComponent } from '../../../shared/atoms/button/button.component';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 

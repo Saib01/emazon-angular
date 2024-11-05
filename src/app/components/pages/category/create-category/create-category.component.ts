@@ -6,7 +6,9 @@ import { StockService } from '@services/stock.service';
 import { BasicInfo } from '@models/basic-Info.model';
 import { CustomValidatorsAsync } from '@utils/custom-validators-async';
 import { CustomValidators } from '@utils/custom-validators';
-import { CATEGORY, CATEGORY_DESCRIPTION_EMPTY_OR_NULL_ERROR, CATEGORY_DESCRIPTION_MAX_LENGTH, CATEGORY_DESCRIPTION_MAX_MAX_LENGTH_ERROR, CATEGORY_NAME_EMPTY_OR_NULL_ERROR, CATEGORY_NAME_MAX_LENGTH, CATEGORY_NAME_MAX_LENGTH_ERROR, CATEGORY_NAME_NOT_AVAILABLE_ERROR } from '@shared/constants/category.constants'; 
+import { CATEGORY, CATEGORY_DESCRIPTION_EMPTY_OR_NULL_ERROR, CATEGORY_DESCRIPTION_MAX_LENGTH, CATEGORY_DESCRIPTION_MAX_MAX_LENGTH_ERROR, CATEGORY_NAME_EMPTY_OR_NULL_ERROR, CATEGORY_NAME_MAX_LENGTH, CATEGORY_NAME_MAX_LENGTH_ERROR, CATEGORY_NAME_NOT_AVAILABLE_ERROR, CATEGORY_TITTLE_ERROR, CATEGORY_TITTLE_SUCCESSFULLY } from '@shared/constants/category.constants'; 
+import { HttpStatusCode } from '@angular/common/http';
+import { Status } from '@models/status.model';
 const { checkNoWhitespace, WHITESPACE_ERROR } = CustomValidators;
 const { checkNameAvailability, NOT_AVAILABLE_ERROR } = CustomValidatorsAsync;
 const { maxLength } = Validators;
@@ -21,7 +23,11 @@ export class CreateCategoryComponent{
     name: ['', [checkNoWhitespace(),maxLength(CATEGORY_NAME_MAX_LENGTH)],checkNameAvailability(this.stock,CATEGORY)],
     description: ['', [checkNoWhitespace(),maxLength(CATEGORY_DESCRIPTION_MAX_LENGTH)]],
   });
-
+  status: Status = {
+    code: null,
+    messages: new Map([[HttpStatusCode.Created, '']]),
+    tittles: new Map([[true, CATEGORY_TITTLE_SUCCESSFULLY],[false, CATEGORY_TITTLE_ERROR]])
+  } 
   errorNameMessages: ErrorMessages[] = [
     {
       type: maxLength.name.toLowerCase(),
@@ -40,8 +46,7 @@ export class CreateCategoryComponent{
 
   constructor(
     private readonly formBuilder: FormBuilder,
-     private readonly router: Router
-     ,private readonly stock:StockService
+    private readonly stock:StockService
     ) {
         }
     
@@ -53,15 +58,14 @@ export class CreateCategoryComponent{
       };
       this.stock.createCategory(category)
       .subscribe({
-        next: (rta) => {
-            this.router.navigate(['/panel/category']);
-        },
-        error: (error)=>{
-          console.log(error);
-        }
+        next: (response) => this.updateStatusCode(response.status),
+        error: (error) => this.updateStatusCode(error.status),
       })
     } else {
       this.formCategory.markAllAsTouched();
     }
+  }
+  updateStatusCode(status: number) {
+    this.status.code = status;
   }
 }

@@ -21,7 +21,7 @@ const routes: Routes = [
   {path:'product',component:ListProductComponent},
   {path:'product/create',component:CreateProductComponent,canActivate:[AdminGuard]},
   {path:'product/add-supply',component:SupplyProductComponent,canActivate:[WarehouseGuard]},
-  {path:'ware-house',component:CreateWarehouseAssistantComponent,canActivate:[AdminGuard]},
+  {path:'warehouse',component:CreateWarehouseAssistantComponent,canActivate:[AdminGuard]},
   {
     path: '**',
     redirectTo: 'home',
