@@ -10,7 +10,7 @@ import { SideBarItemComponent } from '../../shared/molecules/sidebar-item/side-b
 import { SideBarComponent } from '../organisms/side-bar/side-bar.component';
 import { HeaderComponent } from '../organisms/header/header.component';
 import { HomeIconComponent } from '../atoms/icons/home-icon/home-icon.component';
-import { UserIconComponent } from '../atoms/icons/user-icon/user-icon.component';
+import { UserInfoComponent } from '../molecules/user-info/user-info.component';
 import { BrandIconComponent } from '../atoms/icons/brand-icon/brand-icon.component';
 import { ProductIconComponent } from '../atoms/icons/product-icon/product-icon.component';
 import { WarehouseIconComponent } from '../atoms/icons/warehouse-icon/warehouse-icon.component';
@@ -21,7 +21,7 @@ import { WarehouseIconComponent } from '../atoms/icons/warehouse-icon/warehouse-
   declarations: [
     AdminTemplateComponent,
     MenuArrowComponent,
-    UserIconComponent,
+    UserInfoComponent,
     LogoEmazonComponent,
     HomeIconComponent,
     CategoryIconComponent,

@@ -35,9 +35,6 @@ export class ListCategoryComponent implements OnInit {
     .subscribe({
       next: (rta: Page<BasicInfo>) => {
         this.pageCategory=rta;
-      },
-      error: (error)=>{
-        console.log(error);
       }
     })
   }

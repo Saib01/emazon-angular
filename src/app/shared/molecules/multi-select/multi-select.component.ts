@@ -1,4 +1,4 @@
-import { Component, forwardRef, Input} from '@angular/core';
+import { Component, ElementRef, forwardRef, HostListener, Input, ViewChild} from '@angular/core';
 import { ControlValueAccessor, FormControl, FormGroupDirective, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { BasicInfo } from '@models/basic-Info.model';
 import { ErrorMessages } from '@models/error-messages.model';
@@ -21,6 +21,10 @@ export class MultiSelectComponent implements ControlValueAccessor {
   @Input() type: string = 'text';
   @Input() controlName!: string;
   @Input() options!: BasicInfo[] ;
+
+  @ViewChild('toggle') toggle!: ElementRef;
+  @ViewChild('option') option!: ElementRef;
+  
   isDropdownOpen = false;
   selectedOptions: BasicInfo[] = [];
   onChange: (selectedOptions: BasicInfo[]) => void = () => {};
@@ -68,5 +72,15 @@ onOptionDelete(option: BasicInfo){
 onKeydown() {
 }
 
-
+@HostListener('document:click', ['$event'])
+onDocumentClick(event: MouseEvent) {
+  const target = event.target as HTMLElement;
+  if (
+    this.isDropdownOpen &&
+    !this.toggle.nativeElement.contains(target) &&
+    !this.option.nativeElement.contains(target)
+  ) {
+    this.isDropdownOpen= false;
+  }
+}
 }

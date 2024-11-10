@@ -3,7 +3,7 @@ import { BasicInfo } from '@models/basic-Info.model';
 import { FieldsToShow } from '@models/field-to-show.model';
 import { Product } from '@models/product.model';
 import { UserInfo } from '@models/user-info.model';
-import { UserService } from '@services/user.service';
+import { AuthService } from '@services/auth.service';
 
 @Component({
   selector: 'app-basic-table-info',
@@ -25,11 +25,13 @@ export class BasicTableInfoComponent  implements OnInit{
   @Output() pageSizeEvent = new EventEmitter<number>();
   @Output() sortDirectionEvent = new EventEmitter<string>();
   @Output() sortByEvent=new EventEmitter<string>();
-  constructor(private readonly userService:UserService) { }
+  constructor(private readonly authService:AuthService) { }
   
   ngOnInit(): void { 
    this.getRegexForHtmlNumberClass();
-   this.user=this.userService.getUserValue();
+   this.authService.getUserStatus().subscribe(userStatus => {
+    this.user=userStatus;
+ });
   }
   getRegexForHtmlNumberClass(){
     const numberFields=this.fieldsToShow.filter(field=>field.type==='number').map(field=>field.name);

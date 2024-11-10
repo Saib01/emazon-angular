@@ -9,8 +9,7 @@ export class LoginGuard implements CanActivate {
   constructor(private readonly tokenService:TokenService,
     private readonly router:Router){}
   canActivate():boolean{
-    const isValidToken=this.tokenService.isValidToken();
-    if (isValidToken) {
+    if (this.tokenService.getToken()!=='') {
       this.router.navigate(['panel/home']); 
       return false;
     } else {

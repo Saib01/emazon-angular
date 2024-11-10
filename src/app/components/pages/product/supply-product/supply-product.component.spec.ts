@@ -1,4 +1,3 @@
-/* tslint:disable:no-unused-variable */
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { SupplyProductComponent } from './supply-product.component';
@@ -8,9 +7,8 @@ import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { TransactionService } from '@services/transaction.service';
 import { PRODUCT_URL } from '@shared/constants/product.constants';
 import { of, throwError } from 'rxjs';
-import { PRODUCT_SUPPLY_CONNECTION_ERROR, PRODUCT_SUPPLY_ID_INVALID_ERROR, PRODUCT_SUPPLY_UNKNOWN_ERROR } from '@shared/constants/supply.constants';
-import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { PROPERTY_ID, PROPERTY_NAME } from '@shared/constants/properties.constants';
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 
 describe('SupplyProductComponent', () => {
   let component: SupplyProductComponent;
@@ -77,7 +75,6 @@ describe('SupplyProductComponent', () => {
     component.validateProduct();
 
     expect(transactionService.addProductSupply).toHaveBeenCalledWith({ idProduct: 1, amount: 10 });
-    expect(router.navigate).toHaveBeenCalledWith([PRODUCT_URL]);
   });
 
   test('should set error message when addProductSupply fails', () => {
@@ -87,22 +84,11 @@ describe('SupplyProductComponent', () => {
     transactionService.addProductSupply.mockReturnValue(throwError(() => errorResponse));
 
     component.validateProduct();
-
-    expect(component.message).toBe(PRODUCT_SUPPLY_ID_INVALID_ERROR);
-    expect(component.status).toBe(HttpStatusCode.NotFound);
+    expect(component.status.code).toBe(HttpStatusCode.NotFound);
   });
 
-  test('should navigate to product URL if status is 404 in handleError', () => {
-    component.status = HttpStatusCode.NotFound;
-    component.handleError();
-    expect(router.navigate).toHaveBeenCalledWith([PRODUCT_URL]);
-    expect(component.status).toBeNull();
-  });
-  test('should return correct message error for status codes', () => {
-    expect(component.getMessageError(0)).toBe(PRODUCT_SUPPLY_CONNECTION_ERROR);
-    expect(component.getMessageError(404)).toBe(PRODUCT_SUPPLY_ID_INVALID_ERROR);
-    expect(component.getMessageError(500)).toBe(PRODUCT_SUPPLY_UNKNOWN_ERROR);
-  });
+
+
 
   test('should navigate to PRODUCT_URL if id parameter is invalid', () => {
     (mockActivatedRoute.snapshot!.queryParamMap.get as jest.Mock).mockReturnValue('invalidId'); 

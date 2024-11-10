@@ -1,8 +1,9 @@
 .header {
+  position: relative;
     height: 10vh;
     box-sizing: border-box;
     border: 1px solid #e5e7eb;
-    padding: 1rem 1.5rem;
+    padding: 1rem 5vw;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -10,10 +11,10 @@
     width: 83vw;
 }
 @media only screen and (min-width:1023px){
-    .header{
-        width: 90vw;
-    }
+  .header{
+      width: 90vw;
   }
+}
   
   button {
     background: none;        /* Quita el fondo */
@@ -25,3 +26,34 @@
     font: inherit;           /* Hereda la fuente */
     cursor: pointer;         /* Cambia el cursor para indicar que es clickeable */
   }
+
+  .user-info {
+   
+    position: fixed;
+    z-index: 1000;
+    top: 8vh;
+    right: 5vw;
+    &__content{
+      padding-left: 1rem;
+      padding-right: 1rem;
+      padding-top: 0.5rem;
+      padding-bottom: 0.5rem;
+      justify-content: flex-start;
+      align-items: center;
+      display: inline-flex;
+    }
+    &__container {
+        border: 1px solid rgb(229, 231, 235);   
+        box-shadow: 0 0.125rem 0.5rem rgba(0, 0, 0, 0.2);
+        padding: 1rem;
+        border-radius: 0.5rem;
+        background: rgb(229, 231, 235);
+        color: rgb(0, 0, 0);
+    }
+    &__button{
+        margin-top: 1rem;  
+    }
+  }
+  
+
+  

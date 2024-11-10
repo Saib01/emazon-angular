@@ -133,6 +133,11 @@
         font-size: 1rem;
         vertical-align: middle;
         height: 5rem;
+        max-width: 10rem;
+        box-sizing: border-box;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
     }
     &__table-button{
         margin: auto;

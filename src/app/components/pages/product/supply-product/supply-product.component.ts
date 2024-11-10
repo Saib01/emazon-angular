@@ -1,12 +1,13 @@
 import { HttpStatusCode } from '@angular/common/http';
 import { Component, OnInit, } from '@angular/core';
-import { FormBuilder,Validators } from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ErrorMessages } from '@models/error-messages.model';
+import { Status } from '@models/status.model';
 import { TransactionService } from '@services/transaction.service';
 import { PRODUCT_MIN_AMOUNT, PRODUCT_URL } from '@shared/constants/product.constants';
 import { PROPERTY_ID, PROPERTY_NAME } from '@shared/constants/properties.constants';
-import { PRODUCT_SUPPLY_CONNECTION_ERROR, PRODUCT_SUPPLY_GREATER_THAN_ERROR, PRODUCT_SUPPLY_ID_INVALID_ERROR, PRODUCT_SUPPLY_NOT_INTEGER_ERROR, PRODUCT_SUPPLY_REQUIRED_ERROR, PRODUCT_SUPPLY_UNKNOWN_ERROR } from '@shared/constants/supply.constants';
+import { PRODUCT_SUPPLY_GREATER_THAN_ERROR, PRODUCT_SUPPLY_ID_INVALID_ERROR, PRODUCT_SUPPLY_NOT_INTEGER_ERROR, PRODUCT_SUPPLY_REQUIRED_ERROR, PRODUCT_SUPPLY_TITTLE_ERROR, PRODUCT_SUPPLY_TITTLE_SUCCESSFULLY } from '@shared/constants/supply.constants';
 import { CustomValidators } from '@utils/custom-validators';
 
 const {
@@ -20,8 +21,11 @@ const { required, min } = Validators;
   styleUrls: ['./supply-product.component.scss']
 })
 export class SupplyProductComponent implements OnInit {
-  message:string='';
-  status:number|null=null;
+  status: Status = {
+    code: null,
+    messages: new Map([[HttpStatusCode.Ok, ''], [HttpStatusCode.NotFound, PRODUCT_SUPPLY_ID_INVALID_ERROR]]),
+    tittles: new Map([[true, PRODUCT_SUPPLY_TITTLE_SUCCESSFULLY], [false, PRODUCT_SUPPLY_TITTLE_ERROR]])
+  }
   formSupply = this.formBuilder.nonNullable.group({
     id: [{ value: '', disabled: true }, [required, min(PRODUCT_MIN_AMOUNT), checkNumberIsInteger()]],
     name: [{ value: '', disabled: true }, [required]],
@@ -34,7 +38,7 @@ export class SupplyProductComponent implements OnInit {
         type: required.name,
         message: PRODUCT_SUPPLY_REQUIRED_ERROR,
       },
-      { type: min.name, message: PRODUCT_SUPPLY_GREATER_THAN_ERROR},
+      { type: min.name, message: PRODUCT_SUPPLY_GREATER_THAN_ERROR },
       {
         type: NOT_INTEGER_ERROR,
         message: PRODUCT_SUPPLY_NOT_INTEGER_ERROR,
@@ -45,7 +49,7 @@ export class SupplyProductComponent implements OnInit {
         type: required.name,
         message: PRODUCT_SUPPLY_REQUIRED_ERROR,
       },
-      { type: min.name, message: PRODUCT_SUPPLY_GREATER_THAN_ERROR},
+      { type: min.name, message: PRODUCT_SUPPLY_GREATER_THAN_ERROR },
       {
         type: NOT_INTEGER_ERROR,
         message: PRODUCT_SUPPLY_NOT_INTEGER_ERROR,
@@ -56,17 +60,17 @@ export class SupplyProductComponent implements OnInit {
     private readonly formBuilder: FormBuilder,
     private readonly router: Router,
     private readonly route: ActivatedRoute,
-    private readonly transactionService:TransactionService
-  ) {}
+    private readonly transactionService: TransactionService
+  ) { }
   ngOnInit(): void {
     this.setProduct();
   }
 
-  setProduct(){
-    const id=Number(this.route.snapshot.queryParamMap.get(PROPERTY_ID))||NaN;
-    const name=this.route.snapshot.queryParamMap.get(PROPERTY_NAME)??'';
-    if(isNaN(id)){
-      this.navigateToProductPage();
+  setProduct() {
+    const id = Number(this.route.snapshot.queryParamMap.get(PROPERTY_ID)) || NaN;
+    const name = this.route.snapshot.queryParamMap.get(PROPERTY_NAME) ?? '';
+    if (isNaN(id)) {
+      this.router.navigate([PRODUCT_URL]);
     }
     this.formSupply.controls.id.setValue(id.toString());
     this.formSupply.controls.name.setValue(name);
@@ -74,38 +78,17 @@ export class SupplyProductComponent implements OnInit {
 
   validateProduct() {
     if (this.formSupply.valid) {
-      const {id,supply}=this.formSupply.getRawValue();
-      this.transactionService.addProductSupply({idProduct:Number(id),amount:Number(supply)}).subscribe({
-        next: (rta) => {
-          this.navigateToProductPage();
-        },
-        error: (error) => {
-          this.message=this.getMessageError(error.status);
-          this.status=error.status;
-        },
+      const { id, supply } = this.formSupply.getRawValue();
+      this.transactionService.addProductSupply({ idProduct: Number(id), amount: Number(supply) }).subscribe({
+        next: (response) => this.updateStatusCode(response.status),
+        error: (error) => this.updateStatusCode(error.status),
       });
     } else {
       this.formSupply.markAllAsTouched();
     }
   }
-  handleError() {
-    if(this.status==HttpStatusCode.NotFound){
-      this.navigateToProductPage();
-    }
-    this.status=null;
+  updateStatusCode(status: number) {
+    this.status.code = status;
   }
-  getMessageError(statusError:number){
-    switch (statusError) {
-      case 0:
-          return PRODUCT_SUPPLY_CONNECTION_ERROR;
-      case 404:
-          return PRODUCT_SUPPLY_ID_INVALID_ERROR;
-      default:
-          return PRODUCT_SUPPLY_UNKNOWN_ERROR;
-  }
-  }
-  navigateToProductPage(){
-    this.router.navigate([PRODUCT_URL]);
-  }
-  
 }
+

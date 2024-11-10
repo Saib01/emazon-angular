@@ -1,0 +1,10 @@
+
+<div class="alert" *ngIf="status.code!=null" [ngClass]="{'alert--full-size': fullSize}">
+  <div class="alert__container">
+    <h3 class="alert__tittle">{{getTittle()}}</h3>
+    <span class="alert__content">{{getMessage()}}</span>
+    <div class="alert__button">
+      <app-button typeBtn="button" [isDisabled]="false" (clickEvent)="navigateBack()">Accept</app-button>
+    </div>
+  </div>
+</div>

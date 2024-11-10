@@ -14,7 +14,8 @@ export class TransactionService {
 
   addProductSupply(supplyRequest: SupplyRequest) {
     return this.http.put(`${this.API_TRANSACTION}`, supplyRequest,{
-      context: checkToken()
+      context: checkToken(),
+      observe: 'response'
     });
   }
 }

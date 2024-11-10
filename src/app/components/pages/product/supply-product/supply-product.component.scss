@@ -3,7 +3,7 @@
     margin: 0;
 }
 .container__form {
-    margin-top: 4rem;
+    margin: 4rem 0;
    display: flex;
    justify-content: center;
     .form {
@@ -43,7 +43,7 @@
 
 
 
-  .error {
+  .alert {
    
     margin: auto;
     position: fixed;
@@ -81,7 +81,7 @@
   
 @media only screen and (min-width:1023px){
     
-  .error {
+  .alert {
     width: 90vw;
   }
   }

@@ -1,3 +1,4 @@
+import { HttpStatusCode } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { Validators, FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -5,8 +6,9 @@ import { BasicInfo } from '@models/basic-Info.model';
 import { ErrorMessages } from '@models/error-messages.model';
 import { Page } from '@models/page.model';
 import { ProductRequest } from '@models/product.model';
+import { Status } from '@models/status.model';
 import { StockService } from '@services/stock.service';
-import { PRODUCT_AMOUNT_GREATER_THAN_ERROR, PRODUCT_AMOUNT_NOT_INTEGER_ERROR, PRODUCT_AMOUNT_REQUIRED_ERROR, PRODUCT_BRAND_REQUIRED_ERROR, PRODUCT_CATEGORY_LIST_MAX_LENGTH_ERROR, PRODUCT_CATEGORY_LIST_REQUIRED_ERROR, PRODUCT_DESCRIPTION_EMPTY_OR_NULL_ERROR, PRODUCT_MIN_AMOUNT, PRODUCT_MIN_PRICE, PRODUCT_NAME_EMPTY_OR_NULL_ERROR, PRODUCT_NAME_NOT_AVAILABLE_ERROR, PRODUCT_PRICE_GREATER_THAN_ERROR, PRODUCT_PRICE_REQUIRED_ERROR } from '@shared/constants/product.constants';
+import { PRODUCT_AMOUNT_GREATER_THAN_ERROR, PRODUCT_AMOUNT_NOT_INTEGER_ERROR, PRODUCT_AMOUNT_REQUIRED_ERROR, PRODUCT_BRAND_REQUIRED_ERROR, PRODUCT_CATEGORY_LIST_MAX_LENGTH_ERROR, PRODUCT_CATEGORY_LIST_REQUIRED_ERROR, PRODUCT_DESCRIPTION_EMPTY_OR_NULL_ERROR, PRODUCT_MIN_AMOUNT, PRODUCT_MIN_PRICE, PRODUCT_NAME_EMPTY_OR_NULL_ERROR, PRODUCT_NAME_NOT_AVAILABLE_ERROR, PRODUCT_PRICE_GREATER_THAN_ERROR, PRODUCT_PRICE_REQUIRED_ERROR, PRODUCT_TITTLE_ERROR, PRODUCT_TITTLE_SUCCESSFULLY, PRODUCT_URL } from '@shared/constants/product.constants';
 import { CustomValidators } from '@utils/custom-validators';
 import { CustomValidatorsAsync } from '@utils/custom-validators-async';
 const {
@@ -25,6 +27,11 @@ const { required, min } = Validators;
   styleUrls: ['./create-product.component.scss'],
 })
 export class CreateProductComponent {
+  status: Status = {
+    code: null,
+    messages: new Map([[HttpStatusCode.Created, '']]),
+    tittles: new Map([[true, PRODUCT_TITTLE_SUCCESSFULLY],[false, PRODUCT_TITTLE_ERROR]])
+  } 
   formProduct = this.formBuilder.nonNullable.group({
     name: [
       '',
@@ -102,20 +109,14 @@ export class CreateProductComponent {
     this.stock.getBrands('ASC', 0, 100).subscribe({
       next: (rta: Page<BasicInfo>) => {
         this.pageBrand = rta;
-      },
-      error: (error) => {
-        console.log(error);
-      },
+      }
     });
   }
   getCategories() {
     this.stock.getCategories('ASC', 0, 100).subscribe({
       next: (rta: Page<BasicInfo>) => {
         this.pageCategory = rta;
-      },
-      error: (error) => {
-        console.log(error);
-      },
+      }
     });
   }
   validateProduct() {
@@ -131,16 +132,15 @@ export class CreateProductComponent {
           .categoryList.map((num) => Number(num.id)),
       };
       this.stock.createProduct(product).subscribe({
-        next: () => {
-          this.router.navigate(['/panel/product']);
-        },
-        error: (error) => {
-          console.log(error);
-        },
+        next: (response) => this.updateStatusCode(response.status),
+        error: (error) => this.updateStatusCode(error.status),
       });
     } else {
       this.formProduct.markAllAsTouched();
     }
+  }
+  updateStatusCode(status: number) {
+    this.status.code = status;
   }
   emptyPageBasicInfo(): Page<BasicInfo> {
     return {

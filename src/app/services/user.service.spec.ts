@@ -6,20 +6,15 @@ import { HttpTestingController, HttpClientTestingModule } from '@angular/common/
 import { environment } from '@environments/environment';
 import { UserRegister } from '@models/user.model';
 import { PROPERTY_EMAIL, PROPERTY_ID_DOCUMENT } from '@shared/constants/properties.constants';
-import { TokenService } from './token.service';
 
 describe('Service: Auth', () => {
   let userService: UserService;
   let httpMock: HttpTestingController;
-  let tokenService: TokenService;
 
   beforeEach(() => {
-    const tokenServiceMock = {
-      getUser: jest.fn() 
-    };
     TestBed.configureTestingModule({
       imports: [HttpClientTestingModule],
-      providers: [UserService,{ provide: TokenService, useValue: tokenServiceMock }
+      providers: [UserService
       ]
     });
 
@@ -48,6 +43,21 @@ describe('Service: Auth', () => {
     const req = httpMock.expectOne(`${environment.API_URL_USER}/api/users/aux`);
     expect(req.request.method).toBe('POST');
     expect(req.request.body).toEqual(warehouseRegister);
+  });
+
+  test('should send a POST request to create a client', () => {
+    const clientRegister: UserRegister = {
+      email: 'test@example.com',
+      idDocument: '12345678',
+    };
+
+    userService.createClient(clientRegister).subscribe(response => {
+      expect(response).toBeTruthy();
+    });
+
+    const req = httpMock.expectOne(`${environment.API_URL_USER}/api/users/client`);
+    expect(req.request.method).toBe('POST');
+    expect(req.request.body).toEqual(clientRegister);
   });
 
   test('should send a GET request to validate email', () => {

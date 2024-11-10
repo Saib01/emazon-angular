@@ -2,6 +2,7 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ErrorMessages } from '@models/error-messages.model';
+import { Status } from '@models/status.model';
 
 @Component({
   selector: 'app-basic-form',
@@ -9,6 +10,7 @@ import { ErrorMessages } from '@models/error-messages.model';
   styleUrls: ['./basic-form.component.scss']
 })
 export class BasicFormComponent{
+  @Input() status!:Status;
   @Input() formGroup!: FormGroup;
   @Input() formName:string='';
   @Input() errorNameMessages: ErrorMessages[]=[];

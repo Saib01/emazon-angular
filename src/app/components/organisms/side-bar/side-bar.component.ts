@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { UserInfo } from '@models/user-info.model';
-import { UserService } from '@services/user.service';
+import { AuthService } from '@services/auth.service';
 
 @Component({
   selector: 'app-side-bar',
@@ -10,11 +10,14 @@ import { UserService } from '@services/user.service';
 export class SideBarComponent implements OnInit{
   closeSideBar:boolean = true;
   user!:UserInfo|null;
+  constructor(private readonly authService:AuthService) { }
+  ngOnInit(): void {
+    this.authService.getUserStatus().subscribe(userStatus => {
+       this.user=userStatus;
+    });
+  }
+  
   toggleSidebar() {
     this.closeSideBar=!this.closeSideBar;
-  }
-  constructor(private readonly userService:UserService) { }
-  ngOnInit(): void {
-   this.user=this.userService.getUserValue();
   }
  }

@@ -55,6 +55,10 @@
       padding: 10px;
       border: 1px solid #e5e7eb;
       cursor: pointer;
+      box-sizing: border-box;
+      white-space: nowrap;
+      overflow: hidden; 
+      text-overflow: ellipsis; 
       &:hover {
         background-color: #f0f0f0;
       }

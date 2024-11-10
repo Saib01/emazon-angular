@@ -11,6 +11,7 @@ export const PRODUCT_SUPPLY_REQUIRED_ERROR=ERROR_TEMPLATE_REQUIRED(PROPERTY_SUPP
 export const PRODUCT_SUPPLY_NOT_INTEGER_ERROR='The supply must be an integer number.';
 export const PRODUCT_SUPPLY_GREATER_THAN_ERROR=ERROR_TEMPLATE_GREATER_THAN(PROPERTY_SUPPLY,PRODUCT_MIN_SUPPLY);
 
+export const PRODUCT_SUPPLY_TITTLE_ERROR='Error adding supply';
+export const PRODUCT_SUPPLY_TITTLE_SUCCESSFULLY='Supply updated successfully.';
 export const PRODUCT_SUPPLY_ID_INVALID_ERROR='The ID is invalid. Please select the product from the product list.';
-export const PRODUCT_SUPPLY_CONNECTION_ERROR='Unable to communicate with the server.';
 export const PRODUCT_SUPPLY_UNKNOWN_ERROR='An error occurred while adding supply.';

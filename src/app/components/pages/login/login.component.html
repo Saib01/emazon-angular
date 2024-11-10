@@ -1,3 +1,4 @@
+<app-status-response [status]="status" [fullSize]="true"></app-status-response>
 <div class="container__form">
   <form [formGroup]="loginForm" class="form" (ngSubmit)="login()">
     <h2 class="form__tittle">Emazon</h2>
@@ -5,6 +6,10 @@
     [errorMessages]="errorMessages['email']" [placeHolder]="'Enter your email'"></input-text>
     <input-text [controlName]="'password'" [type]="'password'" [errorMessages]="errorMessages['password']"
       [placeHolder]="'Enter your password'"></input-text>
+    <div class="form__register-form">
+      <p>Don't have an account?</p>
+      <a href="/register">Sign up here</a>
+    </div>
     <div class="form__actions">
       <div class="form__save">
         <app-button typeBtn="submit" [isDisabled]="loginForm.status!='VALID'">Login</app-button>
