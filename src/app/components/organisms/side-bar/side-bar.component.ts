@@ -16,6 +16,7 @@ export class SideBarComponent implements OnInit{
        this.user=userStatus;
     });
   }
+  
   toggleSidebar() {
     this.closeSideBar=!this.closeSideBar;
   }
