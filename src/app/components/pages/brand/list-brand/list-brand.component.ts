@@ -35,9 +35,6 @@ export class ListBrandComponent implements OnInit {
     .subscribe({
       next: (rta: Page<BasicInfo>) => {
         this.pageBrand=rta;
-      },
-      error: (error)=>{
-        console.log(error);
       }
     })
   }

@@ -22,6 +22,7 @@ const {
   styleUrls: ['./show-product.component.scss']
 })
 export class ShowProductComponent implements OnInit {
+  TEMPLATE_NO_STOCK_ERROR = "Insufficient stock. The next restock will be on day {0} of {1}";
   status: Status = {
     code: null,
     messages: new Map([[HttpStatusCode.Created, ''],[HttpStatusCode.Conflict, 'The maximum number of products per category has been reached.']]),
@@ -114,5 +115,24 @@ export class ShowProductComponent implements OnInit {
   }
   updateStatusCode(status: number) {
     this.status.code = status;
+  }
+  messageForInsufficientStock(restockDate: number): string {
+      const today = new Date();
+      const monthFormatter = new Intl.DateTimeFormat('es', { month: 'long' });
+      
+      let monthName: string;
+
+      if (today.getDate() > restockDate) {
+          const nextMonth = new Date(today.getFullYear(), today.getMonth() + 1, restockDate);
+          monthName = monthFormatter.format(nextMonth);
+      } else {
+          monthName = monthFormatter.format(today);
+      }
+
+      return this.formatMessage(this.TEMPLATE_NO_STOCK_ERROR, restockDate, monthName);
+  }
+
+  formatMessage(template: string, day: number, month: string): string {
+      return template.replace("{0}", day.toString()).replace("{1}", month);
   }
 }

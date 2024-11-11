@@ -15,5 +15,5 @@
   </form>
 </div>
 <ng-template #noStock>
-  <app-display-field label="amount" value="No stock available"></app-display-field>
+  <app-display-field label="amount" [value]="messageForInsufficientStock(15)"></app-display-field>
 </ng-template>

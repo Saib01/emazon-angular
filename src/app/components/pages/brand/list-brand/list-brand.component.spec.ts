@@ -66,14 +66,6 @@ describe('ListBrandComponent', () => {
     expect(component.pageBrand.content[0].name).toBe('Brand 1');
   });
 
-  test('should log an error message if getBrands fails', () => {
-    const consoleSpy = jest.spyOn(console, 'log');
-    stockServiceMock.getBrands.mockReturnValue(throwError(() => new Error('Error')));
-
-    component.getBrands();
-    expect(consoleSpy).toHaveBeenCalledWith(expect.any(Error));
-  });
-
   test('should update page and call getBrands when onPageNumberChange is called', () => {
     const newPage = 2;
     jest.spyOn(component, 'getBrands');
