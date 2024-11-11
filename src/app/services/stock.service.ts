@@ -73,6 +73,12 @@ export class StockService {
     );
   }
 
+  getProduct(productId:number) : Observable<Product>{
+    return this.http.get<Product>(
+      `${this.API_STOCK_PRODUCT}/${productId}`
+    );
+  }
+
   private setParams(sortDirection: string, page: number, size: number,sortBy?:string) {
     let params=new HttpParams()
       .set(this.PARAM_SORT_DIRECTION, sortDirection)

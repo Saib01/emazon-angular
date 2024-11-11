@@ -72,8 +72,8 @@
                   [ngClass]="textNumberClass(item)?'text--number':'text--start' ">
                   {{item|titlecase}}
                 </th>
-                <th class="list__table-header text--center" *ngIf=" user?.role?.includes('AUX_BODEGA')&& fieldsToShow.length>4">
-                  {{'supply'|titlecase}}
+                <th class="list__table-header text--center" *ngIf="(user?.role?.includes('AUX_BODEGA')||user==null||user?.role?.includes('CLIENT'))&& fieldsToShow.length>4">
+                  {{(user==null||user.role.includes('CLIENT')?'add to cart':'supply')|titlecase}}
                 </th>
               </tr>
             </thead>
@@ -92,9 +92,10 @@
                     </ul>
                   </ng-template>
                 </td>
-                <td class="list__table-data" *ngIf=" user?.role?.includes('AUX_BODEGA') && isProduct(item)">
+                <td class="list__table-data" *ngIf=" (user?.role?.includes('AUX_BODEGA')||user==null||user?.role?.includes('CLIENT')) && isProduct(item)">
                   <div class="list__table-button ">
-                    <a class="link" [routerLink]="['add-supply']" [queryParams]="{ id: item.id,name:item.name}">
+                    <a class="link" [routerLink]="user == null || user.role.includes('CLIENT') ? ['/panel/product', item.id] : ['add-supply']" 
+                    [queryParams]="user == null || user.role.includes('CLIENT') ? {} : { id: item.id, name: item.name }">
                       <app-button [isDisabled]="false" >
                         <span class="link__icon">+ </span>
                       </app-button>

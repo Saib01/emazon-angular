@@ -7,6 +7,7 @@ export class CustomValidators {
   static readonly MISMATCH_ERROR = 'mismatch';
   static readonly MAX_LENGTH_ARRAY_ERROR = 'maxLengthArray';
   static readonly UNDERAGE_ERROR = 'underage';
+  static readonly ID_ZERO_ERROR = 'idZero';
 
   static checkNoWhitespace() {
     return (control: AbstractControl): { [key: string]: boolean } | null => {
@@ -14,6 +15,14 @@ export class CustomValidators {
       return isWhitespace ? { whitespace: true } : null;
     };
   }
+  static idNotZeroValidator(control: AbstractControl): ValidationErrors | null {
+    const value = control.value;
+    if (value?.id === 0) {
+      return { idZero: 'ID cannot be zero' }; 
+    }
+    return null; 
+  }
+  
   static checkNumberIsInteger() {
     return (control: AbstractControl): { [key: string]: boolean } | null => {
       const value = control.value;

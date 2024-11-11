@@ -11,6 +11,7 @@ import { CreateWarehouseAssistantComponent } from './warehouse-assistant/create-
 import { AdminGuard } from '@guards/admin.guard';
 import { WarehouseGuard } from '@guards/warehouse.guard';
 import { SupplyProductComponent } from './product/supply-product/supply-product.component';
+import { ShowProductComponent } from './product/show-product/show-product.component';
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
@@ -22,6 +23,7 @@ const routes: Routes = [
   {path:'product/create',component:CreateProductComponent,canActivate:[AdminGuard]},
   {path:'product/add-supply',component:SupplyProductComponent,canActivate:[WarehouseGuard]},
   {path:'warehouse',component:CreateWarehouseAssistantComponent,canActivate:[AdminGuard]},
+  { path: 'product/:id', component: ShowProductComponent },
   {
     path: '**',
     redirectTo: 'home',

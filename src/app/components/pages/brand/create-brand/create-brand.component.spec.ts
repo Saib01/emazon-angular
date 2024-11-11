@@ -53,7 +53,6 @@ describe('CreateBrandComponent', () => {
 
     fixture = TestBed.createComponent(CreateBrandComponent);
     component = fixture.componentInstance;
-    router = TestBed.inject(Router);
     component.formBrand.markAllAsTouched();
     fixture.detectChanges();
   });

@@ -15,6 +15,7 @@ import { ListProductComponent } from './product/list-product/list-product.compon
 import { CreateWarehouseAssistantComponent } from './warehouse-assistant/create-warehouse-assistant/create-warehouse-assistant.component';
 import { SharedModule } from '@shared/shared.module';
 import { SupplyProductComponent } from './product/supply-product/supply-product.component';
+import { ShowProductComponent } from './product/show-product/show-product.component';
 
 
 @NgModule({
@@ -30,7 +31,8 @@ import { SupplyProductComponent } from './product/supply-product/supply-product.
     BasicFormComponent,
     BasicTableInfoComponent,
     HomeComponent,
-    BasicTableInfoComponent
+    BasicTableInfoComponent,
+    ShowProductComponent
   ],
   imports: [
     CommonModule,

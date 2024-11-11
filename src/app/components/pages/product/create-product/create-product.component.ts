@@ -98,7 +98,6 @@ export class CreateProductComponent {
 
   constructor(
     private readonly formBuilder: FormBuilder,
-    private readonly router: Router,
     private readonly stock: StockService
   ) {
     this.getBrands();
