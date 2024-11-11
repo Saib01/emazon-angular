@@ -6,7 +6,8 @@ export const environment = {
   production: true,
   API_URL_STOCK: 'http://localhost:9090',
   API_URL_USER: 'http://localhost:9091',
-  API_URL_TRANSACTION: 'http://localhost:8080'
+  API_URL_TRANSACTION: 'http://localhost:8080',
+  API_URL_SHOPPING_CART:'http://localhost:8085'
 };
 
 /*

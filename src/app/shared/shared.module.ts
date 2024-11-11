@@ -12,6 +12,7 @@ import { RegisterFormComponent } from '../components/organisms/register-form/reg
 import { RouterModule } from '@angular/router';
 import { ButtonComponent } from './atoms/button/button.component';
 import { StatusResponseComponent } from './molecules/status-response/status-response.component';
+import { DisplayFieldComponent } from './molecules/display-field/display-field.component';
 
 
 @NgModule({
@@ -24,7 +25,8 @@ import { StatusResponseComponent } from './molecules/status-response/status-resp
     ButtonComponent,
     RangePipe,
     RegisterFormComponent,
-    StatusResponseComponent
+    StatusResponseComponent,
+    DisplayFieldComponent
   ],
   imports: [
     CommonModule,
@@ -41,7 +43,8 @@ import { StatusResponseComponent } from './molecules/status-response/status-resp
     ButtonComponent,
     RangePipe,
     RegisterFormComponent,
-    StatusResponseComponent
+    StatusResponseComponent,
+    DisplayFieldComponent
   ] 
 })
 export class SharedModule { }

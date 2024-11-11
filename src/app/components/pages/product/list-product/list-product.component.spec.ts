@@ -8,7 +8,7 @@ import { Product } from '@models/product.model';
 import { RangePipe } from '../../../pipe/range.pipe';
 import { ButtonComponent } from '../../../../shared/atoms/button/button.component';
 import { BasicTableInfoComponent } from '../../../organisms/basic-table-info/basic-table-info.component';
-import { CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 
 describe('ListProductComponent', () => {
   let component: ListProductComponent;
@@ -64,15 +64,6 @@ describe('ListProductComponent', () => {
     expect(stockService.getProducts).toHaveBeenCalledWith('ASC', 0, 5, 'productName');
   });
 
-  test('should handle error when getProducts fails', () => {
-    const errorResponse = new Error('Service error');
-    stockService.getProducts.mockReturnValue(throwError(() => errorResponse));
-    jest.spyOn(console, 'log').mockImplementation(() => {});
-
-    component.getProducts();
-
-    expect(console.log).toHaveBeenCalledWith(errorResponse);
-  });
 
   test('should update the page size and call getProducts when onPageSizeChange is triggered', () => {
     component.onPageSizeChange(10);

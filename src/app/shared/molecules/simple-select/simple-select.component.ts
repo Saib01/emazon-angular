@@ -18,17 +18,13 @@ export class SimpleSelectComponent  implements ControlValueAccessor {
   @Input() controlName!: string;
   @Input() options!: BasicInfo[] ;
   @Input() errorMessages: ErrorMessages[] = [];
-  @Input() placeHolder: string = '';
-  @Input() type: string = 'text';
-  
   @ViewChild('toggle') toggle!: ElementRef;
   @ViewChild('option') option!: ElementRef;
 
   isDropdownOpen = false;
   selectedOption: BasicInfo={
     id:0,
-    name:'',
-    description:''
+    name:''
   };
   onChange: (selectedOptions: BasicInfo ) => void = () => {};
   onTouched: () => void = () => {};

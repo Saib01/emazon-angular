@@ -1,0 +1,19 @@
+<app-status-response [status]="status"></app-status-response>
+<div class="container__form">
+  <form  [formGroup]="formAddToCart" class="form" (ngSubmit)="addToShoppingCart()">
+    <h2 class="form__tittle">Product Information</h2>
+    <app-display-field label="name" [value]="product.name"></app-display-field>
+    <app-display-field label="description" [value]="product.description"></app-display-field>
+    <app-display-field label="brand" [value]="product.brandResponse.name"></app-display-field>
+    <app-display-field label="price" [value]="product.price.toString()"></app-display-field>
+    <simple-select formControlName="amount" [controlName]="'amount'" [options]="options" [errorMessages]="errorMessages['amount']" *ngIf="product.amount!=0; else noStock"></simple-select>
+    <div class="form__actions">
+      <div class="form__save">
+        <app-button typeBtn="submit" [isDisabled]="formAddToCart.status!='VALID'">Add to cart</app-button>
+      </div>
+    </div>
+  </form>
+</div>
+<ng-template #noStock>
+  <app-display-field label="amount" value="No stock available"></app-display-field>
+</ng-template>

@@ -49,9 +49,6 @@ export class ListProductComponent implements OnInit {
     .subscribe({
       next: (rta: Page<Product>) => {
         this.pageProduct=rta;
-      },
-      error: (error)=>{
-        console.log(error);
       }
     })
   }
