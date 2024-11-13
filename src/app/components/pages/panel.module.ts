@@ -16,6 +16,7 @@ import { CreateWarehouseAssistantComponent } from './warehouse-assistant/create-
 import { SharedModule } from '@shared/shared.module';
 import { SupplyProductComponent } from './product/supply-product/supply-product.component';
 import { ShowProductComponent } from './product/show-product/show-product.component';
+import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
 
 
 @NgModule({
@@ -32,7 +33,8 @@ import { ShowProductComponent } from './product/show-product/show-product.compon
     BasicTableInfoComponent,
     HomeComponent,
     BasicTableInfoComponent,
-    ShowProductComponent
+    ShowProductComponent,
+    ShoppingCartComponent
   ],
   imports: [
     CommonModule,

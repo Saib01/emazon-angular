@@ -10,6 +10,8 @@ import { ButtonComponent } from '../../../../shared/atoms/button/button.componen
 import { ActivatedRoute} from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
 import { BasicTableInfoComponent } from '../../../organisms/basic-table-info/basic-table-info.component';
+import { PaginationParamsComponent } from '@shared/molecules/pagination-params/pagination-params.component';
+import { NO_ERRORS_SCHEMA } from '@angular/core';
 
 
 class MockStockService{
@@ -53,7 +55,7 @@ describe('ListCategoryComponent', () => {
   beforeEach(async () => {
     stockServiceMock = new MockStockService();
     await TestBed.configureTestingModule({
-      declarations: [ListCategoryComponent,RangePipe,ButtonComponent,BasicTableInfoComponent],
+      declarations: [ListCategoryComponent,RangePipe,ButtonComponent,BasicTableInfoComponent,PaginationParamsComponent],
       imports: [HttpClientTestingModule,RouterTestingModule],
       providers: [
         { provide: StockService, useValue: stockServiceMock },
@@ -72,6 +74,7 @@ describe('ListCategoryComponent', () => {
         },
       },
       ],
+      schemas:[NO_ERRORS_SCHEMA]
     }).compileComponents();
   });
 

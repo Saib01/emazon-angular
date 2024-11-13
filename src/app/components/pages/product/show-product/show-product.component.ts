@@ -1,6 +1,6 @@
 import { HttpStatusCode } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
+import { FormBuilder} from '@angular/forms';
 import { Router } from '@angular/router';
 import { BasicInfo } from '@models/basic-Info.model';
 import { ErrorMessages } from '@models/error-messages.model';

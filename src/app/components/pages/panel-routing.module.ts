@@ -12,6 +12,8 @@ import { AdminGuard } from '@guards/admin.guard';
 import { WarehouseGuard } from '@guards/warehouse.guard';
 import { SupplyProductComponent } from './product/supply-product/supply-product.component';
 import { ShowProductComponent } from './product/show-product/show-product.component';
+import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
+import { ClientGuard } from '@guards/client.guard';
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
@@ -24,6 +26,7 @@ const routes: Routes = [
   {path:'product/add-supply',component:SupplyProductComponent,canActivate:[WarehouseGuard]},
   {path:'warehouse',component:CreateWarehouseAssistantComponent,canActivate:[AdminGuard]},
   { path: 'product/:id', component: ShowProductComponent },
+  { path: 'cart', component: ShoppingCartComponent,canActivate:[ClientGuard] },
   {
     path: '**',
     redirectTo: 'home',

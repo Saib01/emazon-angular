@@ -1,7 +1,5 @@
-/* tslint:disable:no-unused-variable */
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { By } from '@angular/platform-browser';
-import { DebugElement } from '@angular/core';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
+
 
 import { DisplayFieldComponent } from './display-field.component';
 
@@ -9,12 +7,12 @@ describe('DisplayFieldComponent', () => {
   let component: DisplayFieldComponent;
   let fixture: ComponentFixture<DisplayFieldComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [ DisplayFieldComponent ]
     })
     .compileComponents();
-  }));
+  });
 
   beforeEach(() => {
     fixture = TestBed.createComponent(DisplayFieldComponent);

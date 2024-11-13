@@ -4,7 +4,6 @@ import { environment } from '@environments/environment';
 import { checkToken } from '@interceptors/token.interceptor';
 import { UserRegister } from '@models/user.model';
 import { PROPERTY_EMAIL, PROPERTY_ID_DOCUMENT } from '@shared/constants/properties.constants';
-import { TokenService } from './token.service';
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +13,7 @@ export class UserService {
   private readonly PARAM_EMAIL=PROPERTY_EMAIL;
   private readonly PARAM_ID_DOCUMENT=PROPERTY_ID_DOCUMENT;
 
-  constructor(private readonly http: HttpClient,private readonly tokenService:TokenService) {}
+  constructor(private readonly http: HttpClient) {}
   createWarehouse(warehouseRegister: UserRegister) {
     return this.http.post(`${this.API_USER}/aux`, warehouseRegister, {
      context: checkToken(),

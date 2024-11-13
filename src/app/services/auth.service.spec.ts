@@ -2,7 +2,6 @@
 import { TestBed } from '@angular/core/testing';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { TokenService } from './token.service';
-import { environment } from '@environments/environment';
 import { UserLogin } from '@models/user.model';
 import { ResponseLogin } from '@models/auth.model';
 import { AuthService } from './auth.service';

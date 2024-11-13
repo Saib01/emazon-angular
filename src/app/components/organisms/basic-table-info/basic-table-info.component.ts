@@ -37,17 +37,17 @@ export class BasicTableInfoComponent  implements OnInit{
     const numberFields=this.fieldsToShow.filter(field=>field.type==='number').map(field=>field.name);
     this.regexNumberClass = new RegExp(`(${numberFields.join('|')})`); 
   }
-  onPageNumberChange(event: Event): void {
-    this.pageNumberEvent.emit(Number((event.target as HTMLSelectElement).value));
+  onPageNumberChange(event: number): void {
+    this.pageNumberEvent.emit(event);
   }
-  onPageSizeChange(event: Event): void {
-    this.pageSizeEvent.emit(Number((event.target as HTMLSelectElement).value));
+  onPageSizeChange(event: number): void {
+    this.pageSizeEvent.emit(event);
   }
-  onSortDirectionChange(event: Event) {
-    this.sortDirectionEvent.emit(String((event.target as HTMLSelectElement).value));
+  onSortDirectionChange(event: string) {
+    this.sortDirectionEvent.emit(event);
   }
-  onSortByChange(event: Event) {
-    this.sortByEvent.emit(String((event.target as HTMLSelectElement).value)); 
+  onSortByChange(event: BasicInfo) {
+    this.sortByEvent.emit(event.name); 
   }
   isArrayWithThreeElements(value: any): boolean {
     return Array.isArray(value);

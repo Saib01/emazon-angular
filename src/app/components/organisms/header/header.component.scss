@@ -17,14 +17,14 @@
 }
   
   button {
-    background: none;        /* Quita el fondo */
-    border: none;            /* Quita el borde */
-    box-shadow: none;        /* Quita las sombras */
-    outline: none;           /* Elimina el contorno al hacer clic */
-    padding: 0;              /* Quita el padding si no es necesario */
-    color: inherit;          /* Hereda el color del texto del contenedor */
-    font: inherit;           /* Hereda la fuente */
-    cursor: pointer;         /* Cambia el cursor para indicar que es clickeable */
+    background: none;       
+    border: none;           
+    box-shadow: none;        
+    outline: none;         
+    padding: 0;           
+    color: inherit;          
+    font: inherit;          
+    cursor: pointer;         
   }
 
   .user-info {

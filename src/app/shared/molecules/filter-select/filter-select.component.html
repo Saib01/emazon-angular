@@ -1,0 +1,31 @@
+<div class="filter">
+
+  <span class="filter__name" >{{controlName|titlecase}}:</span>
+
+  <div class="">
+    <div class="filter__select" [attr.aria-expanded]="isDropdownOpen ? 'true' : 'false'" [ngClass]="{'filter__select--large': 'large'==elementSize}" [ngClass]="{'filter__select--medium': 'medium'==elementSize}">
+      <div #toggle class="select__toggle" (click)="toggleDropdown()" (keydown)="onKeydown() ">
+  
+        <span class="select__option-text">{{selectedOption.name == ''?initialOption:selectedOption.name}}
+        </span>
+  
+        <span>
+          <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" color="black">
+            <path d="M480-360 280-560h400L480-360Z" />
+          </svg>
+        </span>
+        
+      </div>
+    </div>
+  
+    <div #option class="filter__options" [ngClass]="{'filter__options--large': true}">
+      <div *ngIf="isDropdownOpen" class="options">
+        <div *ngFor="let option of options" class="options__option" (click)="onOptionSelect(option)"
+          (keydown)="onKeydown()">
+          {{ option.name }}
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>

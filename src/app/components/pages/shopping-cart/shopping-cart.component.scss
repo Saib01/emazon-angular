@@ -1,43 +1,31 @@
-
 .list {
     padding: 1rem 0.5rem;
     display: grid;
     width: 100%;
     box-sizing: border-box;
-    overflow-y: hidden;
-    &__button {
-    
-        width: 100%;
-        box-sizing: border-box;
-        justify-content: center;
-        align-items: center;
-        .link {
-            color: white;
-            text-decoration: none;
-            font-size: 1rem;
-            gap: 0.5rem;
-
-            &__icon  {
-                font-size: 1.3rem;
-            }
-        }
+    &__total{
+        font-size: 1.15rem;
+    padding: 0.3125rem;
     }
-    &__select-params {
+     &__param{
+        width: 100%;
         display: flex;
-        align-items: center;
         justify-content: end;
-        gap: 0.5rem;
-        box-sizing: border-box;
-        overflow: visible;  
+        align-items: end;
     }
     &__pagination {
         display: flex;
         justify-content: end;
-        
         padding: 0 0.8rem;
         gap: 0.5rem;
+        align-items: end;
+        box-sizing: border-box;
     }
-
+    &__params--mobile{
+        display: flex;
+        flex-direction: row;
+        gap: 0.5rem;
+    }
     &__container {
         display: flex;
         flex-direction: column;
@@ -84,6 +72,7 @@
         caption-side: bottom;
         font-size: 0.875rem;
         line-height: 1.25rem;
+        min-height: 8rem;
     }
 
     &__custom-tr {
@@ -111,10 +100,10 @@
         padding: 0.5rem;
         font-size: 1rem;
         vertical-align: middle;
-        min-height: 5rem;
+        height: 5rem;
         max-width: 10rem;
         box-sizing: border-box;
-        white-space: nowrap;
+        white-space: wrap;
         overflow: hidden;
         text-overflow: ellipsis;
     }
@@ -140,21 +129,6 @@
 
 @media only screen and (min-width:600px) {
     .list {
-        &__pagination {
-            &--admin-mode{
-                justify-content: space-between;
-            }
-        }
-
-        &__button {
-            &--mobile {
-                display: none;
-            }
-
-            &--desktop {
-                width: 7rem;
-            }
-        }
         &__params-container{
             display: flex;
             gap: 0.5rem;
@@ -164,20 +138,14 @@
 
 @media only screen and (max-width:599px) {
     .list {
-        &__button {
-            &--desktop {
-                display: none;
-            }
-            &--mobile {
-                padding: 0 0.8rem;
-            }
-        }
         &__pagination{
             display: flex;
             flex-direction: column; 
         }
-        &__params-container{
-            height: 4rem;
-        }
     }
+}
+
+
+.visible-overflow{
+    overflow: visible !important;
 }
