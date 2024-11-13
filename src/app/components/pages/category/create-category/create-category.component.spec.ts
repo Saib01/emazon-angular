@@ -35,7 +35,6 @@ describe('CategoryComponent', () => {
   let component: CreateCategoryComponent;
   let fixture: ComponentFixture<CreateCategoryComponent>;
   let stockServiceMock: MockStockService;
-  let router: Router;
 
   beforeEach(async () => {
     stockServiceMock = new MockStockService();
@@ -58,7 +57,6 @@ describe('CategoryComponent', () => {
 
     fixture = TestBed.createComponent(CreateCategoryComponent);
     component = fixture.componentInstance;
-    router = TestBed.inject(Router);
     component.formCategory.markAllAsTouched();
     fixture.detectChanges();
   });

@@ -13,6 +13,7 @@ import { RouterModule } from '@angular/router';
 import { ButtonComponent } from './atoms/button/button.component';
 import { StatusResponseComponent } from './molecules/status-response/status-response.component';
 import { DisplayFieldComponent } from './molecules/display-field/display-field.component';
+import { FilterSelectComponent } from './molecules/filter-select/filter-select.component';
 
 
 @NgModule({
@@ -26,7 +27,8 @@ import { DisplayFieldComponent } from './molecules/display-field/display-field.c
     RangePipe,
     RegisterFormComponent,
     StatusResponseComponent,
-    DisplayFieldComponent
+    DisplayFieldComponent,
+    FilterSelectComponent
   ],
   imports: [
     CommonModule,
@@ -44,7 +46,8 @@ import { DisplayFieldComponent } from './molecules/display-field/display-field.c
     RangePipe,
     RegisterFormComponent,
     StatusResponseComponent,
-    DisplayFieldComponent
+    DisplayFieldComponent,
+    FilterSelectComponent
   ] 
 })
 export class SharedModule { }

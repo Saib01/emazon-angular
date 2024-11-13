@@ -4,7 +4,6 @@ import { ListBrandComponent } from './list-brand.component';
 import { StockService } from '@services/stock.service';
 import { of } from 'rxjs/internal/observable/of';
 import { BasicTableInfoComponent } from '../../../organisms/basic-table-info/basic-table-info.component';
-import { throwError } from 'rxjs';
 import { RangePipe } from '../../../pipe/range.pipe';
 import { ButtonComponent } from '../../../../shared/atoms/button/button.component';
 import { NO_ERRORS_SCHEMA } from '@angular/core';

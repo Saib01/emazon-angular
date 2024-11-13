@@ -33,6 +33,9 @@
       <side-bar-item [linkName]="'warehouse'" [link]="'panel/warehouse'" [isClose]="closeSideBar" *ngIf="user?.role?.includes('ADMIN')">
         <warehouse-icon></warehouse-icon>
       </side-bar-item>
+      <side-bar-item [linkName]="'cart'" [link]="'panel/cart'" [isClose]="closeSideBar" *ngIf="user?.role?.includes('CLIENT')||user==null">
+        <shopping-cart-icon class="overflow-visible"></shopping-cart-icon>
+      </side-bar-item>
     </div>
   
   </div>

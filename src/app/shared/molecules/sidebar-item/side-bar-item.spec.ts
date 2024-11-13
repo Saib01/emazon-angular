@@ -1,7 +1,4 @@
 
-
-// side-bar-item.component.spec.ts
-
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { SideBarItemComponent } from './side-bar-item.component';
 import { By } from '@angular/platform-browser';

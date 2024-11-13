@@ -118,3 +118,7 @@
     }
   }
 }
+
+::ng-deep .overflow-visible {
+  overflow: visible;
+}

@@ -14,6 +14,7 @@ import { UserInfoComponent } from '../molecules/user-info/user-info.component';
 import { BrandIconComponent } from '../atoms/icons/brand-icon/brand-icon.component';
 import { ProductIconComponent } from '../atoms/icons/product-icon/product-icon.component';
 import { WarehouseIconComponent } from '../atoms/icons/warehouse-icon/warehouse-icon.component';
+import { ShoppingCartIconComponent } from '../atoms/icons/shopping-cart-icon/shopping-cart-icon.component';
 
 
 
@@ -27,6 +28,7 @@ import { WarehouseIconComponent } from '../atoms/icons/warehouse-icon/warehouse-
     CategoryIconComponent,
     BrandIconComponent,
     ProductIconComponent,
+    ShoppingCartIconComponent,
     WarehouseIconComponent,
     SideBarItemComponent,
     SideBarComponent,
