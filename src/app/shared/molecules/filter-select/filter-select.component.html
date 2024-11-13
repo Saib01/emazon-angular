@@ -2,8 +2,8 @@
 
   <span class="filter__name" >{{controlName|titlecase}}:</span>
 
-  <div>
-    <div class="filter__select" [attr.aria-expanded]="isDropdownOpen ? 'true' : 'false'" >
+  <div class="">
+    <div class="filter__select" [attr.aria-expanded]="isDropdownOpen ? 'true' : 'false'" [ngClass]="{'filter__select--large': 'large'==elementSize}" [ngClass]="{'filter__select--medium': 'medium'==elementSize}">
       <div #toggle class="select__toggle" (click)="toggleDropdown()" (keydown)="onKeydown() ">
   
         <span class="select__option-text">{{selectedOption.name == ''?initialOption:selectedOption.name}}
@@ -18,7 +18,7 @@
       </div>
     </div>
   
-    <div #option class="filter__options">
+    <div #option class="filter__options" [ngClass]="{'filter__options--large': true}">
       <div *ngIf="isDropdownOpen" class="options">
         <div *ngFor="let option of options" class="options__option" (click)="onOptionSelect(option)"
           (keydown)="onKeydown()">

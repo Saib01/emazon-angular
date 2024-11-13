@@ -3,10 +3,10 @@
     display: grid;
     width: 100%;
     box-sizing: border-box;
-    &__params-container{
-       // height: 2rem;
+    &__total{
+        font-size: 1.15rem;
+    padding: 0.3125rem;
     }
-    //::ng-deep
      &__param{
         width: 100%;
         display: flex;
@@ -141,9 +141,6 @@
         &__pagination{
             display: flex;
             flex-direction: column; 
-        }
-        &__params-container{
-           // height: 4rem;
         }
     }
 }

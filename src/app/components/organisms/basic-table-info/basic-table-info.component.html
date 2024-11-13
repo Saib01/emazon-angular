@@ -21,43 +21,10 @@
       </div>
 
       <div class="list__select-params">
-
-        <div class="list__params-container">
-
-          <div class="select">
-            <span>Sort:</span>
-            <select class="select__param" (change)="onSortDirectionChange($event)">
-              <option *ngFor="let option of ['ASC','DESC']" [value]="option">{{option }}</option>
-            </select>
-          </div>
-
-          <div class="select" *ngIf="sortByOptions.length!=0"><span>Order By:</span>
-            <select class="select__param" (change)="onSortByChange($event)">
-              <option *ngFor="let option of sortByOptions" [value]="option">{{option}}</option>
-            </select>
-          </div>
-
-        </div>
-
-        <div class="list__params-container">
-
-          <div class="select">
-            <span>Page:</span>
-            <select class="select__param" (change)="onPageNumberChange($event)">
-              <option *ngFor="let option of (0 | range:totalPages-1)" [value]="option">{{ option+1 }}
-              </option>
-            </select>
-          </div>
-
-          <div class="select">
-            <span>Size:</span>
-            <select class="select__param" (change)="onPageSizeChange($event)">
-              <option *ngFor="let option of (5 | range:15:5)" [value]="option">{{ option }}</option>
-            </select>
-          </div>
-
-        </div>
-
+        <app-pagination-params [totalPages]="totalPages" (pageNumberEvent)="onPageNumberChange($event)" (pageSizeEvent)="onPageSizeChange($event)" (sortDirectionEvent)="onSortDirectionChange($event)" [isSortByActive]="sortByOptions.length!=0" >
+          <app-filter-select  *ngIf="sortByOptions.length!=0" controlName="Sort by" [data]="sortByOptions" [initialOption]="'product'"   elementSize="medium"  
+          (optionSelect)="onSortByChange($event)"></app-filter-select>
+        </app-pagination-params>
       </div>
 
     </div>

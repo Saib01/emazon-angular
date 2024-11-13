@@ -31,7 +31,7 @@ describe('BasicTableInfoComponent', () => {
 
   test('should emit pageNumberEvent when onPageNumberChange is called', () => {
     jest.spyOn(component.pageNumberEvent, 'emit');
-    const mockEvent = { target: { value: '2' } } as unknown as Event;
+    const mockEvent =2;
 
     component.onPageNumberChange(mockEvent);
 
@@ -40,7 +40,7 @@ describe('BasicTableInfoComponent', () => {
 
   test('should emit pageSizeEvent when onPageSizeChange is called', () => {
     jest.spyOn(component.pageSizeEvent, 'emit');
-    const mockEvent = { target: { value: '20' } } as unknown as Event;
+    const mockEvent = 20;
 
     component.onPageSizeChange(mockEvent);
 
@@ -49,7 +49,7 @@ describe('BasicTableInfoComponent', () => {
 
   test('should emit sortDirectionEvent  when onSortDirectionChange is called', () => {
     jest.spyOn(component.sortDirectionEvent, 'emit');
-    const mockEvent = { target: { value: 'asc' } } as unknown as Event;
+    const mockEvent = 'asc' ;
 
     component.onSortDirectionChange(mockEvent);
 
@@ -58,7 +58,7 @@ describe('BasicTableInfoComponent', () => {
 
   test('should emit sortByChangeEvent when onSortByChange is called', () => {
     jest.spyOn(component.sortByEvent, 'emit');
-    const mockEvent = { target: { value: 'product' } } as unknown as Event;
+    const mockEvent = { name: 'product' } ;
 
     component.onSortByChange(mockEvent);
 

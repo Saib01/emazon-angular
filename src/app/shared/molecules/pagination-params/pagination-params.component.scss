@@ -1,0 +1,26 @@
+.pagination{
+    gap: 0.5rem;
+    box-sizing: border-box;
+    &__container{
+        display: flex;
+        justify-content: end;
+        gap: 0.5rem;
+    }
+}
+
+@media only screen and (min-width:600px) {
+    .pagination{
+        &--without-sortBy{
+            display: flex;
+            flex-direction: row;
+        }
+    }
+}
+@media only screen and (min-width:1000px) {
+    .pagination{
+        &--with-sortBy{
+            display: flex;
+            flex-direction: row;
+        }
+    }
+}

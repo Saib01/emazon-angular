@@ -45,6 +45,7 @@ fieldsToShow:FieldsToShow[]=[
   {name:'categories',accessValue:'categoryResponseList'},
 ];
   fieldNames=this.fieldsToShow.map(field=>field.name);
+  fieldAccessValues=this.fieldsToShow.map(field=> field.accessValue ? field.accessValue : field.name);
   constructor(private readonly shoppingCartService:ShoppingCartService, private readonly stock:StockService){}
   ngOnInit(): void {
     this.getRegexForHtmlNumberClass();
@@ -76,6 +77,7 @@ fieldsToShow:FieldsToShow[]=[
   getShoppingCart(){
     this.shoppingCartService.getShoppingCart(this.sortDirection,this.page,this.size,this.brandName,this.categoryName).subscribe({
       next: (response) => {this.userShoppingCart=response;
+        this.total=0;      
         this.userShoppingCart.content.forEach(item=>{
           if(item.amount>0){
             this.total=this.total+item.unitsInCart*item.price;
@@ -87,13 +89,6 @@ fieldsToShow:FieldsToShow[]=[
   
   get(item: any, field: string): any {
     return field.split('.').reduce((acc, part) => acc?.[part], item);
-  }
-  getFieldsNames(){
-    console.log("asdas");
-    return this.fieldsToShow.map(field=>field.name);
-  }
-  getFieldsAccessValues(){
-    return this.fieldsToShow.map(field=> field.accessValue ? field.accessValue : field.name);
   }
 
   isArrayWithThreeElements(value: any): boolean {
@@ -111,16 +106,16 @@ fieldsToShow:FieldsToShow[]=[
     this.categoryName=event.name!="none"?event.name:"";
     this.getShoppingCart();
   }
-  onPageNumberChange(event: BasicInfo): void {
-    this.page=Number(event.name)-1;
+  onPageNumberChange(event: number): void {
+    this.page=event
     this.getShoppingCart();
   }
-  onPageSizeChange(event: BasicInfo): void {
-    this.size=Number(event.name);
+  onPageSizeChange(event: number): void {
+    this.size=event;
     this.getShoppingCart();
   }
-  onSortDirectionChange(event: BasicInfo) {
-    this.sortDirection=event.name;;
+  onSortDirectionChange(event: string):void {
+    this.sortDirection=event;
     this.getShoppingCart();
   }
 

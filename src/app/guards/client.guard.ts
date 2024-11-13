@@ -13,7 +13,7 @@ export class ClientGuard implements CanActivate{
     canActivate(): Observable<boolean> {
       return this.authService.getUserStatus().pipe(
         map(userStatus => {
-          return userStatus?.role?.includes('CLIENT') ||userStatus==null|| false;
+          return userStatus?.role?.includes('CLIENT') || false;
         }),
         tap(isAuthorized => {
           if (!isAuthorized) {

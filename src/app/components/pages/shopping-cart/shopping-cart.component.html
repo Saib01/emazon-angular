@@ -3,23 +3,18 @@
   <div class="list__container">
 
     <div class="list__pagination">
-      <div>
-        <span>Total: {{total}}</span>
-      </div>
+
       <div class="list__params-container">
 
-          <app-filter-select controlName='category' [options]="categoryList" (optionSelect)="onCategoryFilterChange($event)"></app-filter-select>
-
-          <app-filter-select controlName='brand' [options]="brandList" (optionSelect)="onBrandFilterChange($event)"></app-filter-select>
-
-        <div class="list__params--mobile">
-
-            <app-filter-select controlName='Sort' [data]="['ASC','DESC']" [initialOption]="sortDirection" (optionSelect)="onSortDirectionChange($event)"></app-filter-select>
-
-            <app-filter-select controlName='Page' [data]="(1 | range:userShoppingCart.totalPages)" [initialOption]="page+1" (optionSelect)="onPageNumberChange($event)"></app-filter-select>
-        </div>
-
-          <app-filter-select controlName='Size' [data]="(5 | range:15:5)" [initialOption]="size" (optionSelect)="onPageSizeChange($event)"></app-filter-select>
+        <span class="list__total">Subtotal: {{total}}
+        </span>
+        <app-filter-select controlName='category' elementSize="large" [options]="categoryList"
+          (optionSelect)="onCategoryFilterChange($event)"></app-filter-select>
+    
+        <app-filter-select controlName='brand' elementSize="large" [options]="brandList"
+          (optionSelect)="onBrandFilterChange($event)"></app-filter-select>
+    
+        <app-pagination-params [totalPages]="userShoppingCart.totalPages" (pageNumberEvent)="onPageNumberChange($event)" (pageSizeEvent)="onPageSizeChange($event)" (sortDirectionEvent)="onSortDirectionChange($event)"></app-pagination-params>
       </div>
     </div>
 
@@ -37,7 +32,7 @@
               </thead>
               <tbody>
                 <tr *ngFor="let item of userShoppingCart.content " class="list__custom-tr">
-                  <td *ngFor="let field of getFieldsAccessValues()" class="list__table-data"
+                  <td *ngFor="let field of fieldAccessValues" class="list__table-data"
                     [ngClass]="textNumberClass(field)?'text--number':'text--start' ">
                     <ng-container *ngIf="!isArrayWithThreeElements(get(item, field)); else arrayBlock">
                       <span>{{ field=='amount'&&get(item, field)==0? messageForInsufficientStock(15):get(item, field) }}</span>
