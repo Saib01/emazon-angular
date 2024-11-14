@@ -16,9 +16,9 @@ export class BasicTableInfoComponent  implements OnInit{
   @Input() totalPages:number=0;
   @Input() elements:Product[]|BasicInfo[]=[];
   @Input() fieldsToShow:FieldsToShow[]=[
-    {name:'id',type:'number'},
-    {name:'name'},
-    {name:'description'}
+    {name:'id',type:'number',size:'small'},
+    {name:'name',size:'large'},
+    {name:'description',size:'large'}
   ];
   @Input() sortByOptions:string[]=[];
   @Output() pageNumberEvent = new EventEmitter<number>();

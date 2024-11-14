@@ -36,13 +36,13 @@ brandList: BasicInfo[] = [{id:0,name:'none',description:''}];
 
 regexNumberClass!:RegExp;
 fieldsToShow:FieldsToShow[]=[
-  {name:'id',type:'number'},
-  {name:'name'},
-  {name:'amount',type:'number', accessValue:'unitsInCart'},
-  {name:'stock',type:'number', accessValue:'amount'},
-  {name:'price',type:'number'},
-  {name:'brand',accessValue:'brandResponse.name'},
-  {name:'categories',accessValue:'categoryResponseList'},
+  {name:'id',type:'number', size:'small'},
+  {name:'name', size:'large'},
+  {name:'amount',type:'number', accessValue:'unitsInCart', size:'medium'},
+  {name:'stock',type:'number', accessValue:'amount', size:'medium'},
+  {name:'price',type:'number', size:'medium'},
+  {name:'brand',accessValue:'brandResponse.name', size:'large'},
+  {name:'categories',accessValue:'categoryResponseList', size:'large'},
 ];
   fieldNames=this.fieldsToShow.map(field=>field.name);
   fieldAccessValues=this.fieldsToShow.map(field=> field.accessValue ? field.accessValue : field.name);

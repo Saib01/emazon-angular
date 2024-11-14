@@ -3,16 +3,21 @@
     display: grid;
     width: 100%;
     box-sizing: border-box;
-    &__total{
+    overflow-y: hidden;
+
+    &__subtotal-text {
         font-size: 1.15rem;
-    padding: 0.3125rem;
+        font-weight: bolder;
+        padding: 0.3125rem;
     }
-     &__param{
+
+    &__param {
         width: 100%;
         display: flex;
         justify-content: end;
         align-items: end;
     }
+
     &__pagination {
         display: flex;
         justify-content: end;
@@ -21,22 +26,21 @@
         align-items: end;
         box-sizing: border-box;
     }
-    &__params--mobile{
+
+    &__params--mobile {
         display: flex;
         flex-direction: row;
         gap: 0.5rem;
     }
+
     &__container {
         display: flex;
         flex-direction: column;
-        overflow-x: hidden;  
+        overflow-x: hidden;
         box-sizing: border-box;
     }
 
     &__main-content {
-        flex: 1 1 0%;
-        flex: column;
-        gap: 1rem;
         padding: 0.75rem;
     }
 
@@ -45,38 +49,41 @@
         border-radius: 0.5rem;
         padding: 0.5rem;
         overflow-x: auto;
-        
+
     }
 
     &__table-wrapper {
         position: relative;
         width: 100%;
         overflow: auto;
+
         &::-webkit-scrollbar {
             height: 0.4rem;
             background-color: #555555;
-          }
-          &::-webkit-scrollbar-thumb {
-            background: #d2d2d2ce; 
-            border-radius: 0.25rem; 
-          }
-      
-          &::-webkit-scrollbar-thumb:hover {
-            background-color: #d2d2d271; 
-          }
+        }
+
+        &::-webkit-scrollbar-thumb {
+            background: #d2d2d2ce;
+            border-radius: 0.25rem;
+        }
+
+        &::-webkit-scrollbar-thumb:hover {
+            background-color: #d2d2d271;
+        }
     }
 
     &__custom-table {
         border-collapse: collapse;
+        table-layout: fixed;
         width: 100%;
         caption-side: bottom;
         font-size: 0.875rem;
         line-height: 1.25rem;
-        min-height: 8rem;
     }
 
     &__custom-tr {
         border-bottom: 1px solid#e5e7eb;
+
         &:nth-child(even) {
             background-color: #f0eded;
         }
@@ -90,62 +97,92 @@
     &__table-header {
         height: 2.5rem;
         padding: 0 0.5rem;
-        text-align: left;
         vertical-align: middle;
         font-size: 1.15rem;
-        width: 100px;
+        box-sizing: border-box;
+
+        &--small {
+            width: 6rem;
+        }
+
+        &--medium {
+            width: 9rem;
+        }
+
+        &--large {
+            width: 18rem;
+        }
     }
 
     &__table-data {
         padding: 0.5rem;
         font-size: 1rem;
+        height: 9rem;
         vertical-align: middle;
-        height: 5rem;
-        max-width: 10rem;
-        box-sizing: border-box;
         white-space: wrap;
         overflow: hidden;
-        text-overflow: ellipsis;
+        word-wrap: break-word;
+        overflow-wrap: break-word;
+
     }
-    &__table-button{
+
+    &__table-button {
         margin: auto;
         width: 3rem;
         vertical-align: middle;
     }
+
+    &__subtotal {
+        display: flex;
+        flex-direction: column;
+    }
+    &__text {
+        &--start {
+            text-align: start;
+        }
+    
+        &--number {
+            text-align: end;
+            justify-content: end;
+        }
+    
+        &--center {
+            text-align: center;
+        }
+    }
 }
 
-.text {
-    &--start {
-        text-align: start;
-    }
-
-    &--number {
-        text-align: end;
-    }
-    &--center {
-        text-align: center;
-    }
-}
 
 @media only screen and (min-width:600px) {
     .list {
-        &__params-container{
+        &__params-container {
             display: flex;
             gap: 0.5rem;
+        }
+
+        &__subtotal {
+            &--mobile {
+                display: none !important;
+            }
         }
     }
 }
 
 @media only screen and (max-width:599px) {
     .list {
-        &__pagination{
+        &__pagination {
             display: flex;
-            flex-direction: column; 
+            flex-direction: column;
         }
+
+        &__subtotal {
+            &--desktop {
+                display: none;
+            }
+        }
+
+
     }
-}
 
 
-.visible-overflow{
-    overflow: visible !important;
 }

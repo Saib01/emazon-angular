@@ -9,6 +9,7 @@ import { ShoppingCartItem } from '@models/shopping-cart-item';
 import { PaginationParamsComponent } from '@shared/molecules/pagination-params/pagination-params.component';
 import { FilterSelectComponent } from '@shared/molecules/filter-select/filter-select.component';
 import { RangePipe } from '../../pipe/range.pipe';
+import { ButtonComponent } from '@shared/atoms/button/button.component';
 
 describe('ShoppingCartComponent', () => {
   let component: ShoppingCartComponent;
@@ -39,7 +40,7 @@ describe('ShoppingCartComponent', () => {
     };
 
     await TestBed.configureTestingModule({
-      declarations: [ShoppingCartComponent,PaginationParamsComponent,FilterSelectComponent,RangePipe],
+      declarations: [ShoppingCartComponent,PaginationParamsComponent,FilterSelectComponent,RangePipe,ButtonComponent],
       providers: [
         { provide: ShoppingCartService, useValue: shoppingCartServiceMock },
         { provide: StockService, useValue: stockServiceMock }

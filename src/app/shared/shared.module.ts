@@ -15,6 +15,7 @@ import { StatusResponseComponent } from './molecules/status-response/status-resp
 import { DisplayFieldComponent } from './molecules/display-field/display-field.component';
 import { FilterSelectComponent } from './molecules/filter-select/filter-select.component';
 import { PaginationParamsComponent } from './molecules/pagination-params/pagination-params.component';
+import { DraggableScrollDirective } from '../directive/DraggableScrollDirective.directive';
 
 
 @NgModule({
@@ -30,7 +31,8 @@ import { PaginationParamsComponent } from './molecules/pagination-params/paginat
     StatusResponseComponent,
     DisplayFieldComponent,
     FilterSelectComponent,
-    PaginationParamsComponent
+    PaginationParamsComponent,
+    DraggableScrollDirective 
   ],
   imports: [
     CommonModule,
@@ -50,7 +52,8 @@ import { PaginationParamsComponent } from './molecules/pagination-params/paginat
     StatusResponseComponent,
     DisplayFieldComponent,
     FilterSelectComponent,
-    PaginationParamsComponent
+    PaginationParamsComponent,
+    DraggableScrollDirective 
   ] 
 })
 export class SharedModule { }

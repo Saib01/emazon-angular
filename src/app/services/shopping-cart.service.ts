@@ -32,6 +32,15 @@ export class ShoppingCartService {
       })
     );
   }
+
+  removeFromShoppingCart(id:number){
+    return this.http.post<ResponseMessage>(`${this.API_SHOPPING_CART}/remove-product/${id}`,
+      { context: checkToken(),
+        observe: 'response'
+       }
+    );
+  }
+  
   getTotalProductsInShoppingCart() {
     return this.http.get<number>(`${this.API_SHOPPING_CART}/total`, {
         context: checkToken(),
