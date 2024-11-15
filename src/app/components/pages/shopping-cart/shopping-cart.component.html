@@ -1,11 +1,16 @@
 <ng-template #subtotalPage>
-  <span class="list__subtotal-text">Subtotal: {{total}}
-  </span>
+  <app-filter-select controlName='brand' elementSize="large" [options]="brandList"
+  (optionSelect)="onBrandFilterChange($event)"></app-filter-select>
 </ng-template>
 
+<app-status-response [status]="status"></app-status-response>
 
-
-
+<app-alert-message
+[tittle]="'Are you sure you want to remove this item from your cart?'"
+[isActive]="isRemoveAlertActive"
+(continueProcess)="removeProduct()" 
+(stopProcess)="setIsRemoveAlertActive(false)"
+></app-alert-message>
 
 <div class="list">
 
@@ -14,25 +19,26 @@
     <div class="list__pagination">
 
       <div class="list__params-container">
-
-        <div class="list__subtotal list__subtotal--desktop">
+        
+        
+        <div class="list__param list__param--desktop">
           <ng-container *ngTemplateOutlet="subtotalPage"></ng-container>
         </div>
 
         <app-filter-select controlName='category' elementSize="large" [options]="categoryList"
           (optionSelect)="onCategoryFilterChange($event)"></app-filter-select>
-
-        <app-filter-select controlName='brand' elementSize="large" [options]="brandList"
-          (optionSelect)="onBrandFilterChange($event)"></app-filter-select>
-
+        
         <app-pagination-params [totalPages]="userShoppingCart.totalPages" (pageNumberEvent)="onPageNumberChange($event)"
           (pageSizeEvent)="onPageSizeChange($event)" (sortDirectionEvent)="onSortDirectionChange($event)">
-
-          <div class="list__subtotal list__subtotal--mobile">
+          <div class="list__param list__param--mobile">
             <ng-container *ngTemplateOutlet="subtotalPage"></ng-container>
           </div>
-
         </app-pagination-params>
+
+      </div>
+      <div class="list__subtotal">
+        <span>Subtotal: {{total}}
+        </span>
       </div>
     </div>
 
@@ -70,7 +76,7 @@
                 </td>
                 <td class="list__table-data">
                   <div class="list__table-button ">
-                    <app-button [isDisabled]="false">
+                    <app-button [isDisabled]="false" (clickEvent)="setIsRemoveAlertActive(true,item)">
                       <span class="link__icon">-</span>
                     </app-button>
                   </div>
@@ -80,6 +86,9 @@
           </table>
         </div>
       </div>
+      <div class="list__not-found" *ngIf="userShoppingCart.content.length===0">
+        <h2>No products were found in the cart.</h2>
+    </div>
     </main>
 
   </div>

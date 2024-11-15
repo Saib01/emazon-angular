@@ -11,8 +11,10 @@ export class AppComponent implements OnInit{
   ngOnInit(): void {
       if(this.tokenService.getToken()!==''){
       this.authService.getUser().subscribe({
-        error: () => {
+        error: (response) => {
+          if(response.status===401){
           this.tokenService.removeToken();
+          }
         },
       });
     }

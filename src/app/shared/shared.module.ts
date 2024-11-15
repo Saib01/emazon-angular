@@ -16,6 +16,7 @@ import { DisplayFieldComponent } from './molecules/display-field/display-field.c
 import { FilterSelectComponent } from './molecules/filter-select/filter-select.component';
 import { PaginationParamsComponent } from './molecules/pagination-params/pagination-params.component';
 import { DraggableScrollDirective } from '../directive/DraggableScrollDirective.directive';
+import { AlertMessageComponent } from './molecules/alert-message/alert-message.component';
 
 
 @NgModule({
@@ -32,7 +33,8 @@ import { DraggableScrollDirective } from '../directive/DraggableScrollDirective.
     DisplayFieldComponent,
     FilterSelectComponent,
     PaginationParamsComponent,
-    DraggableScrollDirective 
+    DraggableScrollDirective,
+    AlertMessageComponent
   ],
   imports: [
     CommonModule,
@@ -53,7 +55,8 @@ import { DraggableScrollDirective } from '../directive/DraggableScrollDirective.
     DisplayFieldComponent,
     FilterSelectComponent,
     PaginationParamsComponent,
-    DraggableScrollDirective 
+    DraggableScrollDirective,
+    AlertMessageComponent 
   ] 
 })
 export class SharedModule { }

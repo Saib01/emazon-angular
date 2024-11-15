@@ -11,7 +11,7 @@ import { UserInfo } from '@models/user-info.model';
 import { AuthService } from '@services/auth.service';
 import { ShoppingCartService } from '@services/shopping-cart.service';
 import { StockService } from '@services/stock.service';
-import { PRODUCT_AMOUNT_REQUIRED_ERROR, PRODUCT_URL } from '@shared/constants/product.constants';
+import { PRODUCT_AMOUNT_REQUIRED_ERROR, PRODUCT_URL, TEMPLATE_NO_STOCK_ERROR } from '@shared/constants/product.constants';
 import { CustomValidators } from '@utils/custom-validators';
 const {
   ID_ZERO_ERROR,idNotZeroValidator
@@ -22,7 +22,6 @@ const {
   styleUrls: ['./show-product.component.scss']
 })
 export class ShowProductComponent implements OnInit {
-  TEMPLATE_NO_STOCK_ERROR = "Insufficient stock. The next restock will be on day {0} of {1}";
   status: Status = {
     code: null,
     messages: new Map([[HttpStatusCode.Created, ''],[HttpStatusCode.Conflict, 'The maximum number of products per category has been reached.']]),
@@ -129,7 +128,7 @@ export class ShowProductComponent implements OnInit {
           monthName = monthFormatter.format(today);
       }
 
-      return this.formatMessage(this.TEMPLATE_NO_STOCK_ERROR, restockDate, monthName);
+      return this.formatMessage(TEMPLATE_NO_STOCK_ERROR, restockDate, monthName);
   }
 
   formatMessage(template: string, day: number, month: string): string {

@@ -58,9 +58,7 @@ export class BasicTableInfoComponent  implements OnInit{
   get(item: any, field: string): any {
     return field.split('.').reduce((acc, part) => acc?.[part], item);
   }
-  getFieldsNames(){
-    return this.fieldsToShow.map(field=>field.name);
-  }
+
   getFieldsAccessValues(){
     return this.fieldsToShow.map(field=> field.accessValue ? field.accessValue : field.name);
   }

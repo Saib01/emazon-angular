@@ -1,0 +1,14 @@
+
+<div class="alert" *ngIf="isActive" [ngClass]="{'alert--full-size': fullSize}">
+  <div class="alert__container">
+    <h3 class="alert__tittle">{{tittle}}</h3>
+    <div class="alert__actions">
+      <div class="alert__button">
+        <app-button typeBtn="button" [isBackgroundBlack]="false" [isDisabled]="false" (clickEvent)="stopProcess.emit()">No</app-button>
+      </div>
+      <div class="alert__button">
+        <app-button typeBtn="button" [isDisabled]="false" (clickEvent)="continueProcess.emit()">Yes</app-button>
+      </div>
+    </div>
+  </div>
+</div>
