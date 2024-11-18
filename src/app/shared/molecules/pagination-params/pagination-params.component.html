@@ -1,12 +1,12 @@
 <div class="pagination" [ngClass]="isSortByActive?'pagination--with-sortBy':'pagination--without-sortBy'">
   <div class="pagination__container">
+    <ng-content></ng-content>
     <app-filter-select controlName="Sort" [data]="['ASC', 'DESC']" [initialOption]="'ASC'"
       (optionSelect)="onSortDirectionChange($event)"></app-filter-select>
-    <app-filter-select controlName="Page" [data]="(1 | range : this.totalPages)" [initialOption]="'1'"
-      (optionSelect)="onPageNumberChange($event)"></app-filter-select>
   </div>
   <div class="pagination__container">
-    <ng-content></ng-content>
+    <app-filter-select controlName="Page" [data]="(1 | range : this.totalPages)" [initialOption]="'1'"
+    (optionSelect)="onPageNumberChange($event)"></app-filter-select>
     <app-filter-select controlName="Size" [data]="(5 | range : 15 : 5)" [initialOption]="5"
       (optionSelect)="onPageSizeChange($event)"></app-filter-select>
   </div>

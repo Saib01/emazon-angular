@@ -29,3 +29,6 @@ export const PRODUCT_CATEGORY_LIST_MAX_LENGTH_ERROR='The category list cannot ex
 
 export const PRODUCT_TITTLE_ERROR='Product Creation Failed';
 export const PRODUCT_TITTLE_SUCCESSFULLY='Product Created Successfully';
+
+
+export const TEMPLATE_NO_STOCK_ERROR = "Insufficient stock. The next restock will be on day {0} of {1}";

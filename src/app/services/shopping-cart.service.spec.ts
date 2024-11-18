@@ -59,7 +59,31 @@ describe('Service: ShoppingCart', () => {
     expect(req.request.method).toBe('POST');
     expect(req.request.body).toEqual(shoppingCartRequest);
     req.flush('');
+    const reqTotal = httpMock.expectOne(`${environment.API_URL_SHOPPING_CART}/api/shopping-cart/total`);
+    expect(reqTotal.request.method).toBe('GET');
+    reqTotal.flush(5);
   });
+
+  test('should send a DELETE request add a product to a shopping cart', () => {
+    const shoppingCartItem:ShoppingCartItem = {
+      id:1,
+      name:'product',
+      price:12312,
+      unitsInCart:123,
+      amount:1,
+      brandResponse:{ id: 1, name: 'Category 1',description:"asd" },
+      categoryResponseList:[{ id: 1, name: 'Category 1',description:"asd" },{ id: 1, name: 'Category 1',description:"asd" }],
+    };
+
+    shoppingCartService.removeFromShoppingCart(shoppingCartItem).subscribe(response => {
+      expect(response).toBeTruthy();
+    });
+
+    const req = httpMock.expectOne(`${environment.API_URL_SHOPPING_CART}/api/shopping-cart/remove-product/${shoppingCartItem.id}`);
+    expect(req.request.method).toBe('DELETE');
+    req.flush('');
+  });
+
   test('should retrieve the total number of products in the shopping cart', () => {
 
     shoppingCartService.getTotalProductsInShoppingCart().subscribe(response => {

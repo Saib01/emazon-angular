@@ -28,10 +28,23 @@ export class ShoppingCartService {
        }
     ).pipe(
       tap(()=>{
-        this.total$.next(this.total$.value+shoppingCartRequest.amount);
+        this.getTotalProductsInShoppingCart().subscribe();
       })
     );
   }
+
+  removeFromShoppingCart(shoppingCartItem:ShoppingCartItem){
+    return this.http.delete<ResponseMessage>(`${this.API_SHOPPING_CART}/remove-product/${shoppingCartItem.id}`,
+      { context: checkToken(),
+        observe: 'response'
+       }
+    ).pipe(
+      tap(()=>{
+        this.total$.next(this.total$.value-shoppingCartItem.unitsInCart)
+      })
+    );
+  }
+  
   getTotalProductsInShoppingCart() {
     return this.http.get<number>(`${this.API_SHOPPING_CART}/total`, {
         context: checkToken(),

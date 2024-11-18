@@ -31,35 +31,41 @@
 
     <main class="list__main-content">
       <div class="list__card">
-        <div class="list__table-wrapper">
+        <div class="list__table-wrapper" appDraggableScroll>
           <table class="list__custom-table">
             <thead>
               <tr class="list__custom-tr">
-                <th *ngFor="let item of getFieldsNames()" class="list__table-header"
-                  [ngClass]="textNumberClass(item)?'text--number':'text--start' ">
-                  {{item|titlecase}}
+                
+                <th *ngFor="let item of fieldsToShow" class="list__table-header"
+                [ngClass]="(textNumberClass(item.name) ? 'text--number' : 'text--start') + ' ' + (item.size === 'small' ? 'list__table-header--small' : item.size === 'medium' ? 'list__table-header--medium' : item.size === 'large' ? 'list__table-header--large' : '')">
+                  {{item.name|titlecase}}
                 </th>
-                <th class="list__table-header text--center" *ngIf="(user?.role?.includes('AUX_BODEGA')||user==null||user?.role?.includes('CLIENT'))&& fieldsToShow.length>4">
+  
+                <th class="list__table-header list__table-header--small text--center" *ngIf="(user?.role?.includes('AUX_BODEGA')||user==null||user?.role?.includes('CLIENT'))&& fieldsToShow.length>4">
                   {{(user==null||user.role.includes('CLIENT')?'add to cart':'supply')|titlecase}}
                 </th>
+
               </tr>
             </thead>
             <tbody>
               <tr *ngFor="let item of elements " class="list__custom-tr">
                 <td *ngFor="let field of getFieldsAccessValues()" class="list__table-data"
                   [ngClass]="textNumberClass(field)?'text--number':'text--start' ">
-                  <ng-container *ngIf="!isArrayWithThreeElements(get(item, field)); else arrayBlock">
-                    <span>{{ get(item, field) }}</span>
-                  </ng-container>
-                  <ng-template #arrayBlock>
-                    <ul>
-                      <li *ngFor="let element of get(item, field)">
-                        <span class='text--start'>{{ element.name }}</span>
-                      </li>
-                    </ul>
-                  </ng-template>
+                  
+                    <ng-container *ngIf="!isArrayWithThreeElements(get(item, field)); else arrayBlock">
+                      <span>{{ get(item, field) }}</span>
+                    </ng-container>
+                    <ng-template #arrayBlock>
+                      <ul>
+                        <li *ngFor="let element of get(item, field)">
+                          <span class='text--start'>{{ element.name }}</span>
+                        </li>
+                      </ul>
+                    </ng-template>
+                
                 </td>
                 <td class="list__table-data" *ngIf=" (user?.role?.includes('AUX_BODEGA')||user==null||user?.role?.includes('CLIENT')) && isProduct(item)">
+             
                   <div class="list__table-button ">
                     <a class="link" [routerLink]="user == null || user.role.includes('CLIENT') ? ['/panel/product', item.id] : ['add-supply']" 
                     [queryParams]="user == null || user.role.includes('CLIENT') ? {} : { id: item.id, name: item.name }">

@@ -11,13 +11,13 @@ import { StockService } from '@services/stock.service';
 })
 export class ListProductComponent implements OnInit {
   fieldsToShow:FieldsToShow[]=[
-    {name:'id',type:'number'},
-    {name:'name'},
-    {name:'description'},
-    {name:'amount',type:'number'},
-    {name:'price',type:'number'},
-    {name:'brand',accessValue:'brandResponse.name'},
-    {name:'categories',accessValue:'categoryResponseList'},
+    {name:'id',type:'number', size:'small'},
+    {name:'name', size:'large'},
+    {name:'description', size:'large'},
+    {name:'amount',type:'number', size:'medium'},
+    {name:'price',type:'number', size:'medium'},
+    {name:'brand',accessValue:'brandResponse.name', size:'large'},
+    {name:'categories',accessValue:'categoryResponseList', size:'large'},
   ];
 
   regexNumberClass!:RegExp;

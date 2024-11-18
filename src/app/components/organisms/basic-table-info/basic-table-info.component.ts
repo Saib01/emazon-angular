@@ -16,9 +16,9 @@ export class BasicTableInfoComponent  implements OnInit{
   @Input() totalPages:number=0;
   @Input() elements:Product[]|BasicInfo[]=[];
   @Input() fieldsToShow:FieldsToShow[]=[
-    {name:'id',type:'number'},
-    {name:'name'},
-    {name:'description'}
+    {name:'id',type:'number',size:'small'},
+    {name:'name',size:'large'},
+    {name:'description',size:'large'}
   ];
   @Input() sortByOptions:string[]=[];
   @Output() pageNumberEvent = new EventEmitter<number>();
@@ -58,9 +58,7 @@ export class BasicTableInfoComponent  implements OnInit{
   get(item: any, field: string): any {
     return field.split('.').reduce((acc, part) => acc?.[part], item);
   }
-  getFieldsNames(){
-    return this.fieldsToShow.map(field=>field.name);
-  }
+
   getFieldsAccessValues(){
     return this.fieldsToShow.map(field=> field.accessValue ? field.accessValue : field.name);
   }

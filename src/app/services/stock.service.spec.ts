@@ -207,4 +207,25 @@ test('should retrieve products with correct query parameters', () => {
   expect(req.request.method).toBe('GET');
   req.flush(mockResponse);
 });
+
+test('should fetch the product from API', () => {
+  const productId = 1;
+  const mockProduct: Product ={ 
+    id: 1, 
+    name: 'Brand 1',
+    description:'asd',
+    amount:5, 
+    price:5000, 
+    brandResponse:{ id: 1, name: 'Brand 1',description:"asd" },
+    categoryResponseList:[{ id: 1, name: 'Category 1',description:"asd" }]
+  };
+
+  service.getProduct(productId).subscribe((product) => {
+    expect(product).toEqual(mockProduct);
+  });
+
+  const req = httpMock.expectOne(`${environment.API_URL_STOCK}/api/product/${productId}`);
+  expect(req.request.method).toBe('GET');
+  req.flush(mockProduct); 
+});
 });

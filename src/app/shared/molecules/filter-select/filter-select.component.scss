@@ -19,6 +19,7 @@
       box-sizing: border-box;
       display: inline-flex;
       text-overflow: ellipsis; 
+      width: 5rem !important;
       &--large{
         width: 8rem !important;
       }

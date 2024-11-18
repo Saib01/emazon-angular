@@ -1,3 +1,17 @@
+<ng-template #subtotalPage>
+  <app-filter-select controlName='brand' elementSize="large" [options]="brandList"
+  (optionSelect)="onBrandFilterChange($event)"></app-filter-select>
+</ng-template>
+
+<app-status-response [status]="status"></app-status-response>
+
+<app-alert-message
+[tittle]="'Are you sure you want to remove this item from your cart?'"
+[isActive]="isRemoveAlertActive"
+(continueProcess)="removeProduct()" 
+(stopProcess)="setIsRemoveAlertActive(false)"
+></app-alert-message>
+
 <div class="list">
 
   <div class="list__container">
@@ -5,52 +19,77 @@
     <div class="list__pagination">
 
       <div class="list__params-container">
+        
+        
+        <div class="list__param list__param--desktop">
+          <ng-container *ngTemplateOutlet="subtotalPage"></ng-container>
+        </div>
 
-        <span class="list__total">Subtotal: {{total}}
-        </span>
         <app-filter-select controlName='category' elementSize="large" [options]="categoryList"
           (optionSelect)="onCategoryFilterChange($event)"></app-filter-select>
-    
-        <app-filter-select controlName='brand' elementSize="large" [options]="brandList"
-          (optionSelect)="onBrandFilterChange($event)"></app-filter-select>
-    
-        <app-pagination-params [totalPages]="userShoppingCart.totalPages" (pageNumberEvent)="onPageNumberChange($event)" (pageSizeEvent)="onPageSizeChange($event)" (sortDirectionEvent)="onSortDirectionChange($event)"></app-pagination-params>
+        
+        <app-pagination-params [totalPages]="userShoppingCart.totalPages" (pageNumberEvent)="onPageNumberChange($event)"
+          (pageSizeEvent)="onPageSizeChange($event)" (sortDirectionEvent)="onSortDirectionChange($event)">
+          <div class="list__param list__param--mobile">
+            <ng-container *ngTemplateOutlet="subtotalPage"></ng-container>
+          </div>
+        </app-pagination-params>
+
+      </div>
+      <div class="list__subtotal">
+        <span>Subtotal: {{total}}
+        </span>
       </div>
     </div>
 
-      <main class="list__main-content">
-        <div class="list__card">
-          <div class="list__table-wrapper">
-            <table class="list__custom-table">
-              <thead>
-                <tr class="list__custom-tr">
-                  <th *ngFor="let item of fieldNames" class="list__table-header"
-                    [ngClass]="textNumberClass(item)?'text--number':'text--start' ">
-                    {{item|titlecase}}
-                  </th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr *ngFor="let item of userShoppingCart.content " class="list__custom-tr">
-                  <td *ngFor="let field of fieldAccessValues" class="list__table-data"
-                    [ngClass]="textNumberClass(field)?'text--number':'text--start' ">
-                    <ng-container *ngIf="!isArrayWithThreeElements(get(item, field)); else arrayBlock">
-                      <span>{{ field=='amount'&&get(item, field)==0? messageForInsufficientStock(15):get(item, field) }}</span>
-                    </ng-container>
-                    <ng-template #arrayBlock>
-                      <ul>
-                        <li *ngFor="let element of get(item, field)">
-                          <span class='text--start'>{{ element.name }}</span>
-                        </li>
-                      </ul>
-                    </ng-template>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
+    <main class="list__main-content">
+      <div class="list__card">
+        <div class="list__table-wrapper" appDraggableScroll>
+          <table class="list__custom-table">
+            <thead>
+              <tr class="list__custom-tr">
+                <th *ngFor="let item of fieldsToShow" class="list__table-header"
+                  [ngClass]="(textNumberClass(item.name) ? 'list__text--number' : 'list__text--start') + ' ' + (item.size === 'small' ? 'list__table-header--small' : item.size === 'medium' ? 'list__table-header--medium' : item.size === 'large' ? 'list__table-header--large' : '')">
+                  {{item.name|titlecase}}
+                </th>
+                <th class="list__table-header"
+                  [ngClass]="(textNumberClass('remove') ? 'list__text--number' : 'list__text--start') + ' ' +'list__table-header--small'">
+                  remove
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let item of userShoppingCart.content " class="list__custom-tr">
+                <td *ngFor="let field of fieldAccessValues" class="list__table-data"
+                  [ngClass]="textNumberClass(field)?'list__text--number':'list__text--start' ">
+                  <ng-container *ngIf="!isArrayWithThreeElements(get(item, field)); else arrayBlock">
+                    <span>{{ field=='amount'&&get(item, field)==0? messageForInsufficientStock(15):get(item, field)
+                      }}</span>
+                  </ng-container>
+                  <ng-template #arrayBlock>
+                    <ul>
+                      <li *ngFor="let element of get(item, field)">
+                        <span class='list__text--start'>{{ element.name }}</span>
+                      </li>
+                    </ul>
+                  </ng-template>
+                </td>
+                <td class="list__table-data">
+                  <div class="list__table-button ">
+                    <app-button [isDisabled]="false" (clickEvent)="setIsRemoveAlertActive(true,item)">
+                      <span class="link__icon">-</span>
+                    </app-button>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
         </div>
-      </main>
+      </div>
+      <div class="list__not-found" *ngIf="userShoppingCart.content.length===0">
+        <h2>No products were found in the cart.</h2>
+    </div>
+    </main>
 
   </div>
 </div>
